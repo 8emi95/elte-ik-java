@@ -1,0 +1,21 @@
+2017.04.25.
+10. Java GY
+
++/-: mi az absztrakt oszt�ly?
+meo: nem lehet p�ld�nyos�tani...
+
+maximum,compareTo(elem)
+ > 0, ha    maximum  > elem
+== 0, ha    maximum == elem
+ < 0, ha    maximum  < elem
+
+
+ Throwable
+ - Exception
+    - RuntimeException
+        - NullPointerException
+    - IOException
+    - ...
+- Error
+    - ...
+    - OutOfMemory

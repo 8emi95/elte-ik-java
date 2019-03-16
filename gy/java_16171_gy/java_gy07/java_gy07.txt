@@ -1,0 +1,29 @@
+elõzõ +/-: objektum élettartama - newtól gc-ig
+
++/-: default konsi - pm nélküli üres törzsû konsi, fordító generálja ha nem írunk konsit
+
+interface: ...
+
+
+interface Comperable<T> {
+	int compereTo(T other);
+}
+
+class Circle implements Comperable<Circle> {
+	int compereTo(Circle other) {
+		...
+	}
+}
+
+Circle a = ...;
+Circle b = ...;
+
+			{ n > 0,  ha a > b
+a.compereTo(b); == n	{ n == 0, ha a.equals(b)
+			{ n < 0,  ha a < b
+						
+interface I {
+	default void method() {
+		...
+	}
+}

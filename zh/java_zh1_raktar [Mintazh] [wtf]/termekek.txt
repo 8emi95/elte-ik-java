@@ -1,0 +1,4 @@
+1 alma 5 10
+2 korte 7 8.5
+3 eper 8 10
+4 banan 5 2.5

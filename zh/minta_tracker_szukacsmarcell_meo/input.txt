@@ -1,0 +1,6 @@
+lab1,lab2,lab3,lab5
+d1@lab1,lab2,lab3:2
+d2@lab2,lab3:3
+d1:2
+d3@lab1:4
+d5@lab4:1

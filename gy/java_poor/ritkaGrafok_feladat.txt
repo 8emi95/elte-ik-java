@@ -1,0 +1,3 @@
+A gyakorlaton megírt DenseGraph párjaként készítsük el a SparseGraph osztályt, a Graph másik leszármazottját, amely a ritka gráfok tárolására optimális. Az éleket tároljuk egy gyorsan indexelhető java.util.ArrayList-ben, ennek minden eleme egy java.util.Set, amiben benne vannak azok a csúcsok amelyek egy csúcsból elérhetők.
+
+Implementáljuk le a hasEdge(), edgesFrom() és addEdge() függvényeket ennek megfelelően. Konstruktor legyen az előző ábrázoláshoz hasonló.

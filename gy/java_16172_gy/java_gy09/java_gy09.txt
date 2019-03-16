@@ -1,0 +1,7 @@
+2017.04.11.
+9. Java GY
+
+// absent
+
++/-: 3 tömbdeklaráció, melyik helyes? arraylist int
+meo: 2 helyes

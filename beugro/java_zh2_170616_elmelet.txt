@@ -1,0 +1,276 @@
+// Itt mindenhol az a) a helyes. (A vizsgán természetesen nem.)
+
+
+1. Mit ír ki az alábbi kód?
+
+int[] t = {1,1};
+int[] s = t;
+s[1] = 2;
+s[0] = t[1];
+System.out.println(t[0] + " " + t[1] + " " + s[0] + " " + s[1]);
+
+a) 2 2 2 2
+b) 1 1 1 2
+c) 1 2 1 2
+d) 1 2 2 2
+
+
+
+2. Mit ír ki az alábbi kódrészlet?
+
+int i = 0, j = 0;
+while (i < 5) {
+	++i;
+}
+do {
+	++j;
+} while (j < 5);
+System.out.println(i + " " + j);
+
+a) 5 5
+b) 5 6
+c) 4 5
+d) 6 5
+
+
+
+3. Mennyit ír ki az alábbi kódrészlet?
+
+try {
+	int n = 1;
+	throw new RunTimeException();
+} catch(RunTimeException e) {
+	n += 2;
+	throw new Exception();
+} catch(Exception e) {
+	n += 4;
+} catch(Exception e) {
+	n += 8;
+} finally {
+	System.out.println(n);
+}
+
+a) Nem jut el a vezérlés a kiíró utasításig.
+b) 11
+c) 15
+d) 7
+
+
+
+4. Mi lesz a b.count(1) értéke Base b = new Sub() után?
+
+class Base {
+	int count(int n) {
+		return n;
+	}
+}
+class Sub extends Base {
+	int count(int n) {
+		return n - 1;
+	}
+}
+
+a) 0
+b) 1
+c) A kód le sem fordul, hibás felüldefiniálás.
+d) A kód le sem fordul, hibás túlterhelés.
+
+
+
+5. Lefordul az alábbi három osztálydefiníció?
+
+class A {}
+class B {}
+abstract calss C extends A, B {}
+
+a) Nem fordul le, mert egy osztálynak nem lehet két szülőosztálya.
+b) Nem fordul le, mert nem absztrakt osztályból nem lehet absztrakt osztályt származtatni.
+c) Nem fordul le, mert absztrakt osztályban lennie kell absztrakt metódusnak.
+d) Lefordul.
+
+
+
+6. Milyen viszonyban áll egy változó statikus és dinamikus típusa egymással?
+
+a) A dinamikus altípusa a statikusnak.
+b) A statikus altípusa a dinamikusnak.
+c) A statikus altípusa a dinamikusnak, de a kettő sosem egyezhet meg.
+d) A kettő között nem feltétlenül van altípus-kapcsolat.
+
+
+
+7. Mit ír ki az alábbi program?
+
+interface Portable {}
+class Satchel implements Portable {}
+class Clutch implements Portable {}
+
+class Bags {
+	public static void main(String[] args) {
+		Portable p1 = new Clutch();
+		Portable p2 = new Satchel();
+		Clutch c = new CLutch();
+		System.out.println((p1 instanceof Portable) + " " + 
+						   (p2 instanceof Satchel) + " " + 
+						   (c instanceof Portable))
+	}
+}
+
+a) true true true
+b) true false true
+c) true false false
+d) false true false
+
+
+
+8. Melyik a try-with-resources utasítás a két try-utasítás közül?
+
+try (OutputStream out = new FileOutputStream("a.dat")) {
+	out.write(0);
+} catch(IOException ioe) {}
+try { OutputStream out = new FileOutputStream("a.dat");
+	out.write(0);
+} catch(IOException ioe) {}
+
+a) Az első.
+b) A második.
+c) Mindkettő, a kettő ekvivalens.
+d) A kettő közül egyik sem.
+
+
+
+9. Miért kapunk fordítási hibát?
+
+class Zero {
+	void set(Integer n) {
+		n = 0;
+	}
+	public static void main(String[] args) {
+		int v = 0;
+		set(v);
+	}
+}
+
+a) Mert a set metódus nem statikus.
+b) Mert az aktuális paraméter típusa nem felel meg a formális paraméter típusának.
+c) Mert a set metódusban típushibát okoz, hogy a referenciának értékül próbálunk adni egy int-et.
+d) Mert nem lehet értéket adni egy metódus formális paraméterének.
+
+// a main statikus, statikusból csak statikust hívhatsz // static: példányosítás nélkül el lehet érni, Class.method()
+
+
+
+10. Mennyit ír ki az alábbi program?
+
+public class One {
+	static void set(int n) {
+		n = 1;
+	}
+	static void set(Integer n) {
+		n = 1;
+	}
+	public static void main(String[] args) {
+		int i = 0;
+		Integer j = new Integer(0);
+		set(i);
+		set(j);
+		System.out.println(i + " " + j);
+	}
+}
+
+a) 0 0
+b) 0 1
+c) 1 0
+d) 1 1
+
+// primitív típus lemásolódik, objektum egy objektumra mutató pointerként lemásolódik, fv lefutása után megszűnnek a másolatok
+
+
+
+11. Lefordul az alábbi osztály? Ha igen, mi lesz a new Complex().equals(Complex()) hatása?
+
+public class Complex {
+	public double re, im;
+	@Override public boolean equals(Complex that) {
+		return this.re == that.re && this.im == that.im;
+	}
+}
+
+a) Fordítási hiba: hibás felüldefiniálás.
+b) Fordítási hiba: inicializálatlan re és im.
+c) Futási hiba: inicializálatlan re és im.
+d) Lefordul, lefut, és true-t kapunk vissza.
+
+// equals paraméternek mindig Objectnek kell lennie, a paraméter nem lehet specifikusabb mint az eredeti (azaz nem lehet az eredeti alosztálya)
+
+
+
+12. Lefordul ez a program? Ha igen, mit ír ki? Ha nem, miért nem?
+
+public class Evil {
+	public String identity(String s) {
+		return s;
+	}
+	static String identity(Object o) {
+		return "bad";
+	}
+	public static void main(String[] args) {
+		Object good = "good";
+		System.out.println(new Evil().identity(good));
+	}
+}
+
+a) Lefordul, kiírja, hogy bad.
+b) Lefordul, kiírja, hogy good.
+c) Nem fordul le: hibás túlterhelés a 3. sorban.
+d) Nem fordul le: hibás értékadás az 5. sorban.
+
+// az átadott változó statikus típusa az Object. Mivel van olyan függvény, ami pont egy Objectet vár, így a jvm ezt fogja hívni. Ha nincs a túlterhelt lehetőségek között pontos egyezés, akkor a fordító keres egy olyan verziót, ami méretben az átadotthoz a legközelebb van, és upcastokkal elérhető (remélem ez így nem túl katyvasz). Magyarul ha nincs pontos egyezés, akkor jó olyan típus is, ami őse az átadottnak. (edited)
+
+
+
+13. Mit nevezünk lokális változónak?
+
+a) Egy metódusban deklarált változó.
+b) Olyan mező, amely más osztályból nem látható.
+c) Nem statikus mező.
+d) Statikus, de nem módosíthatatlan mező.
+
+
+
+14. Hol lehet meghívni a java.io.File osztály egy protected metódusát?
+
+a) Csak a java.io.File osztály leszármazottjaiban és a java.io csomag típusdefinícióiban.
+b) Csak a java.io csomag típusdefinícióiban.
+c) Csak a java.io.File leszármazottjaiban.
+d) Csak a java.io.File osztályban.
+
+
+
+15. Hogyan kell létrehozni egy Puppy objektumot?
+
+class Pet {
+	String name;
+	Pet(String name) {
+		this.name = name;
+	}
+}
+class Puppy extends Pet {}
+
+a) A kód le sem fordul.
+b) new Puppy("Daisy")
+c) new Puppy()
+d) (Puppy)(new Pet("Daisy"))
+
+
+
+/*
+változó statikus típusa = amit kiírsz a változó neve elé
+változó dinamikus típusa = a változó által tárolt érték legspecifikusabb típusa
+
+immutable: nem módosítható az objektum belső szerkezete (érték)
+
+wrapper: ezek között auto(un)boxingol
+int -> Integer
+short -> Short
+*/

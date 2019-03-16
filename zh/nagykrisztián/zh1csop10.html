@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
+</head><body>
+<h1 id="java-csoport-zh-wzxhzdk0-2013-november-4">Java Csoport Zh – 2013. november 4.</h1>
+<h2 id="segedanyagok">Segédanyagok</h2>
+<ul>
+<li><a href="http://koszegijudit.web.elte.hu/ebr/public/java/">Java SE 6 Dokumentáció</a></li>
+</ul>
+<h2 id="tesztprogram-es-osztaly-vazak">Tesztprogram és osztály vázak</h2>
+<ul>
+<li><a href="http://koszegijudit.web.elte.hu/java/zh1/zh1csop10.zip">zh1csop10.zip</a></li>
+</ul>
+<h2 id="a-feladat-atfogo-leirasa">A feladat átfogó leírása</h2>
+<p>A feladat egy olyan alkalmazás készítése, amellyel szimulálni tudjuk 
+termékek elszállítását gyárakból. A gyárakban a dobozokba csomagolt 
+termékek egyetlen futószalagra kerülnek, ahonnan a szállítók szállítják 
+tovább a dobozokat a központi raktárba, vagy egyéb - azonosítóval 
+megadott - helyekre. A gyártás során a legyártott dobozok a futószalag 
+végére kerülnek, a szállítók pedig a futószalag elejétől pakolnak.</p>
+<p>Az osztályok kerüljenek egy <code>szallitas</code> nevű csomagba.</p>
+<h2 id="2-esert">2-esért</h2>
+<h3 id="wzxhzdk3gyarwzxhzdk4-osztaly"><code>Gyar</code> osztály</h3>
+<ul>
+<li>A gyárban az elkészült, futószalagra helyezett (<code>Doboz</code> típusú) dobozokat egy listában tároljuk, egy gyár létrejöttekor a futószalagja üres.</li>
+<li><code>legyart</code>: olyan <code>void</code> visszatérési értékű metódus, amelynek egyetlen paramétere egy újonnan legyártott doboz, amit a futószalag teszünk.</li>
+<li><code>dobozokSzama</code>: paraméter nélküli, <code>int</code> visszatérési értékű függvény, amely megadja, hogy hány doboz van a futószalagon</li>
+<li><code>kozpontiRaktar</code>: <code>byte</code> típusú, osztályszintű változó, amelyben a központi raktár azonosítóját tároljuk. Az kezdőértéke legyen <code>1</code>, amit ne lehessen megváltoztatni, viszont akárhonnan lekérdezhető legyen.</li>
+</ul>
+<h3 id="wzxhzdk5dobozwzxhzdk6-osztaly"><code>Doboz</code> osztály</h3>
+<ul>
+<li><code>ertek</code> nevű adattagjában tároljuk a dobozba csomagolt termék értékét (<code>int</code> típusú). A változót ne lehessen kívülről elérni, viszont legyen hozzá publikus lekérdező (<code>getErtek</code>) és beállító (<code>setErtek</code>) metódus.</li>
+<li>létrehozáskor a konstruktorban a doboz értékét lehessen megadni paraméterként</li>
+<li><code>getRaktar</code>: példányszintű, paraméter nélküli, <code>byte</code> visszatérésű értékű metódus, a <code>Gyar</code> osztályban található központi raktár azonosítóját adja vissza.</li>
+<li><code>toString</code> paraméter nélküli, <code>String</code> 
+visszatérési értékű függvény. Egy doboz String reprezentációjában 
+szögletes zárójelek között szerepeljen a doboz értéke (amit a <code>getErtek</code> metódus ad vissza) és a raktár, ahová szállítani kell (a <code>getRaktar</code> metódus visszatérési értéke) vesszővel elválasztva. Szóközök, újsor, stb. le negyen benne! Pl. <code>"[2500,1]"</code></li>
+</ul>
+<h3 id="wzxhzdk7iranyitottdobozwzxhzdk8-osztaly-wzxhzdk11-a-wzxhzdk9dobozwzxhzdk10-osztalybol-szarmazik"><code>IranyitottDoboz</code> osztály – a <code>Doboz</code> osztályból származik</h3>
+<ul>
+<li><code>raktar</code> egy új adattag, amelyben annak a raktárnak a <code>byte</code> típusú azonosítóját tároljuk, ahová a dobozt majd szállítani kell.</li>
+<li><code>getRaktar</code>: definiáld felül a szülőosztályban található metódust úgy, hogy a <code>raktar</code> változó értékét adja vissza.</li>
+<li>legyen egy két paraméteres konstruktora: az első paraméter jelezze a doboz értékét, a második pedig a raktár azonosítóját.</li>
+<li><code>getErtek</code>: definiáld felül a szülőosztályban található metódust úgy, hogy a <code>ertek</code> változóban tárolt értéknél 
+20%-al nagyobbat adjon mindig vissza (ennyiért szeretnénk eladni a dobozt).</li>
+</ul>
+<h2 id="3-asert">3-asért</h2>
+<h3 id="wzxhzdk12gyarwzxhzdk13-osztaly"><code>Gyar</code> osztály</h3>
+<ul>
+<li><code>getElsoDoboz</code>: példányszintű, paraméter nélküli, <code>Doboz</code>
+ visszatérési értékű metódus, amely visszaadja a futószalagon található 
+első dobozt (levenni nem kell a szalagról). Amennyiben egyetlen doboz 
+sincs a futószalagon, <code>null</code>-t adjon vissza.</li>
+<li><code>toString</code>: a futószalagon lévő dobozok String reprezentációját adja vissza, ahol a dobozok aláhúzás jellel (<code>_</code>) legyenek elválasztva. Az utolsó után ne szerepeljen ilyen jel. Pl. "[2500,1]_[1600,1]_[1800,2]"</li>
+</ul>
+<h3 id="wzxhzdk14iranyitottdobozwzxhzdk15-osztaly"><code>IranyitottDoboz</code> osztály</h3>
+<ul>
+<li>legyen egy paraméteres konstruktora is, amelyben csak a doboz értékét adjuk meg, raktárnak pedig a központi raktárat állítsa be.</li>
+<li>módosítsd a <code>getErtek</code> metódust úgy, hogy csak abban az esetben adjon vissza 20%-al nagyobb értéket, ha a doboz nem a központi raktárba van címezve.</li>
+</ul>
+<h2 id="4-esert">4-esért</h2>
+<h3 id="wzxhzdk16szallitowzxhzdk17-osztaly"><code>Szallito</code> osztály</h3>
+<ul>
+<li>a szállítónak két adattagja van: az egyik egy lista, amelyben a 
+felpakolt dobozok szerepelnek (a szállító kapacitását most végtelennek 
+feltételezzük); a másik pedig egy halmaz (lehet pl. <code>HashSet</code>), amely pedig azon raktárak azonosítóját tartalmazza, ami a szállító úticéljai között szerepel.</li>
+<li>kezdetben a dobozok listája legyen üres, az úticélok között pedig csak a központi raktár szerepeljen</li>
+<li><code>getDobozok</code>: példányszintű, paraméter nélküli metódus, amely visszaadja a szállítón lévő dobozok listáját (lehet <code>List</code> típusú, vagy annak leszármazottja)</li>
+<li><code>addUticel</code>: példányszintű, <code>void</code> visszatérési értékű metódus, amelynek egyetlen <code>byte</code> típusú paramétere azt adja meg, hogy milyen azonosítójú raktárt szeretnénk felvenni az úticélok közé</li>
+<li><code>felrak</code>: példányszintű, <code>boolean</code> visszatérési értékű metódus. Egy <code>Doboz</code>
+ típusú paramétere van. A paraméterben megadott dobozt akkor tesszük fel
+ az autóra, ha a doboznál tárolt raktár azonosító megtalálható a 
+szállító úticéljai között. Ekkor <code>true</code> értékkel térünk vissza, és felvesszük a dobozt a szállító listájára, egyébként pedig <code>false</code> értéket adunk vissza. </li>
+</ul>
+<h2 id="5-osert">5-ösért</h2>
+<h3 id="wzxhzdk18gyarwzxhzdk19-osztaly"><code>Gyar</code> osztály</h3>
+<ul>
+<li><code>elszallit</code>: példányszintű, <code>int</code> visszatérési
+ értékű, egyparaméteres metódus. Paramétere egy szállító. A futószalag 
+elejéről kezdve felpakoljuk a szállítóra azokat a dobozokat, amelyek 
+megfelelnek a szállító úticéljának, és eltávolítjuk őket a gyár 
+futószalagjáról. A visszatérési értékben megadjuk, hogy hány dobozt 
+pakoltunk fel. </li>
+</ul>
+<h3 id="wzxhzdk20szallitowzxhzdk21-osztaly"><code>Szallito</code> osztály</h3>
+<ul>
+<li><code>lepakol</code>: példányszintű, <code>int</code> visszatérési értékű függvény. Egy <code>byte</code>
+ típusú paramétert vár, amely azt adja meg, hogy éppen melyik 
+azonosítójú raktárnál pakolunk le. A feladat kikeresni az összes dobozt,
+ ami ebbe a raktárba volt címezve, és lepakolni, azaz eltávolítani a 
+szállító listájáról ezeket a dobozokat. Össze kell számolni és a 
+visszatérési értékben meg kell adni azt is, hogy mennyi pénzt kérünk a 
+raktártól a szállítmányért: ezt a dobozok összértéke adja (amit a <code>getErtek</code> metódussal tudunk lekérdezni tőlük).</li>
+</ul>
+<h3 id="tipp">Tipp</h3>
+<p>A for-each ciklussal történő listabejárás során a listát nem lehet 
+változtatni, ezért a fenti két feladat megoldásánál célszerű az 
+eltávolítandó elemeket egy külön ideiglenes listába kigyűjteni, majd ezt
+ a listát bejárni, és a kívánt elemeket eltávolítani az eredeti 
+listából.</p>
+
+
+
+</body></html>

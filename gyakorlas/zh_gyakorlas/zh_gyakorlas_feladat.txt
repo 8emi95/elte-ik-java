@@ -1,0 +1,47 @@
+Általános tudnivalók
+Ebben az ismertetésben az osztályok, valamint a minimálisan szükséges metódusok leírásai fognak szerepelni. A feladatmegoldás során fontos betartani az elnevezésekre és típusokra vonatkozó megszorításokat, illetve a szövegek formázási szabályait. Segédfüggvények létrehozhatóak, a feladatban nem megkötött adattagok és elnevezéseik is a feladat megoldójára vannak bízva. Törekedjünk arra, hogy az osztályok belsõ reprezentációját a lehetõ legjobban védjük, tehát csak akkor engedjünk, és csak olyan hozzáférést, amelyre a feladat felszólít, vagy amit azt osztályt használó kódrészlet megkíván!
+
+A beadott megoldásodnak mûködnie kell a mellékelt tesztprogramokkal, de ez nem elégséges feltétele az elfogadásnak. A megírt forráskód legyen kellõen általános és újrafelhasználható!
+
+Használható segédanyagok: Java dokumentáció [https://bead.inf.elte.hu/files/java/api/index.html], legfeljebb egy üres lap és toll. Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelõknek kell jelezni, NEM a diáktársaknak!
+
+A feladat összefoglaló leírása
+A feladatban autóversenyt ábrázolunk és versenyzõket.
+
+A programhoz tartozik egységtesztelõ [http://people.inf.elte.hu/poor_a/hu/java/versenyzo/Tests.java] amely az egyes osztályok funkcionalitását teszteli, illetve a várható pontszámot mutatja.
+
+Megoldás
+Fontos, hogy ezt csak akkor nézzük meg, ha már végigértünk a feladaton és meg szeretnénk nézni, hogy lehetne-e jobban is megoldani a feladatot, vagy végképp elakadtunk a megoldásban.
+
+A feladat részletes ismertetése
+Versenyzõ
+Valósítsuk meg a verseny.Versenyzo osztályt, amelynek az a feladata, hogy egy versenyzõt ábrázoljon.
+
+Két adattagja van: a nev, amely egy szöveg, és a versenyek, amely szövegek egy tetszõlegesen hosszú tömbje. Ez utóbbiban szerepelnek azon versenyek nevei, amelyeken a versenyzõ korábban elindult.
+
+Az osztály egyik konstruktora egyszerûen kapja meg a versenyzõ nevét és versenyeinek neveit, és tárolja ezeket el.
+
+A második konstruktor a versenyzõ adatait egyetlen szövegként kapja meg: a név, és a versenyek vesszõkkel vannak elválasztva benne. Ha nincsenek versenyek, akkor a szöveg nem tartalmaz vesszõt. A konstruktor bontsa szét a szöveget, és töltse fel az adattagokat.
+
+Segítség: használjuk a String osztály split metódusát a szétbontáshoz.
+
+Legyen egy osztályszintû javaVersenyzo adattagunk, amelyben egy versenyzõ legyen, akinek a neve legyen James Gosling, és egy versenyen vett részt: Kanada Open.
+
+Az adattagokhoz tartozzanak ,,getter'' és ,,setter'' mûveletek. Ezek a mûveletek és a konstruktorok ne szivárogtassák ki a belsõ állapotot: a tömb adattagok másolatait adják ki/állítsák be az adattagba, ne egyszerûen a tömb referenciáját.
+
+Tartalmazzon az osztály saját toString megvalósítást. A metódus eredménye legyen Versenyzo[Versenyzo1, [versenyA, versenyB, versenyC, versenyD]], ha a versenyzõ neve Versenyzo1, a versenyei pedig versenyA, versenyB, versenyC és versenyD.
+
+Legyen egy hasVerseny függvénye, amely megkapja szövegesen egy verseny nevét, és visszatér azzal, hogy a versenyzõ részt vett-e ilyen nevû versenyen.
+
+Verseny
+Valósítsuk meg a verseny.Verseny osztályt.
+
+A versenynek legyen egy nev adattagja (szöveg) és tartsuk számon, kik a versenyzok (Versenyzok tömbje).
+
+A konstruktora egy fájlnevet kap szövegesen paraméterként. Feltételezhetõ, hogy a fájl létezik, és helyesen van kitöltve: az elsõ sorában tartalmazza a verseny nevét, a másodikban a benne található versenyzõk számát, a fennmaradó sorokban pedig egy-egy versenyzõ adatait. A versenyzõk adatai olyan alakúak, ahogyan azt a Versenyzo második konstruktora elvárja. A Verseny konstruktora olvassa be a fájl adatait, és töltse fel az adattagokat.
+
+Valósítsunk meg itt is toString mûveletet. A példaként adott verseny1.txt fájlban leírt verseny adja az alábbi kimenetet:
+
+"Verseny:(Verseny1, Versenyzo[Versenyzo1, [versenyA, versenyB, versenyC, versenyD]], Versenyzo[Versenyzo2, [versenyA, versenyE]], Versenyzo[Versenyzo3, [versenyB, versenyC, versenyF]])"
+
+Legyen egy getVersenyVersenyzoi mûvelete. Ez szövegesen megkapja egy verseny nevét, és azokat a versenyzõket adja vissza egy List listában, akik részt vettek ilyen nevû versenyen.

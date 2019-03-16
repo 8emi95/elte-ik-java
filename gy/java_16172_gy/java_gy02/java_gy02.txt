@@ -1,0 +1,35 @@
+2017.02.21.
+2. Java GY
+
++/-: Java fordító ki- és bemenete, mit olvas be és mit ...?
+bemenet - Java forráskód
+kimenet - bájtkód
+
+
+F1:
+
+[   Person  ]
+-------------
+[isUpperCase]
+
+[      p:Person      ]
+----------------------
+[lastName = "Federer"]
+
+[     q:Person     ]
+--------------------
+[lastName = "Nadal"]
+
+
+
+F2:
+
+[  Person  ]
+------------
+[ [] [] [] ]
+
+[    Car   ]
+------------
+[ [] [3] [] ]
+		  v
+	Person-re mutat

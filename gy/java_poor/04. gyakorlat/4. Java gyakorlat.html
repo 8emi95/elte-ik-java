@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>4. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">4. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.10.05.</p>
+<h2 id="feladatok">Feladatok</h2>
+<p>A feladatok megoldásában használjuk a láthatósági módosítókat (<code>public</code>, <code>private</code>)!</p>
+<ol>
+<li><p>Írjunk egy <code>math.Matrix</code> osztályt, melyben néhány mátrixműveletet valósítunk meg! Ezek az alábbiak:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>A <code>plus()</code> osztályszintű metódus paraméterül vár két kétdimenziós tömböt, melyeket összeadja. Az eredményt egy harmadik tömbben adja vissza.</p>
+<p>Az <span class="math inline">\(A\)</span> és a <span class="math inline">\(B\)</span> mátrix <span class="math inline">\(C\)</span> összegét megkapjuk a <span class="math inline">\(C_{ij} = \sum_{k=0}^{n} A_{ik} + B_{kj}\)</span> kiszámításával minden <span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span>-re.</p></li>
+<li><p><em>Haladóknak</em>. Hasonlóan a <code>plus()</code> metódushoz, készítsünk egy <code>multiply()</code> metódust, mely paraméterül vár két kétdimenziós tömböt, és a szorzás eredményét egy új tömbben adja vissza!</p>
+<p>Az <span class="math inline">\(A\)</span> és a <span class="math inline">\(B\)</span> mátrix <span class="math inline">\(C\)</span> szorzatát megkapjuk a <span class="math inline">\(C_{ij} = \sum_{k = 0}^n A_{ik} \times B_{jk}\)</span> kiszámításával minden <span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span>-re.</p></li>
+</ol></li>
+<li><p>Készítsünk egy <code>util</code> csomagban található <code>IntList</code> osztályt, mely egészekből álló listát valósít meg tömbbel! Legyen</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Egy egészeket tartalmazó tömb adattagja.</p></li>
+<li><p>Egy konstruktora, mely nem vár paramétert.</p></li>
+<li><p>Egy konstruktora, mely egy másik <code>IntList</code>-et vár paraméterül. A paraméterbeli tömböt használjuk inicializálásra, a tartalmát le kell másolni elemről-elemre.</p></li>
+</ol>
+<p>Az <code>IntList</code> mérete mindig pont akkora, hogy el tudja tárolni a számokat. Tehát <code>add()</code> hatására megnő eggyel, míg <code>remove()</code> hatására összemegy eggyel. Az új, nagyobb vagy kisebb tömb előállításához használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#copyOf-int:A-int-"><code>java.utils.Arrays.copyOf()</code></a> statikus metódust!</p>
+<p>Az <code>IntList</code> rendelkezzen az alábbi metódusokkal:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><code>size()</code>, mely megadja az eltárolt egészek számát.</p></li>
+<li><p><code>get()</code>, mely visszaadja az első számot.</p></li>
+<li><p><code>get()</code>, mely visszaadja az adott indexen tárolt egész számot (túlterhelt változat).</p></li>
+<li><p><code>add()</code>, mely egy egész számot szúr be a lista végére.</p></li>
+<li><p><code>add()</code>, mely egy egész számot egy megadott pozícióra szúr be (túlterhelt változat).</p></li>
+<li><p><code>toString()</code>, mely szöveggé alakítja a listát. Az elemek vesszővel elválasztva szerepelnek a szövegben.</p></li>
+<li><p><code>fromString()</code> statikus metódus, mely szövegből készít listát. A szövegben a számokat szóközzel elválasztva adjuk meg. Amennyiben nem sikerült a számok kiolvasása a szövegből, adjunk vissza <code>null</code>-t. Például jó paraméter az <code>1 3 5</code> szöveg.</p></li>
+</ol>
+<p><em>Szorgalmi feladat.</em> Valósítsuk meg az alábbi metódusokat is.</p>
+<ol start="8" style="list-style-type: lower-alpha">
+<li><p><code>set()</code>, mely egy adott indexen lévő számot felülír egy megadott számmal.</p></li>
+<li><p><code>remove()</code>, mely eltávolítja az utolsó elemet.</p></li>
+<li><p><code>remove()</code>, mely eltávolítja az adott indexen található számot, és visszaadja az eltávolított számot (túlterhelt változat).</p></li>
+<li><p><code>indexOf()</code>, mely visszaadja egy paraméterül kapott egész első előfordulásának indexét. Ha az egész nincs a listában, adjunk vissza <span class="math inline">\(-1\)</span>-et.</p></li>
+<li><p><code>concat()</code>, mely a lista végére fűz egy másik <code>IntList</code>-et.</p></li>
+</ol></li>
+<li><p>Írjunk programot, mely sorokat olvas be a szabványos bemenetről, amíg tud! Ezután fordított sorrendben írja ki a sorokat a szabványos kimenetre! A sorok eltárolására használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html"><code>java.util.LinkedList&lt;A&gt;</code></a> osztályt!</p>
+<p><em>Megjegyzés</em>:</p>
+<ul>
+<li><p>A parancssorban (Linuxon) <code>Ctrl-C</code> vagy (Windowson) <code>Ctrl-Z</code> kombinációval tudjuk jelezni a programnak, hogy nincs több sor, amelyet be kellene olvasnia.</p></li>
+<li><p>Annak eldöntésére, hogy van-e még beolvasásra váró sor, használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> osztály <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#hasNextLine--"><code>hasNextLine()</code></a> metódusát! A következő sort a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#nextLine--"><code>nextLine()</code></a> metódussal tudjuk beolvasni.</p></li>
+</ul></li>
+<li><p><em>Szorgalmi feladat</em>. Írjunk programot, mely beolvas egy sort a szabványos bemenetről, és eldönti, hogy benne szereplő zárójelek kiegyensúlyozottak vagy sem! Például a <code>&quot;[()]{}{[()()]}&quot;</code> bemenetre logikai igazat kell visszaadnia, de a <code>&quot;[()&quot;</code> vagy a <code>&quot;[)]&quot;</code> bemenetre már hamisat.</p>
+<p><em>Megjegyzés</em>: használjunk egy vermet, például a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Stack.html"><code>java.util.Stack</code></a> osztályt.</p></li>
+<li><p><em>Haladóknak</em>. Készítsük el a <code>util.IntTree</code> osztályt, mely egész számokat rendezetten tároló bináris fát megvalósít meg! A fa minden csúcsának nulla, egy vagy két gyermeke lehet és legfeljebb egy szülője. Ha egy csúcsnak nincs szülője, úgy az a csúcs a fa gyökere.</p>
+<p>A láncolást egy-egy <code>IntTree</code> objektumra mutató referenciákkal oldjuk meg, melyek egy csúcs bal és jobb oldali gyerekére mutatnak. Emellett minden csúcs egy egész számot is tárol.</p>
+<p>Valósítsuk meg az alábbi műveleteket az <code>IntTree</code> osztályon belül:</p>
+<ul>
+<li><p>Konstruktor, mely egy <code>int</code> értékből létrehoz egy egyelemű fát, a gyökerében a megadott <code>int</code> értékkel.</p></li>
+<li><p><code>insert()</code>, mely beszúr egy <code>int</code> értéket a fába. Ha a szám kisebb, mint az aktuális csúcsban tárolt szám, akkor a bal oldali részfába szúrjuk be (rekurzívan). Ha nagyobb vagy egyenlő, akkor a jobb oldali részfába szúrjuk be (szintén rekurzívan). Ha nincs bal vagy jobb oldali részfa, ahova beszúrnánk, akkor hozzunk lérte egy új csúcsot a beszúrandó számmal.</p></li>
+<li><p><code>contains()</code>, mely eldönti, hogy egy paraméterként kapott szám megtalálható-e a fában (rekurzívan). Ha nem találtuk még meg és a kapott szám kisebb, mint az aktuális csúcsban tárolt, úgy a bal oldali részfában keresünk tovább, különben pedig a jobb oldaliban.</p></li>
+<li><p><code>toArray()</code>, mely egy <code>int</code> értékekből álló tömbben adja vissza a fában eltárolt értékeket. A tömbben először a bal oldali részfában tárolt elemek legyenek, majd a gyökérben tárolt elem, végül a jobb oldali részfában tárolt elemek. A tömbben a számok rendezettek lesznek. Ezt a bejárást hívják inorder bejárásnak.</p></li>
+<li><p><code>toString()</code> metódus, mely a fában tárolt értékek felsorolását adja vissza szövegként.</p></li>
+</ul>
+<p>Készítsünk programot, mely egész számok sorozatát rendezi a bináris fa segítségével! A program sorban bekér egész számokat, melyeket beszúrja a fába. Ha elfogytak a számok, úgy a fa inorder bejárásával megkapjuk a rendezett sorozatot. Írjuk is ki a képernyőre a rendezett sorozatot!</p></li>
+</ol>
+<ul>
+<li><p><em>Haladóknak</em>: írjunk programot a Josephus-probléma megoldására! A probléma szerint <span class="math inline">\(n\)</span> ember szörnyű helyzetbe kerül az ellenséggel vívott háborúban, és csapdába esik egy barlangban. Mivel nem akarnak fogságba esni, ezért úgy döntenek, hogy sorban végeznek magukkal. Így tehát leülnek egy körben (<span class="math inline">\(0\)</span>-tól <span class="math inline">\(n-1\)</span>-ig számozott pozícióban), és körbe haladva minden <span class="math inline">\(m.\)</span> ember végez magával, egészen addig, míg csak egy ember marad. Azonban a híres matematikus, Josephus nem akar részt venni ebben az őrültségben, így kigondolja, hova kell ülnie, hogy utolsónak életben maradjon.</p>
+<ul>
+<li><p>Írjunk programot, mely bekéri <span class="math inline">\(n\)</span> számot, majd sorban kiírja, milyen pozíción ülő emberek végeztek magukkal, és segít Josephusnak, hogy hová üljön hogy életben maradjon! Kezdetben minden második ember végez magával (<span class="math inline">\(m = 2\)</span>).</p></li>
+<li><p>Általánosítsuk a programunkat, hogy tetszőleges <span class="math inline">\(m\)</span> számra működjön!</p></li>
+</ul></li>
+</ul>
+</body>
+</html>

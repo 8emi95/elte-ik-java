@@ -1,0 +1,14 @@
+A iterátorok célja, hogy egységesítse az adatszerkezetek bejárását. Iterátornak nevezzük azt az objektumot, mely megvalósítja az Iterator interfészt:
+
+package java.util;
+
+public interface Iterator<E> {
+    boolean hasNext();  // visszaadja, hogy van-e még következő elem
+    E next();           // visszaadja a következő elemet
+    void remove();      // eltávolítja a `next()` legutoljára visszaadott elemét az adatszerkezetből
+}
+Írjuk át a gyakorlaton megírt largestFigure() metódust úgy, hogy egy Iterator<Figure> objektumot várjon paraméterül:
+
+public static Figure largestFigure(Iterator<Figure> it) {
+}
+A main() metódusban próbáljuk ki ezt a változatot.

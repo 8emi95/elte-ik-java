@@ -1,0 +1,2 @@
+The length of the path is 18.
+[white, whine, chine, chink, clink, clank, flank, flask, flash, slash, slosh, sloth, sooth, south, sough, rough, rouge, rouse, house]

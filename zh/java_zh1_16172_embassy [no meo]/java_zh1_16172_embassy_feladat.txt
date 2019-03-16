@@ -1,0 +1,99 @@
+Általános tudnivalók
+Ebben az ismertetésben az osztályok, valamint a minimálisan szükséges metódusok leírásai fognak szerepelni. A feladatmegoldás során fontos betartani az elnevezésekre és típusokra vonatkozó megszorításokat, illetve a szövegek formázási szabályait.
+
+Segédfüggvények létrehozhatóak, a feladatban nem megkötött adattagok és elnevezéseik is a feladat megoldójára vannak bízva. Törekedjünk arra, hogy az osztályok belső reprezentációját a lehető legjobban védjük, tehát csak akkor engedjünk, és csak olyan hozzáférést, amelyre a feladat felszólít, vagy amit az osztályt használó kódrészlet feltétlenül megkíván!
+
+A beadott megoldásnak működnie kell a mellékelt tesztprogramokkal, de ez nem elégséges feltétele az elfogadásnak. A tesztelő célja a segítségnyújtás, nem a kód értékelése! A kódot a gyakorlatvezető értékeli.
+
+Ügyeljünk arra, hogy a forráskód legyen kellően általános és újrafelhasználható, könnyen módosítható, redundanciamentes és esztétikus.
+
+Használható segédanyagok: Java dokumentáció, legfeljebb egy üres lap és toll. Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelőknek kell jelezni, NEM a diáktársaknak!
+
+Figyelem! Az a metódus, mely fordítási hibát tartalmaz, automatikusan nulla pontot ér!
+
+Tesztelés
+Az egyes részfeladatokhoz tartoznak külön tesztesetek, amelyeket a feladatok végén jelöltünk meg. Ezek önállóan is fordítható .java állományok, melyek aztán futtathatók is a mellékelt .jar segítségével. Például Windows alatt az első feladathoz tartozó tesztesetek így fordíthatóak és futtathatóak:
+
+> javac -cp .;tests-Embassy.jar tests/Part1.java
+> java -cp .;tests-Embassy.jar tests/Part1
+Ugyanezeket a teszteseteket használja a komplett feladathoz tartozó tesztelést végző Test osztály is. Ezt Windows alatt így lehet futtatni:
+
+> java -cp .;tests-Embassy.jar Test
+Linux alatt mindent ugyanúgy lehet fordítani és futtatni, csak a -cp paraméterében a pontosvesszőt kell kettőspontra cserélni.
+
+A feladat összefoglaló leírása
+A feladatban egy ország nagykövetségét és az ott dolgozó diplomatákat fogjuk ábrázolni. A diplomatákról számon tartjuk nevüket és az általuk beszélt idegen nyelveket. A diplomaták neveit és a beszélt nyelveket String-ként ábrázoljuk.
+
+A programhoz tartozik egy egységtesztelő, amely az egyes osztályok funkcionalitását teszteli.
+
+A feladat részletes ismertetése
+A feladatban a government.Diplomat és government.Embassy osztályokat fogjuk több lépésben megvalósítani. Az előbbi egy nagykövetségen dolgozó diplomatát, az utóbbi egy nagykövetséget ábrázol.
+
+1. rész (7 + 1 pont)
+Készítsük el a nyilvános government.Diplomat osztályt. Szerepeljenek benne az alábbi rejtett adattagok.
+
+Egy String típusú név.
+
+Egy String tömb, mely a beszélt nyelveket tárolja.
+
+Az osztályhoz készítsünk egy rejtett konstruktort, mely paraméterül várja a két adattag kezdeti értékét, és inicializálja az adattagokat.
+
+Valósítsuk meg továbbá az alábbi nyilvános metódusokat.
+
+Egy osztályszintű make() metódust, mely ugyanazokat a paramétereket várja, mint a konstruktor, és egy Diplomat objektumot ad vissza. A metódus elvégzi az alábbi ellenőrzéseket, majd létrehozza és visszaadja az objektumot, ha minden feltétel teljesül, különben egy null referenciát ad vissza.
+
+A név nem egy üres szöveg.
+
+A név pontosan két részből áll, szóközzel elválasztva.
+
+A két rész egyike sem üres szöveg, mindkettő egy-egy nagy kezdőbetűvel kezdődik. Ennek leellenőrzéséhez használjuk a Character.isUpperCase() metódust.
+
+Figyeljünk arra, hogy a létrehozott objektum belső állapota ne szivárogjon ki.
+
+Egy getName() paraméter nélküli metódust, mely visszaadja a diplomata nevét.
+
+Tesztelő: tests/Part1
+
+2. rész (6 + 1 pont)
+Vegyünk fel a government.Diplomat osztályban egy osztályszintű, nyilvános JAMES_BOND adattagot, mely egy diplomatát ábrázol, akinek a neve James Bond, és beszéli a következő nyelveket: ,,English'', ,,German'', ,,French''.
+
+Emellett valósítsuk meg az alábbi nyilvános metódusokat is.
+
+Egy speaks() metódust, mely egy nyelvet vár paraméterül, és logikai értékben adja vissza, hogy a diplomata beszéli-e a nyelvet. Feltesszük, hogy a paraméter nem null.
+
+Egy getLanguages() paraméter nélküli metódust, mely visszaadja a beszélt nyelvek tömbjét. Figyeljünk arra, hogy a metódus ne szivárogtassa ki a belső állapotot.
+
+Egy toString() metódust, mely visszaadja a diplomata szöveges ábrázolását a következő alakban: Diplomat(<név>, <nyelvek>). Például Diplomat(Colin Powell, [English, French]). A nyelvek formátuma tetszőleges, azonban legalább egy szóközzel legyenek elválasztva.
+
+Tesztelő: tests/Part2
+
+3. rész (5 + 1 pont)
+Hozzuk létre a nyilvános government.Embassy osztályt is, és vegyük fel az alábbi rejtett adattagokat.
+
+Egy String típusú országnevet, a nagykövetség országát.
+
+Diplomat objektumok sorozatát, mely a nagykövetségen dolgozó diplomatákat tárolja.
+
+Valósítsuk meg az alábbi metódusokat is a government.Embassy osztályban.
+
+Egy konstruktort, mely paraméterül várja a nagykövetség országának nevét és egy Diplomat objektumokból álló tömböt, mely utóbbi a nagykövetségen dolgozó diplomatákat tárolja. A konstruktor beállítja az adattagok kezdeti értékét. Ügyeljünk arra, hogy a létrehozott objektum belső állapota ne szivárogjon ki.
+
+Egy spokenLanguages() paraméter nélküli metódust, mely visszaadja a nagykövetségen dolgozó diplomaták által beszélt nyelvek listáját, ismétlés nélkül.
+
+Tesztelő: tests/Part3
+
+4. rész (7 + 2 pont)
+Bővítsük ki a government.Embassy osztályt az alábbi metódusokkal is.
+
+Egy spokenBy() metódust, mely egy nyelvet vár paraméterül, és visszaadja azon Diplomat objektumok listáját, melyek beszélik a nyelvet.
+
+Egy delegation() metódust, mely nyelvek tömbjét várja paraméterül, és összeállít egy delegációt egy országba, ahol a hivatalos nyelveket a paraméter tárolja. A delegációt úgy kell összeállítani, hogy minden nyelvet beszélje legalább egy ember. Nem kell törekedni a legkisebb méretű delegáció összeállítására, azonban kerüljük el az ismétléseket. A delegációt nevek listájaként adjuk vissza. Feltesszük, hogy minden nyelvet beszél legalább egy diplomata, és a paraméter legalább egy nyelvet tartalmaz.
+
+Tesztelő: tests/Part4
+
+Pontozás (elmélet + gyakorlat)
+0 -- 19: elégtelen (1)
+20 -- 24: elégséges (2)
+25 -- 29: közepes (3)
+30 -- 34: jó (4)
+35 -- 39: jeles (5)

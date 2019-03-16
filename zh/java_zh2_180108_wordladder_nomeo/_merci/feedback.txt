@@ -1,0 +1,24 @@
+﻿Ponthatárok:
+0 -- 14: elégtelen (1)
+15 -- 22: elégséges (2)
+23 -- 30: közepes (3)
+31 -- 38: jó (4)
+39 -- 47: jeles (5)
+
+Levonás összesen: 32p
+Bontás:
+- 1p: Dictionary konstruktorban a ciklusfeltétel nem megfelelő
+- 0p: a WordList nincs inicializálva (-1), viszont a láthatóság javítva lett rejtettre (+1)
+- 1p: Dictionary.getWords állapotszivárgás
+- 3p: Dictionary.equals és Dictionary.hashCode nincs
+- 13p: UndirectedGraph nincs
+- 9p: UndirectedGraphTest nincs 
+- 1p: WordLadder.readInput félig hibás
+- 1p: WordLadder.isNeighbour félig hibás
+- 3p: WordLadder.buildLadder (2p) és WordLadder.writePath (1p) hiányzik 
+
+Kisbetűs rész:
+A tesztek hiányáért maximum 10 helyett csak 9 pontot vontam le: a "null paraméter" pontnál nem volt mit tesztelni, így automatikusan teljesítettnek tekintettem. 
+A hibajavításnál valójában 9 hiba volt, az egyik csak a feladat szövegétől való eltérés (protected/private wordList): a pontozáshoz a 8 és a megtalált hibák számának minimumát vettem, de senki sem talált 8-nál több hibát.
+
+2

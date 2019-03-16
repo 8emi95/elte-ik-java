@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>9. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">9. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2015.11.21.</p>
+<h2 id="feladatok">Feladatok</h2>
+<ul>
+<li><p>Definiáljuk a generikus <code>Pair</code> osztályt! Az osztály objektumai rendezett párokat ábrázolnak. A két komponens típusa tetszőleges lehet, és paraméterként adjuk meg.</p>
+<p>Legyen egy konstruktor, mely paraméterül várja a komponenseket, emellett egy <code>getFirst()</code> és egy <code>getSecond()</code> metódus is, melyek az első és második komponenst adják vissza.</p>
+<p>Például:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Pair&lt;<span class="bu">Integer</span>,<span class="bu">Character</span>&gt; p = <span class="kw">new</span> Pair&lt;&gt;(<span class="dv">0</span>, &#39;a&#39;);
+<span class="dt">int</span> n  = p.<span class="fu">getFirst</span>();
+<span class="dt">char</span> c = p.<span class="fu">getSecond</span>();
+
+<span class="dt">char</span> d = p.<span class="fu">getFirst</span>();                          <span class="co">// fordítási hiba </span>
+Pair&lt;<span class="bu">Integer</span>,<span class="bu">Character</span>&gt; q = <span class="kw">new</span> Pair&lt;&gt;(&#39;b&#39;, <span class="dv">1</span>); <span class="co">// fordítási hiba </span></code></pre></div>
+<p><em>Haladóknak</em>: definiáljuk felül az <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html"><code>java.lang.Object</code></a> <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-"><code>equals()</code></a> metódusát! Figyeljünk, hogy az <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-"><code>equals()</code></a> paramétere <code>Object</code> típusú.</p></li>
+<li><p>Valósítsuk meg a <code>GenericMax</code> osztályban a generikus <code>max()</code> metódust, mely tetszőleges elemek gyűjteményét (<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html"><code>java.util.Collection</code></a> típus) várja paraméterül, és megkeresi a legnagyobbat közülük. Az egyetlen megkötés az eltárolt elemekre, hogy implementálják a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"><code>Comparable</code></a> interfészt.</p></li>
+<li><p>Definiáljunk egy saját ellenőrzött <code>util.AlreadyContainsException</code> kivételosztályt! Ilyet akkor váltunk ki, ha egy gyűjteménybe olyan elemet akarunk beszúrni, mely már megtalálható benne.</p>
+<p>Legyen egy rejtett adattagja (például <code>what</code>), mely eltárolja a beszúrandó elem szöveges ábrázolását. Írjunk hozzá ,,getter’’ metódust is! Adjunk meg érthető hibaüzenetet is az <code>Exception</code> szülőosztály konstruktorának meghívásával!</p></li>
+<li><p>Valósítsuk meg a generikus <code>util.SortedList</code> osztályt, melynek objektumai rendezett listát ábrázolnak! Írjuk elő, hogy csak <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"><code>java.util.Comparable</code></a>-t megvalósító típussal lehessen paraméterezni az osztályt!</p>
+<ul>
+<li><p>Írjunk hozzá beszúró <code>add()</code> műveletet is! Ez paraméterül kapott elemet nagyság szerinti helyére szúrja be. A művelet után a lista rendezett marad.</p></li>
+<li><p>Írjunk hozzá beszúró <code>uniqueAdd()</code> műveletet is! Ez <code>AlreadyContainsException</code> kivételt vált ki, ha a beszúrandó elem már megtalálható a listában.</p></li>
+<li><p>Írjunk hozzá törlő <code>remove()</code> műveletet is! Ez a paraméterül kapott elem első előfordulását távolítja el a listából. Adjunk vissza igaz értéket, ha az adott elem benne volt a listában. Kihasználva a rendezettséget csak addig kell keresni a listában, amíg meg nem találjuk az első olyan elemet, amely már nagyobb, mint a keresett.</p></li>
+</ul>
+<p>Írjunk egy rövid <code>main()</code> metódust a <code>SortedListDemo</code> osztályban! Hozzunk létre egy <code>SortedList</code> objektumot, és szúrjunk be néhány elemet a <code>uniqueAdd()</code> metódussal! Kezeljük le az esetlegesen keletkező kivételt úgy, hogy kiírjuk a szabványos hibakimenetre kivételben tárolt információt (például <code>message</code>)!</p></li>
+</ul>
+</body>
+</html>

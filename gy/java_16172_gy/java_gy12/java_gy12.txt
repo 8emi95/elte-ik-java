@@ -1,0 +1,12 @@
+2017.05.09.
+12. Java GY
+
++/-: explicit típuskényszerítést mikor kell használni? mikor nem megy magától?
+meo: 
+
+bead2:
+- nem szövegleírás programról
+- java dokumentáció... meg kell alkotni egy java programot annak megfelelően (kísérlet...)
+- interfész megadva, melyik metódus mit csináljon, váz megvan
+- nincs tesztelő!
+vizsga nem bizts h ilyen lesz

@@ -1,0 +1,54 @@
+﻿                                          //üres sor, figyelmen kívül kell hagyni
+blablabla                                 //nincs benne kettõspont, a sort figyelmen kívül kell hagyni
+REG:Joska Pista,1978,BB:foloslegesadat    //túl sok kettõspont, a sort figyelmen kívül kell hagyni
+ABC:Joska Pista,1978,BB                   //ismeretlen parancs, a sort figyelmen kívül kell hagyni
+REG:                                      //nincs elég paraméter, a sort figyelmen kívül kell hagyni
+REG:Joska Pista                           //nincs elég paraméter, a sort figyelmen kívül kell hagyni
+REG:Joska Pista,1978,OTP,foloslegesadat   //túl sok paraméter, a sort figyelmen kívül kell hagyni
+REG:Joska Pista,nemszam,BB                //a születési év nem szám, a sort figyelmen kívül kell hagyni
+REG:,1978,BB                              //rossz név [üres], a sort figyelmen kívül kell hagyni
+REG:Joska  Pista,1978,BB                  //rossz név [az elválasztó két szóköz (de úgy is értelmezhetõ, hogy 3 részbõll áll, amibõl a második rész üres)], a sort figyelmen kívül kell hagyni
+REG:Rita,1978,BB                          //rossz név [kevés részbõl áll], a sort figyelmen kívül kell hagyni
+REG:Kissne Nagy Anna Liza Dora,1978,BB    //rossz név [sok részbõl áll], a sort figyelmen kívül kell hagyni
+REG:Kissne Nagy  Anna Liza,1978,BB        //rossz név [az elválasztó két szóköz (de úgy is lehet értelmezni, hogy 5 részbõll áll, amibõl a harmadik rész üres)], a sort figyelmen kívül kell hagyni
+REG:Joska Pi,1978,BB                      //rossz név [2. rész rövid], a sort figyelmen kívül kell hagyni
+REG:Jo Pista,1978,BB                      //rossz név [1. rész rövid], a sort figyelmen kívül kell hagyni
+REG:Joska pista,1978,BB                   //rossz név [2. rész nem nagybetûs], a sort figyelmen kívül kell hagyni
+REG:joska Pista,1978,BB                   //rossz név [1. rész nem nagybetûs], a sort figyelmen kívül kell hagyni
+REG:JoSka Pista,1978,BB                   //rossz név [rossz helyen tartalmaz nagybetût], a sort figyelmen kívül kell hagyni
+REG:Polgár Jeno1,1978,BB                  //rossz név [hibás karkter], a sort figyelmen kívül kell hagyni
+REG:Nagy G&za,1978,BB                     //rossz név [hibás karkter], a sort figyelmen kívül kell hagyni
+REG:Joska Pista,1900,BB                   //rossz születési év [túl kevés], a sort figyelmen kívül kell hagyni
+REG:Joska Pista,2000,BB                   //rossz születési év [túl sok], a sort figyelmen kívül kell hagyni
+REG:Joska Pista,1978,NonameBank           //rossz banknév, a sort figyelmen kívül kell hagyni
+REG:Joska Pista,1978,BB                   //helyes adatok és még nem szerepel, fel kell vinni
+REG:Joska Pista,1968,OTP                  //helyes adatok, de már szerepel ilyen nevû, a sort figyelmen kívül kell hagyni
+REG:Kiss Anna,1998,OTP                    //helyes adatok és még nem szerepel, fel kell vinni
+REG:Nagy Liza Katalin,1918,Erste          //helyes adatok és még nem szerepel, fel kell vinni
+//ezen a ponton 3 személynek kell a nyilvántartásban szerepelnie (Joska Pista - BB, Kiss Anna - OTP, Nagy Liza Katalin - Erste), ezt érdemes leellenõrizni
+PUT:                                      //nincs elég paraméter, a sort figyelmen kívül kell hagyni
+PUT:Joska Pista                           //nincs elég paraméter, a sort figyelmen kívül kell hagyni
+PUT:Joska Pista,2000,foloslegesadat       //túl sok paraméter, a sort figyelmen kívül kell hagyni
+PUT:Joska Pista,nemszam                   //a betenni kívánt összeg nem szám, a sort figyelmen kívül kell hagyni
+PUT:Ismeretlen Ember,2000                 //nincs ilyen nevû személy, a sort figyelmen kívül kell hagyni
+PUT:Joska Pista,0                         //a betenni kívánt összeg 0, a sort figyelmen kívül kell hagyni
+PUT:Joska Pista,-2000                     //a betenni kívánt összeg negatív, a sort figyelmen kívül kell hagyni
+PUT:Joska Pista,2000                      //történjen meg a betét, a logfájlba íródjon ki "Joska Pista: 2000"
+PUT:Joska Pista,7000                      //történjen meg a betét, a logfájlba íródjon ki "Joska Pista: 9000"
+PUT:Kiss Anna,1000                        //történjen meg a betét, a logfájlba íródjon ki "Kiss Anna: 1000"
+GET:                                      //nincs elég paraméter, a sort figyelmen kívül kell hagyni
+GET:Joska Pista                           //nincs elég paraméter, a sort figyelmen kívül kell hagyni
+GET:Joska Pista,2000,foloslegesadat       //túl sok paraméter, a sort figyelmen kívül kell hagyni
+GET:Joska Pista,nemszam                   //a felvenni kívánt összeg nem szám, a sort figyelmen kívül kell hagyni
+GET:Ismeretlen Ember,2000                 //nincs ilyen nevû személy, a sort figyelmen kívül kell hagyni
+GET:Joska Pista,0                         //a felvenni kívánt összeg 0, a sort figyelmen kívül kell hagyni
+GET:Joska Pista,-2000                     //a felvenni kívánt összeg negatív, a sort figyelmen kívül kell hagyni
+GET:Joska Pista,100000                    //a személynek nincs elég pénze, a sort figyelmen kívül kell hagyni
+GET:Joska Pista,9000                      //a személynek nincs elég pénze (legalábbis a díjjal együtt), a sort figyelmen kívül kell hagyni
+GET:Joska Pista,1000                      //történjen meg a pénzfelvét (saját bank), a személy egyenlege 1000+200 Ft-al csökken, a logfájlba íródjon ki "Joska Pista: 7800"
+PUT:Joska Pista,30000                     //történjen meg a betét, a logfájlba íródjon ki "Joska Pista: 37800"
+GET:Joska Pista,20001                     //történjen meg a pénzfelvét (saját bank), a személy egyenlege 20001+201 Ft-al csökken, a logfájlba íródjon ki "Joska Pista: 17598"
+PUT:Kiss Anna,70000                       //történjen meg a betét, a logfájlba íródjon ki "Kiss Anna: 71000"
+GET:Kiss Anna,5000                        //történjen meg a pénzfelvét (idegen bank), a személy egyenlege 5000+500 Ft-al csökken, a logfájlba íródjon ki "Kiss Anna: 65500"
+GET:Kiss Anna,60000                       //történjen meg a pénzfelvét (idegen bank), a személy egyenlege 60000+1800 Ft-al csökken, a logfájlba íródjon ki "Kiss Anna: 3700"
+//ezen a ponton az automata egyenlege 1023999, ezt érdemes leellenõrizni

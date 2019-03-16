@@ -1,0 +1,35 @@
+Point osztály
+Készítsünk egy Point osztályt a geo csomagban! Az osztály egy kétdimenziós pontot fog ábrázolni.
+
+Legyen két rejtett (private), int adattag: a függõleges és a vízszintes koordináta.
+
+Legyen egy konstruktor, mely paraméterül várja a koordináták kezdeti értékét.
+
+Készítsünk getX() és getY() lekérdezõ metódusokat, melyek visszaadják az egyik koordináta értékét.
+
+Készítsünk egy toString() metódust, mely szép jelölést alkalmaz. Például (2,3).
+
+Circle osztály
+Készítsünk egy Circle osztályt a geo csomagban! Ez egy origó központú, rr sugarú kört fog ábrázolni.
+
+Legyen egy rejtett, int sugár adattagja.
+
+Legyen egy konstruktor, mely paraméterül várja a sugár kezdeti értékét, és inicializálja a sugár adattagot.
+
+Készítsünk egy tartalmazást vizsgáló inside() metódust, mely paraméterül vár egy Point-ot és logikai igazat ad vissza, ha a pont a körben vagy a körvonalon található.
+
+Készítsünk egy toString() metódust, mely valamilyen szöveget ad vissza. Például Circle, radius: 4.
+
+Main osztály
+Végül készítsünk egy Main osztályt a geo csomagon kívül. Legyen benne egy rövid main metódus, mely létrehoz egy pontot és egy kört és megvizsgálja, hogy a pont a körben található-e.
+
+Írja is ki a program, hogy mit mûvel éppen. Például
+
+$ java Main
+(0,2) inside Circle, radius: 2?
+Yepp.
+vagy
+
+$ java Main
+(1,1) inside Circle, radius: 1?
+Nope.

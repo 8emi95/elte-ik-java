@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>7. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">7. Java gyakorlat</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#feladatok">Feladatok</a></li>
+</ul>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.11.10.</p>
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Hozzuk létre a <code>Person</code> nevű osztályt, mely egy személyt fog ábrázolni! Minden személynek van neve, és címe (két privát, szöveg típusú adattag) és fizetése (<code>long</code> típusú, a leszármazottak számára hozzáférhető adattag), mely kezdetben 30000.</p>
+<p>Definiáljuk a következő metódusokat:</p>
+<ul>
+<li><p>Egy konstruktort, mely paraméterül várja a nevet és a címet.</p></li>
+<li><p><code>getName()</code>, <code>getAddress()</code> metódusokat, melyek visszaadják a nevet és a címet.</p></li>
+<li><p><code>toString()</code> metódust, mely felüldefiniálja a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html"><code>java.lang.Object</code></a> osztály <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--"><code>toString()</code></a> metódusát. Egy példa az előállított szövegre: <code>&quot;Rafael Nadal (Manacor, Spain) wage: 50000&quot;</code></p></li>
+<li><p><code>raise()</code>, mely megemeli a fizetést 10000-rel.</p></li>
+</ul></li>
+<li><p>Hozzuk létre a <code>Teacher</code> nevű osztályt, mely kiterjeszti a <code>Person</code> osztályt, és egy tanárt fog ábrázolni! Vegyük fel új adattagként a kurzusok nevét (privát, szöveg objektumok <code>LinkedList</code> referenciája)!</p>
+<p>Definiáljuk az alábbi metódusokat:</p>
+<ul>
+<li><p>Egy konstruktort, mely paraméterül várja a tanár nevét, és címét, melyekkel inicializálja a <code>Person</code> osztályban deklarált adattagokat. Haszánljuk a <code>Person</code> konstruktorát, hogy elkerüljük a kódismétlést! Ehhez szükség lesz a <code>super()</code> metódushívásra. A kurzusok listája legyen üres.</p></li>
+<li><p><code>addCourse()</code>, mely paraméterül várja egy kurzusnak a nevét, és ezt a kurzusok listájának a végéhez fűzi.</p></li>
+<li><p><code>toString()</code>, mely felüldefiniálja a <code>Person</code> osztály metódusát úgy, hogy kiegészíti a visszaadott szöveget. Például: <code>&quot;Teacher: Gipsz Jakab (Budapest) wage: 100000&quot;</code>. A kódismétlés elkerüléséhez használjuk fel a <code>Person</code> osztály <code>toString()</code> metódusát. Ehhez szükség lesz a <code>super</code> minősítőre.</p></li>
+<li><p><code>raise()</code>, mely felüldefiniálja a <code>Person</code> metódusát. Ez 50000-rel emeli a fizetést.</p></li>
+</ul></li>
+<li><p>Készítsük el a <code>Student</code> nevű osztályt, mely szintén kiterjeszti a <code>Person</code> osztályt! Vegyük fel új privát adattagként egy kurzusokon elért eredményeket tároló <code>LinkedList</code> referenciát!</p>
+<p>Definiáljuk a következő metódusokat:</p>
+<ul>
+<li><p>Egy konstruktort, mely paraméterül várja a hallgató nevét és címét, melyekkel inicializálja a <code>Person</code> osztályban deklarált adattagokat. Itt is használjuk a <code>Person</code> konstruktorát!</p></li>
+<li><p><code>addCourseGrade()</code>, mely paraméterül vár egy osztályzatot, és a lista végéhez fűzi.</p></li>
+<li><p><code>getAverage()</code>, mely egy szövegben adja vissza a diák átlagát.</p></li>
+<li><p><code>toString()</code> metódus, mely felüldefiniálja a <code>Person</code> osztály metódusát úgy, hogy kiegészíti annak eredményét. Például: <code>&quot;Student: Hát Izsák (Székesfehérvár) wage: 30000&quot;</code>.</p></li>
+</ul>
+<p>Hozzunk létre egy rövid <code>main()</code> metódust a <code>PersonDemo</code> osztályban! Definiálunk egy <code>Person</code> változót, mely egy <code>Teacher</code> objektumra mutat! Növeljük meg a fizetését, és írjuk ki a képernyőre az objektum szöveges reprezentációját! Melyik <code>raise()</code> és <code>toString()</code> hívódott meg?</p></li>
+<li><p>Valósítsuk meg <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html"><code>java.lang.Object</code></a> referenciák dinamikusan növekvő méretű listáját ábrázoló <code>utils.List</code> osztályt! Az osztály láncolt listásan tárolja a referenciákat. Ez azt jelenti, hogy a referenciákat egymásra hivatkozó rekurzív listák sorozataként tárolja, ahol minden lista tárolja a legelső elemet (fejelem) és a többi elemet tartalmazó listát (farok).</p>
+<p>Implementáljuk az alábbi műveleteket:</p>
+<ul>
+<li><p>Egy konstruktor, mely paraméterül kap egy elemet, és létrehozza az elemet tartalmazó egyelemű listát.</p></li>
+<li><p><code>getHead()</code>, mely visszaadja a legelső elemet.</p></li>
+<li><p><code>getTail()</code>, mely visszaadja az első elemet nem tartalmazó maradék listát.</p></li>
+<li><p><code>length()</code>, mely rekurzívan kiszámolja a lista hosszát.</p></li>
+<li><p><code>add()</code>, mely a lista elejére fűz egy elemet.</p></li>
+<li><p><code>remove()</code>, mely eltávolítja az első elemet.</p></li>
+<li><p><code>concat()</code>, mely az aktuális lista után fűzi a kapott listát.</p></li>
+<li><p><code>toString()</code>, mely rekurzívan szöveggé alakítja a listát.</p></li>
+</ul>
+<p>Készítsünk egy rövid <code>main()</code> metódust egy <code>ListDemo</code> osztályban! Hozzunk létre egy listát, és tegyünk bele néhány elemet! Vegyük ki az első elemet! Mennyire biztonságos a kiolvasás? Mennyire könnyen lehet elrontani a programot?</p></li>
+<li><p><em>Haladóknak.</em> Készítsük el a <code>util.IntTree</code> osztályt, mely egész számokat rendezetten tároló bináris fát megvalósít meg! A fa minden csúcsának nulla, egy vagy két gyermeke lehet és legfeljebb egy szülője. Ha egy csúcsnak nincs szülője, úgy az a csúcs a fa gyökere.</p>
+<p>A láncolást egy-egy <code>IntTree</code> objektumra mutató referenciákkal oldjuk meg, melyek egy csúcs bal és jobb oldali gyerekére mutatnak. Emellett minden csúcs egy egész számot is tárol.</p>
+<p>Valósítsuk meg az alábbi műveleteket az <code>IntTree</code> osztályon belül:</p>
+<ul>
+<li><p>Konstruktor, mely egy <code>int</code> értékből létrehoz egy egyelemű fát, a gyökerében a megadott <code>int</code> értékkel.</p></li>
+<li><p><code>insert()</code>, mely beszúr egy <code>int</code> értéket a fába. Ha a szám kisebb, mint az aktuális csúcsban tárolt szám, akkor a bal oldali részfába szúrjuk be (rekurzívan). Ha nagyobb vagy egyenlő, akkor a jobb oldali részfába szúrjuk be (szintén rekurzívan). Ha nincs bal vagy jobb oldali részfa, ahova beszúrnánk, akkor hozzunk lérte egy új csúcsot a beszúrandó számmal.</p></li>
+<li><p><code>contains()</code>, mely eldönti, hogy egy paraméterként kapott szám megtalálható-e a fában (rekurzívan). Ha nem találtuk még meg és a kapott szám kisebb, mint az aktuális csúcsban tárolt, úgy a bal oldali részfában keresünk tovább, különben pedig a jobb oldaliban.</p></li>
+<li><p><code>toArray()</code>, mely egy <code>int</code> értékekből álló tömbben adja vissza a fában eltárolt értékeket. A tömbben először a bal oldali részfában tárolt elemek legyenek, majd a gyökérben tárolt elem, végül a jobb oldali részfában tárolt elemek. A tömbben a számok rendezettek lesznek. Ezt a bejárást hívják inorder bejárásnak.</p></li>
+<li><p><code>toString()</code> metódus, mely a fában tárolt értékek felsorolását adja vissza szövegként.</p></li>
+</ul>
+<p>Készítsünk programot, mely egész számok sorozatát rendezi a bináris fa segítségével! A program sorban bekér egész számokat, melyeket beszúrja a fába. Ha elfogytak a számok, úgy a fa inorder bejárásával megkapjuk a rendezett sorozatot. Írjuk is ki a képernyőre a rendezett sorozatot!</p></li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,2 @@
+class java.lang.RuntimeException
+Words have different lengths.

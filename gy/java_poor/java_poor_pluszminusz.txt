@@ -1,0 +1,48 @@
+2016/2017 1.
+GY02: Mi a Java fordító ki- és bemenete?
+be - Java forráskód
+ki - bájtkód
+
+GY04: Mi található egy metódus aktivációs rekordjában?
+
+GY05: Mit jelent az aliasing?
+Több referencia hivatkozik ugyanarra az objektumra.
+
+GY06: Meddig tart egy objektum élettartama?
+
+GY07: Mettől meddig tart egy objektum élettartama?
+newtól garbage collectorig
+
+GY08: Mi a default konstruktor?
+Paraméter nélküli üres törzsű konstruktor, fordító generálja, ha nem írunk konstuktort.
+
+
+2016/2017 2.
+GY02: Mi a Java fordító ki- és bemenete?
+bemenet - Java forráskód
+kimenet - bájtkód
+
+GY03: Melyek primitív típusok az alábbiak közül? int, Double, String, char, complex
+int, char
+
+GY04: Az alábbi típusú változók közül melyik NEM helyes alapértelmezett érték?
+a) int -> 0
+b) String -> "null" (EZ)
+c) char -> '\u000'
+d) float -> 0.0f
+
+GY05: Mi az aliasing?
+
+GY06: A static kulcsszó mit jelent metódusoknál?
+
+GY07: Egy dinamikus objektum mikor jön létre, meddig tart?
+
+GY08: Mit jelent az autoboxing, iletve autounboxing? Milyen típusok között?
+
+GY09: 3 tömbdeklaráció közül kellett kiválasztani, hogy melyik helyes
+
+GY10: Mi az absztrakt osztály?
+
+GY11: Milyen sorrendben kell megadni a catch() ágakat kivételeknél?
+
+GY12: Explicit típuskényszerítést mikor kell használni? Mikor nem megy magától?

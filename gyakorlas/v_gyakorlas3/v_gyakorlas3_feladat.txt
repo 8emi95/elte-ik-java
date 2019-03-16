@@ -1,0 +1,229 @@
+A feladat összefoglaló leírása
+Ebben a feladatban egy nagyon egyszerû szerver belsõ logikáját kell megvalósítani. Ez a szerver egy szöveges protokollt használ, ezért a feladat során alapvetõen a szerverhez beérkezõ szövegek (kérések, request) feldolgozását kell megvalósítani, amely során erre újabb szövegeket (válasz, response) állítunk elõ. A részfeladatok ezen válaszadás lépéseihez kapcsolódó osztályok elkészítését kérik.
+
+Ügyeljünk arra, hogy a definiálandó osztályoknak a http, illetve http.method csomagokba kell kerülniük! A feladathoz tartozó segédletet innen [http://people.inf.elte.hu/poor_a/hu/java/http/http.zip] tölthetjük le. Itt találhatjuk a feladat leírásában hivatkozott összes állományt.
+
+Tesztelés
+Az egyes részfeladatokhoz tartoznak külön tesztesetek, amelyeket a feladatok végén jelöltünk meg. Ezek önállóan is fordítható és futtatható .java állományok a mellékelt .jar segítségével. Például Windows alatt az elsõ feladathoz tartozó tesztesetek így fordíthatóak és futtathatóak:
+
+> javac -cp .;tests-zhttpd.jar tests/StatusTest.java
+> java -cp .;tests-zhttpd.jar tests/StatusTest
+Ugyanezeket a teszteseteket használja a feladathoz tartozó, tesztelést és pontbecslést végzõ Test osztály is. Ezt Windows alatt így lehet futtatni:
+
+> java -cp .;tests-zhttpd.jar Test
+Linux alatt mindent ugyanúgy lehet futtatni, csak a -cp paraméterében a pontosvesszõt kettõspontra kell cserélni.
+
+A feladat részletes ismertetése
+http.Status (2 pont)
+A szerverhez érkezõ kérésekre adott válaszoknak van egy ún. státusza, amelybõl a kliens meg tudja állapítani, hogy milyen eredménnyel járt: a kérése teljesíthetõ volt, vagy esetleg valamilyen hiba folytán sikertelen. Mivel a késõbbiekben használni fogjuk ezeket, ábrázoljuk a státuszt egy osztály segítségével!
+
+Egy státusznak a következõ, bárhonnan olvasható de írásvédett elemei vannak:
+
+code: egy pozitív egész szám (int), amely a státusz egyedi azonosítója;
+reason: a státusz szöveges leírása (String).
+valamint:
+
+egy rejtett konstruktor, amely beállítja a fentebb említett adattagok kezdeti (és késõbb nem módosuló) értékét a paramétereinek megfelelõen;
+A továbbiakban alkalmazott gyakori státuszokhoz az osztályhoz kapcsolódóan ezután adjuk meg a következõ (osztályszintû) konstansokat:
+
+Status.OK: kód = 200, leírás = "OK",
+Status.BAD_REQUEST: kód = 400, leírás = "Bad Request",
+Status.NOT_FOUND: kód = 404, leírás = "Not Found",
+Status.ERROR: kód = 500, leírás = "Internal Server Error",
+Status.NOT_IMPLEMENTED: kód = 501, leírás = "Not Implemented".
+Tesztesetek: tests/StatusTest.java
+
+http.Message (3 pont)
+A szerver és kliens között folyó kommunikáció lényegében üzenetváltásokkal történik. Ezért hozzunk létre egy üzeneteket ábrázoló absztrakt osztályt! Ez az osztály tehát ne legyen még példányosítható, ugyanis egy üzenetet majd aszerint kell a késõbbiekben specializálnunk, hogy kérés vagy válasz. Arra viszont alkalmas lesz, hogy kezelje az üzenet esetén ún. fejlécek (header) felfûzését és lekérdezését.
+
+Ezért az osztálynak legyen az alábbi két metódusa:
+
+addHeader(): egy fejlécnevet és -értéket mint szöveget (String) kapó metódus, amely a paramétereit tárolja egy java.util.Map adatszerkezetben késõbbi visszakeresés céljából. A fejlécnevek esetén a kis- és nagybetûket nem különböztetjük meg, ezért tároljuk mindegyiket nagybetûsen;
+
+getHeader(): visszakeresi az üzenetben tárolt fejlécnévhez a neki megfelelõ értéket. Amennyiben nem található, úgy adjon vissza null referenciát.
+
+Tesztesetek: tests/MessageTest.java
+
+http.Response (3 pont)
+Az üzenetek egyik specializációja a szerver által adott válasz, amelyet az elõbbi (http.Message) osztály egy leszármazottjaként kell megadnunk. Az onnan örökölt adattagokat és metódusokat egészítsük ki a következõkkel:
+
+status: a válasz bárhonnan olvasható de írásvédett állapota, amelyet a korábban definiált (http.Status) típussal fejezzük ki;
+
+body: a válaszban tárolt törzs amely egy szöveg (String). Ez legyen bárhonnan olvasható és módosítható;
+
+egy konstruktor, amelyek létrehozáskor segíti az osztály példányainak a státusz és a törzs beállítását;
+
+egy másik konstruktor, amely létrehozáskor segíti a státusz beállítását, a törzset pedig magától null referenciára állítja;
+
+toString(): egy olyan metódus, amely elõállítja a válasz szöveges (String) alakját a protokoll szerint. Ez vázlatosan a következõ:
+
+ HTTP/1.1 {status} {reason}
+ {header1}: {value1}
+ {header2}: {value2}
+ ...
+ {headerN}: {valueN}
+
+ {body}
+ahol {status} a válasz státuszának kódja, {reason} a státusz szöveges leírása, {headerX} és {valueX} az üzenethez tartozó fejlécnevek és a nekik megfelelõ értékek 1 és N között (feltételezve, hogy nn fejlécünk van), a {body} pedig az üzenet törzse. A törzs lehet opcionális, vagyis az értéke null, akkor ne kerüljön bele szöveges alakba!
+
+Például (a fejlécek sorrendje nem számít):
+
+ HTTP/1.1 200 OK
+ CONNECTION: close
+ CONTENT-LENGTH: 8
+
+ 01234567
+vagy:
+
+ HTTP/1.1 500 Internal Server Error
+ CONNECTION: close
+ <üres sor>
+Tesztesetek: tests/ResponseTest.java
+
+http.NotFoundResponse (2 pont)
+Az elõbbi (http.Response) osztály származtatásával készítsünk egy olyan specializált választ ábrázoló osztályt, amelyet akkor tudunk majd használni, amikor egy kért állományt nem találunk!
+
+Ennek a következõ szöveges alakkal kell rendelkeznie (a fejlécek sorrendje nem számít):
+
+HTTP/1.1 404 Not Found
+CONNECTION: close
+CONTENT-LENGTH: 33
+CONTENT-TYPE: text/plain
+
+The requested page was not found.
+Figyeljük meg, hogy ekkor lényegében egyszerûen arra van szükségünk, hogy egy http.Response példányt feltöltsünk konstans értékekkel!
+
+Tesztesetek: tests/NotFoundResponseTest.java
+
+http.Server (1. rész) (1 pont)
+Kezdjük el a szerver belsõ logikáját magában foglaló osztály definícióját! Ennek során egyelõre csak annyira lesz szükségünk, hogy létrehozzunk a következõket:
+
+root: bárhonnan olvasható de írásvédett, szöveges (String) adattag, amely annak a könyvtárnak az elérési útvonalát adja meg, ahol a kiszolgálandó weboldal állományai találhatóak. Ez például a késõbbiekben a feladathoz mellékelt "www" könyvtár lesz;
+
+host: bárhonnan olvasható de írásvédett, szöveges (String) adattag, amely a kiszolgálandó weboldal hálózati nevét adja meg. Ez például a késõbbiekben a "localhost:8000" lesz;
+
+egy konstruktor, amely segítségével be tudjuk állítani a példányok kezdõállapotát;
+
+resolveMethod(): egy olyan bárhonnan hívható osztályszintû metódus, amely a beérkezõ üzenetet feldolgozandó módszert (http.Method) fogja megadni annak nevébõl (String). Mivel még nem definiáltunk ilyen módszereket, ezért a metódusnak egyelõre legyen az a feladata, hogy minden paraméter esetén csak null referenciát ad vissza!
+
+http.Method
+Továbbá kezdjük el együtt párhuzamosan a módszereket leíró interfész definícióját is! Itt egyelõre a következõ tagnak kell szerepelnie:
+
+response(): egy (paraméter nélküli) lekérdezõ metódus, amely a metódus futtásának eredményét adja vissza mint egy választ ábrázoló objektum (http.Response, ld. fentebb).
+Tesztesetek: tests/ServerTest1.java
+
+http.Request (4 pont)
+Valósítsuk meg az üzenetek másik fajtáját, a kéréseket ábrázoló osztályt! Ebben az õsosztály (http.Message) elemeit a következõkkel kell kiegészítenünk:
+
+uri: bárhonnan olvasható de írásvédett szöveges (String) adattag, amely a kiszolgálandó weboldal gyökeréhez viszonyítottan adja meg a keresendõ állomány elérési útvonalát. Ilyen lesz a késõbbiekben az "/index.html";
+
+server: bárhonnan olvasható de írásvédett adattag, amely a kérést kapó, szervert ábrázoló objektumot (http.Server, ld. fentebb) hivatkozza. Erre majd arra lesz szükség, amikor a kérést egy adott módszerrel feldolgozunk;
+
+method: a kérés feldolgozását végzõ módszerre (http.Method) hivatkozó referencia;
+
+egy rejtett konstruktor, amely beállítja a fentebb említett adattagok kezdeti (és késõbb nem módosuló) értékét a paramétereinek megfelelõen;
+
+fromString(): egy osztályszintû metódus, amely a bemenetet feldolgozó szerver (http.Server) referenciájához és a (String) bemenethez létrehozza a neki megfelelõ kérést ábrázoló (http.Request) objektumot. Ennek során azt várjuk, hogy a bemenet a következõ formátummal rendelkezik:
+
+ {method} {uri} HTTP/1.1
+ahol a {method} a lekérés módja szövegesen, amely késõbb "GET" lehet (más módokat egyelõre nem támogatunk), az {uri} a keresendõ állomány relatív útvonala (ld. fentebb).
+
+Például:
+
+ GET /index.html HTTP/1.1
+Figyeljünk arra, hogy a kérést feldolgozó módszert mindig a {method} értékébõl fogjuk tudni megadni (vagyis használjuk erre a Server.resolveMethod() metódust)! Ha ettõl a formátumtól eltér a bemenet, akkor egyszerûen adjunk vissza null referenciát!
+
+response(): egy (paraméter nélküli) lekérdezõ metódus, amely meghívásakor a kéréshez tartozó módszerrel (http.Method) feldolgozzuk magát a kérést (execute(this), ld. lentebb), majd visszaadjuk az így válaszul kapott, választ ábrázoló objektumot (response(), ld. a módszerekhez tartozó interfész elsõ részét fentebb). Amennyiben a módszer egy null referencia, úgy adjuk vissza egy "Not Implemented" (http.Response) üzenetet!
+
+http.Method
+Megjegyezzük, hogy ez utóbbihoz arra lesz még szükségünk, hogy kiegészítsük a korábban elkezdett, módszereket leíró (http.Method) interfészt a következõ szignatúrával:
+
+execute(): egy visszatérési érték nélküli (void) metódus, amely a paraméterként kapott, kérést ábrázoló (http.Request) objektumot dolgozza fel.
+Tesztesetek: tests/RequestTest.java
+
+http.method.Get (5 pont)
+Valósítsuk meg a "GET" típusú kéréseket feldolgozó módszert (http.Method)! Ennek az a feladata, hogy a kérésben szereplõ útvonalon levõ állományról metainformációkat adjon vissza fejléceken keresztül, valamint az üzenet törzsében pedig magát az állomány tartalmát küldje el. Természetesen ezt csak akkor teszi meg, ha az állomány megtalálható, ellenkezõ esetben "Not Found" (http.NotFoundResponse) üzenetet kell generálnia! Továbbá arra is kell figyelnie, a kérésben szereplõ "Host" fejlécnek a szerver által kiszolgált weboldalt kell tartalmaznia.
+
+Például a következõ helyes kérésre (feltételezve, hogy az "index.html" állomány létezik a weboldal könyvtárának törzsében):
+
+GET /index.html HTTP/1.1
+Host: localhost:8000
+<üres sor>
+a helyes válaszunk a következõ (a feladathoz mellékelt állományokkal, a fejlécek sorrendje nem számít):
+
+HTTP/1.1 200 OK
+CONNECTION: close
+CONTENT-LENGTH: 128
+CONTENT-TYPE: text/html
+
+<html>
+<title>WWW Test Page</title>
+<body>
+<p>It works!</p>
+<a href="sub.html">Cliquez ici, s'il vous plait</a>
+</body>
+</html>
+Figyeljünk arra, hogy a kérésben szereplõ állományneveket természetesen a kiszolgált weboldal könyvtárához képest relatívan kell értelmezni! Az állományok méretét például a java.io.File osztály segítségével tudjuk könnyen lekérdezni. Valamint feltételezhetjük, hogy az állományok fajtája mindig "text/html". A "Connection: close" fejlécet is tegyük bele mindig a válaszba, késõbb még kelleni fog.
+
+Amennyiben a feldolgozás során nem java.io.FileNotFoundException keletkezik, akkor a kivételhez tartozó üzenetet küldjünk vissza egy "Internal Error" (http.Response) üzenet törzseként! Értelemszerûen java.io.FileNotFoundException kivétel esetén az eredmény "Not Found" (http.NotFoundResponse) lesz.
+
+Tesztesetek: tests/GetTest.java
+
+http.Server (2. rész) (4 pont)
+Fejezzük be a szerver logikáját megvalósító osztályt a következõ lépéseken keresztül:
+
+resolveMethod(): fejezzük be a korábban elkezdett metódust úgy, a "GET" paraméterre egy új http.Get példányt adjon vissza! Minden más esetben adjon vissza továbbra is null referenciát;
+
+serve(): egy paraméter és visszatérési érték nélküli (void) metódus, amelynek az a feladata, hogy a szabványos bemenetrõl beolvasson egy kérést és annak eredményét a szabványos kimenetre írja ki.
+
+A feldolgozás lépései a következõk:
+
+Egy kérés akkor kezdõdik, amikor a bemenetrõl beolvasott sor nem üres. Ezért amíg nem találunk nemüres sort, addig minden üres sort hagyjunk figyelmen kívül (és folytassuk a beolvasást)!
+
+Az elsõ nemüres sorból próbáljunk meg összeállítani egy kérést (a Request.fromString() metódus segítségével). Amennyiben ez sikeres volt, a következõ üres sorig olvassuk be a hozzá tartozó, fejlécekre vonatkozó adatokat. (Soronként egyetlen fejléc szerepel, a korábban bemutatott formátumnak megfelelõen.)
+
+Például egy formailag helyes kérés így néz ki (ld. a mellékelt request.txt állományt):
+
+   GET /index.html HTTP/1.1
+   Host: localhost:8000
+   User-Agent: Mozilla/5.0 (X11; FreeBSD i386; rv:30.0) Gecko/20100101 Firefox/30.0
+   Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+   Accept-Language: hu,en-us;q=0.7,en;q=0.3
+   Accept-Encoding: gzip, deflate
+   Connection: keep-alive
+   Cache-Control: max-age=0
+   <üres sor>
+Ha nem sikerült értelmeznünk a kérést, akkor válaszként adjunk vissza egy (http.Response típusú) "Bad Request" üzenetet!
+
+Tesztesetek: tests/ServerTest2.java
+
+A feladathoz mellékelt Main.java segítségével is ki tudjuk próbálni, hogy a szerver miként válaszolgatna egy-egy kérésre. Így tudjuk lefordítani, majd használni:
+
+$ javac http/method/Get.java
+$ javac Main.java
+$ java Main www localhost:8000
+GET /index.html HTTP/1.1
+Host: localhost:8000
+<üres sor>
+...
+vagy az utolsó lépést a korábban említett request.txt segítségével is megtehetjük:
+
+$ java Main www localhost:8000 < request.txt
+...
+Ráadás
+Érdemes megjegyezni, hogy a program végsõ változatát a feladathoz mellékelt Zhttpd.java segítségével ki lehet próbálni akár egy böngészõvel is! Elsõként az összes forrást le kell fordítani, majd a létrejövõ programot elindítani ugyanabból a könyvtárból:
+
+$ javac http/method/Get.java
+$ javac Zhttpd.java
+$ java Zhttpd www localhost:8000
+Ekkor a gépen megnyílik a 8000-res port, amelyre tudunk közvetlenül egy tetszõleges böngészõvel csatlakozni a címsorba a következõ beírásával:
+
+http://localhost:8000/index.html
+Jó munkát!
+
+Pontozás
+1: 0 — 6
+2: 7 — 10
+3: 11 — 14
+4: 15 — 18
+5: 19 — 24

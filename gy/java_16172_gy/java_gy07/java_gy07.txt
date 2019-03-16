@@ -1,0 +1,12 @@
+2017.03.28.
+7. Java GY
+
++/-: dinamikus objektum élettartama? mikor jön létre, meddig tart?
+v: new-tól gc-ig
+
+Movable				Comparable<Figure>
+move()				compareTo(Figure)
+v					v
+		Figure
+		area()
+		show()

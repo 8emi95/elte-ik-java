@@ -1,0 +1,37 @@
+java -vp tests-Bibliography;. Test
+project/
+	tests/
+	test-Bibliography.jar
+	biblio
+	main
+
+tippek:
+adatelrejtés (ne maradjon ki a private kulcsszó)
+biblio/Entry.java
+	Query.java
+
+public class Query {
+	private Author author;
+}
+
+kétdimenziós tömb (táblázat) ne osztályszintû legyen
+csv
+
+
+
++/-: mit jelent az aliasing? több referencia hivatkozik ugyanarra az objektumra
+
+main(String[] args) --------> []
+String[] T = args; -----------^
+
+*********
+
+GrepA:
+
+		|	bement			kimenet
+________________|____________________________________________
+bájtalapú	|	InputStream		OutputStream
+karakteralapú	|	Reader			Writer
+
+FileInputStream
+FileReader

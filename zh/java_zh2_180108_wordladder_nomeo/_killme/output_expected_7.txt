@@ -1,0 +1,2 @@
+class java.lang.RuntimeException
+The number of words in the input file in a line differs from two.

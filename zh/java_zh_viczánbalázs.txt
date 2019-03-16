@@ -1,0 +1,127 @@
+Általános tudnivalók
+ 
+A megoldást egyetlen, .zip kiterjesztésû tömörített állományban kell beadni, amely csak és kizárólag .java kiterjesztésû forrásokat tartalmazhat, a feladat leírása szerint megkövetelt könyvtárszerkezetben.
+ 
+Ebben az ismertetésben az osztályok, valamint a minimálisan szükséges metódusok leírásai fognak szerepelni. A feladatmegoldás során fontos betartani az elnevezésekre és típusokra vonatkozó megszorításokat. Segédfüggvények létrehozhatóak, a feladatban nem megkötött adattagok és elnevezéseik is a feladat megoldójára vannak bízva. Törekedjünk arra, hogy az osztályok belsõ reprezentációját a lehetõ legjobban védjük, tehát csak akkor engedjünk, és csak olyan hozzáférést, amelyre a feladat felszólít, vagy amit azt osztályt használó kódrészlet megkíván! Ami az osztályok leírásában nem szerepel, az nem lehet publikus, a helytelen láthatóság-szabályozás pontlevonással jár! Törekedjünk arra is, hogy a megírt forráskód kellõen általános és újrafelhasználható legyen.
+ 
+Használható segédanyagok: Java API dokumentáció, legfeljebb egy üres lap és toll. Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelõknek kell jelezni, nem a diáktársaknak!
+ 
+A PATH változó beállítása (Windows esetén, a verziószám eltérhet):
+ 
+PATH=%PATH%;"C:\Program Files\Java\jdk1.7.0_65\bin"
+A feladat megoldásához nem szabad semmilyen integrált fejlesztõi környezetet (NetBeans, Eclipse, IntelliJ IDEA, stb.) használni! Egyedül egy szövegszerkesztõ, a Java fordító, a Java virtuális gép (a futtatáshoz), illetve szükség esetén a Java debugger alkalmazható!
+ 
+A feladatok egymásra épülnek, ezért érdemes ezeket a megadásuk sorrendjében megoldani, de legalább megérteni az aktuális feladatot megelõzõ feladatokat!
+ 
+Részpontszámokat csak legalább egy teljes osztály hibátlan elkészítése után lehet kapni!
+ 
+A feladat összefoglaló leírása
+ 
+Készítsünk egy olyan parancssoros alkalmazást, amely egy osztálykirándulást szimulál. A szimulátor induláskor három paramétert vár, melyek határozott sorrendje a következõ:
+ 
+az elsõ az osztályfõnökök száma
+ 
+a második a kiránduláson résztvevõ gimnazisták száma összesen és
+ 
+a harmadik a szállásnál található szobák száma, összesen.
+ 
+Az osztályfõnökök minden nap ellenõrzik a szállás szobáit és foglalkozásokat tartanak minden diáknak. A foglalkozások során százszor is figyelmeztetnek egy diákot, ha valami nincsen rendjén, ám a századik figyelmeztetõ után intõvel hazaküldik a tanulót, akinek így a szobájában felszabadul a helye. Ha az egyik osztályfõnök már az ezredik figyelmeztetõt is kénytelen volt kiadni, akkor az osztálykirándulásnak vége szakad. Naponta egy diák legfeljebb négy figyelmeztetõt kaphat egy osztályfõnöktõl. Természetesen akkor is vége a kirándulásnak, ha minden gimnazistát haza kellett küldeni. Ez egyetlen osztálykirándulás, nincsenek külön csoportok, osztályok!
+ 
+A megoldás tesztelése
+ 
+A készülõ megoldást egy tesztelõ osztállyal lehet kipróbálni. Letöltés után tegyük a .class állományt abba a könyvtárba, ahol a forráskódok találhatóak (a csomagon kívülre). A megoldás lefordítása után a következõ paranccsal lehet futtatni a tesztelõt:
+ 
+> java SzimulatorTeszt
+A program ezután megpróbálja megkeresni a megoldáshoz tartozó .class állományokat, ellenõrzi, hogy helyesen mûködnek-e. Feltöltés elõtt célszerû lefuttatni.
+ 
+A feladat részletes ismertetése
+ 
+A feladatban szereplõ osztályokat csomagokba kell tenni. Az OsztalyKirandulas osztály tartalmazza az alkalmazás main() belépési pontját, és a szimulatorApp csomagban található. A Szoba osztály a szallas csomagba, míg a többi osztály, a Gimnazista és az Osztalyfonok a gimnazium.osztaly csomagba kerül. A példányokhoz nem rendeltünk egyedi azonosítókat, így indexükkel kezeljük õket. A tömbelemek számozása mindig induljon 0-ról!
+ 
+gimnazium.osztaly.Gimnazista (7 pont)
+ 
+Valósítsunk meg egy olyan Gimnazista osztályt amely megengedi, hogy egy gimnazistát az osztályfõnök foglalkoztassa és hazaküldhesse, ha a figyelmeztetések száma meghaladja az intõ határát, amely legyen 100 figyelmeztetés.
+ 
+Használjuk a java.util.Random osztályt a szimulációhoz hiányzó adatok kitöltésére! A véletlensorozat magja (seed) legyen 12345678.
+ 
+A Random használatára egy példa:
+ 
+import java.util.Random;
+private static Random veletlengenerator = new Random(12345678);
+veletlengenerator.nextBoolean();
+veletlengenerator.nextInt(n)
+Az osztálynak legyenek az alábbi mûveletei:
+ 
+Gimnazista() létrehoz egy új gimnazistát és véletlenszerûen dönti el, hogy fiú-e vagy lány. (2 pont)
+ 
+boolean fiu() megmondja, hogy a diák fiú-e vagy lány. (1 pont)
+ 
+foglalkoztat(int figyelmeztetesekSzama) foglalkoztatja a gimnazistát. A foglalkozás során az osztályfõnök figyelmeztetesekSzama-szor figyelmezteti, amit a gimnazista megjegyez magának. (2 pont)
+ 
+int osszesFigyelmeztetesekSzama() megmondja, hogy összesen hányszor kapott figyelmeztetést. (1 pont)
+ 
+boolean hazakuldheto() megmondja, hogy elérte-e a figyelmeztetések száma az intõ határát. Ha igen, akkor a diák hazaküldhetõ és felszabadul a helye a szobájában. (1 pont)
+ 
+szallas.Szoba (11 pont)
+ 
+Valósítsunk meg egy olyan Szoba osztályt, amelynek felhasználásával ábrázolhatjuk a diákszállót. Egy szoba tartalmazza a benne elszállásolt gimnazistákat. A szabályzat megkívánja, hogy legyenek külön lány, ill. fiúszobák. Továbbá ügyeljünk arra, hogy ne keverjük össze õket az elszállásolás során. Egy szobában a férõhelyek száma legyen 8 fõ, mely 0-tól számozódik. Amennyiben egy szoba nem alkalmas vagy betelik, akkor a szimulátor körbejárja a szobákat amíg el nem tudja szállásolni a gimnazistát.
+ 
+Az osztálynak legyenek az alábbi mûveletei:
+ 
+private Szoba(int, boolean) konstruktor, amely létrehoz egy szobát a benne levõ férõhelyekkel, valamint kijelöli, hogy fiúszoba-e vagy sem. (1 pont)
+ 
+Szoba foglal(int, boolean) ez az osztályszintû metódus az objektumgyár tervezési minta alapján ellenõrzi, hogy lehetséges-e a szobát létrehozni (azaz az elsõ paraméterben megadott férõhelyszám nagyobb, mint 0; és a lehetséges maximális férõhelynél kisebb egyenlõ). Amennyiben igen, akkor visszaadja az azonos paraméterekkel meghívott konstruktor segítségével létrehozott szobát. Ha a létrehozás feltétele nem teljesül, null-al térjen vissza a függvény. (2 pont)
+ 
+boolean fiu() megmondja, hogy a szoba fiúszoba-e vagy sem. Értéke igaz, ha csak fiúk laknak benne, hamis ha csak lányok. (1 pont)
+ 
+int lakokSzama() megmondja a szobában lakó gimnazisták számát. (1 pont)
+ 
+int osszferohely() megmondja a szoba teljes befogadóképességét. (1 pont)
+ 
+int szabadferohely() megmondja, hogy hány üres szabad férõhely található a szobában. (1 pont)
+ 
+void elszallasol(Gimnazista) megpróbál elszállásolni egy gimnazistát a szobában. (Emlékeztetõ: fiút csak fiúszobában, lányt csak lányszobában szabad elszállásolni. Amennyiben az elszállásolás sikertelen a gimnazista neme miatt, vagy amiatt, hogy már nincs több férõhely, a metódushívásnak nincsen semmilyen határsa a szoba állapotára)(2 pont)
+ 
+Gimnazista lako(int) megadja a gimnazistát, aki az adott ágyszámot kapta a szobában. (1 pont)
+ 
+void felszabadit(int) eltávolítja az adott ágyszámú gimnazistát a szobából és csökkenti a szobában lakók számát. (1 pont)
+ 
+gimnazium.osztaly.Osztalyfonok (4 pont)
+ 
+Valósítsunk meg egy olyan Osztalyfonok osztályt, amely a gimnazistákat és a szobákat kezeli. Egy osztályfõnök nyilvántartja magának, hogy összesen hány figyelmeztetést adott ki, valamint naponta ellenõrzi a szobákat és foglalkoztatja a gimnazistákat. A szimulátorban minden osztályfõnök minden szobát ellenõriz és minden diákot foglalkoztat, minden nap.
+ 
+Az osztálynak legyenek az alábbi mûveletei:
+ 
+int osszesKiosztottFigyelmeztetesekSzama() megmondja, hogy hány figyelmeztetést adott ki összesen az osztályfõnök. (1 pont)
+ 
+void ellenoriz(Szoba) ellenõrzi a megadott szobát és foglalkoztatja az ott lakó gimnazistákat. Egy gimnazistára legfeljebb négyszer szólhat rá egy nap egy osztályfõnök, és ha a gimnazista egy intõnyi figyelmeztetést gyûjtött össze, akkor hazaküldi, felszabadítva a helyét a szobában. A szimulátor kisorsolja, hogy a gimnazista mennyi figyelmeztetést szedett össze a metódus legutolsó hívása óta. Ezt úgy számoljuk, hogy minden hívásnál a figyelmeztetések számát véletlenszerûen egy 0 és 4 közötti értékkel növeljük meg. (3 pont)
+ 
+szimulatorApp.Osztalykirandulas (7 pont)
+ 
+Valósítsunk meg egy olyan Osztalykirandulas osztályt, amely a szimulációhoz megadott paraméterek alapján létrehozza a megfelelõ számú osztályfõnököt, gimnazistát és szobát. Legyen minden páros szoba fiúszoba, minden páratan szoba lányszoba.
+ 
+Ezután meghívja a kirandulas(int, int, int) metódust, amely addig fut, amíg tart az osztálykirándulás. Egy szimulációs ciklus egy nap és addig tart a kirándulás, amíg az egyik osztályfõnök ki nem kényszerült osztani az ezredik figyelmeztetést vagy el nem fogynak a diákok. Minden osztályfõnök minden nap ellenõrzi az összes szobát.
+ 
+A szimuláció végen az alkalmazás kiírja, hogy hány napig tartott az osztálykirándulás és megadja az osztályfõnökök statisztikáját indexük szerint, hogy ki hány figyelmeztetést volt kénytelen kiosztani.
+ 
+Az osztálynak legyenek az alábbi mûveletei:
+ 
+void main(String[]) a szimulátor belépési pontja, induláskor három egész számot vár paraméterként. Az elsõ az osztályfõnökök száma, a második a gimnazisták száma és a harmadik a szobák száma. Ezután meghívja a kirandulas(int, int, int) metódust. (1 pont)
+ 
+private static void kirandulas(int osztalyfonokszam, int gimnazistaszam, int szobakszama) maga a szimulátor, paraméterként vár három egész számot. Ellenõrzi, hogy legalább két szoba van, különben hibaüzenettel kilép. Ezután létrehozza a (8 fõs) szobákat, valamint az osztályfõnököket. Létrehozza a gimnazistákat és egybõl elszállásolja õket a szabályzatnak megfelelõ szobákban az int kovetkezoSzoba(int szobaszam, int szobakszama) segédmetódus segítségével. (4 pont)
+ 
+private static int kovetkezoSzoba(int szobaszam, int szobakszama) segédmetódus, amely a szálláson található szobákon lép végig. Körbejár, azaz ha a végére ért, akkor elõröl kezdi. (2 pont)
+ 
+Példák a szimuláció futtattatásra:
+ 
+java szimulatorApp/OsztalyKirandulas 3 44 12
+Az osztálykirándulás 11 napig tartott.
+Az osztályfõnökök ennyi figyelmeztetõt osztottak ki:
+0.: 902
+1.: 967
+2.: 1004
+Hibakezelés:
+ 
+java szimulatorApp/OsztalyKirandulas
+Indítási hiba: három paraméter szükséges.
+Bónusz feladat: többször futtatva a szimulációt, mi derül ki: átlag meddig tart egy kirándulás?

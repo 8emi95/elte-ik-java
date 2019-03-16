@@ -1,0 +1,23 @@
++/-: Mi található egy metódus aktivációs rekordjában?
+public static void main(String[] args) {
+	int z = 0;
+}
+.......
+
+többdimenziós tömb BEADANDÓBAN IS
+mátrixokhoz
+tömbök tömbje van Javában
+kesztyûtömb (?): más hosszúságú tömbök vannak benne
+
+int[][] a = {{1,2},{3,4}};
+
+A = 1 2    [] -> [1][2]     B = 0 2        A+B = C = 1 4
+    3 4    [] -> [3][4]         4 6                  7 10
+
+C = [] -> [0][0]  // alapból 0-ea van inicializálva
+    [] -> [0][0]
+
+
+ns -> [0][2][4] + 5
+      [0][2][4][0]
+ns -> [0][2][4][5]

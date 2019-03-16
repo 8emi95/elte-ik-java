@@ -1,0 +1,145 @@
+Általános tudnivalók
+Ebben az ismertetésben az osztályok, valamint a minimálisan szükséges metódusok leírásai fognak szerepelni. A feladatmegoldás során fontos betartani az elnevezésekre és típusokra vonatkozó megszorításokat, illetve a szövegek formázási szabályait.
+
+Segédfüggvények létrehozhatóak, a feladatban nem megkötött adattagok és elnevezéseik is a feladat megoldójára vannak bízva. Törekedjünk arra, hogy az osztályok belsõ reprezentációját a lehetõ legjobban védjük, tehát csak akkor engedjünk, és csak olyan hozzáférést, amelyre a feladat felszólít, vagy amit azt osztályt használó kódrészlet megkíván!
+
+A beadott megoldásodnak mûködnie kell a mellékelt tesztprogramokkal, de ez nem elégséges feltétele az elfogadásnak. A megírt forráskód legyen kellõen általános és újrafelhasználható!
+
+Használható segédanyagok: Java dokumentáció, legfeljebb egy üres lap és toll. Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelõknek kell jelezni, NEM a diáktársaknak!
+
+Tesztelés
+Az egyes részfeladatokhoz tartoznak külön tesztesetek, amelyeket a feladatok végén jelöltük meg. Ezek önállóan is fordítható és futtatható .java állományok a mellékelt .jar segítségével. Például Windows alatt az elsõ feladathoz tartozó tesztesetek így fordíthatóak és futtathatóak:
+
+> javac -cp .;tests-Rental.jar tests/Part1.java
+> java -cp .;tests-Rental.jar tests/Part1
+Ugyanezeket a teszteseteket használja a komplett feladathoz tartozó tesztelést végzõ Test osztály is. Ezt Windows alatt így lehet futtatni:
+
+> java -cp .;tests-Rental.jar Test
+Linux alatt mindent ugyanúgy lehet fordítani és futtatni, csak a -cp paraméterében a pontosvesszõt kell kettõspontra cserélni.
+
+A feladat összefoglaló leírása
+Egy webshop adadtbázisának egy lehetséges reprezentációját hozzuk létre.
+
+A programhoz tartozik egységtesztelõ amely az egyes osztályok funkcionalitását teszteli.
+
+A feladat részletes ismertetése
+Part1 (10+2 pont)
+item.Tag
+Vegyünk fel néhány termékkategóriát kategóriát (Sci_fi, Action, Fantasy,Romantic,Philosophy,Satire) tartalmazó felsorolási típust.
+item.Item
+Hozzuk létre a Item absztrakt osztályt, ami egy absztrakt terméket reprezentál. Az osztályt késõbb töltjük föl adattagokkal és metódusokkal.
+Egy adott Item a következõ nem nyilvános adattagokat tartalmazza: - Tag-ek halmaza - és egész szám tíusú year és price attribútumok - valamint szinteén egész számként tároljuk el, hogy az adott Item-bõl épp hány van készleten
+az adattagokhoz adjunk hozzáférést publikus gettereken keresztül! Figyeljünk arra, hogy ne engedjük ki az objektum állapotát!
+hozzunk létre egy konstruktort amely a megfelelõ paraméterként megkapott értékekkel feltölti az adattagokat
+
+írjunk egy paraméter nélüli sellOneCopy és egy egész számot váró addCopies metódust! az elsõ csökkentse a készleten lévõ elemek számát eggyel, míg a második növelje azt a paraméterként kapott egésszel!
+
+implementáljunk egy readTags metódust mely Stringként megkapja Tag-ek neveinek whitespace-ekkel elválasztott, egy Stringben tárolt listáját, melyet Tag objektumok halmazává (Set<Tag>) konvertál
+
+- a metódusban használhatjuk az `Enum.valueOf(..)` statikus metódust:
+~~~~{.java}
+    String s = ...;
+    Enum e = Enum.valueOf(s);
+~~~~    
+definiáljuk felül a toString metódust, melynek a következõ formában kellene leírnia az objektumot:
+
+(Year: 1937) Tags: [Fantasy, Action] Amount on stock: 5
+
+util.Utils
+- írjunk egy `Utils` osztályt, mely a következõ az input ellenõrzésénél hasznos statikus metódusokat tartalmazza:
+
+`public static boolean isValidName(String input)` : a névnek Srtingek whitespace-szel elválasztott sorozatának kell lennie, melyeknél az elsõ karakternek nagybetûsnek kell, lennie ezenfelül csak betûket és `-` karaktert tartalmazhat. Megengedjük továbbá a rövidítést, azaz a karakterlánc utolsó helyén elfogadunk `.`-ot is.
+`public static boolean isInteger(String input)`: leellenõrzi, hogy a kapott String egy egész szám-e, azaz kizárólag számjegyeket tartalmaz-e.            
+item.Book
+Készítsünk egy az elõbbi absztrakt osztály egy példányosítható leszármazottját a Book osztályt
+az osztály adattagjai: - String típusú title - és szintén String típusú author
+
+Legyen négy függvénye:
+Az osztály privát konstruktora, amely feltölti az adattagokat, és meghívja az Item konstruktorát az ott definiált tagok inicializálásához
+A makeBook statikus factory metódus ellenõrzi a konstruktornak továbbítandó paramétereket és ha azok megfelelõek létrhozza és visszaadja a kreált objektumot, ellenkezõ esetben null.
+A makeBookparaméterei egy String[]-ben: 0: price : egész 1: author: String, amely egy valid név (lásd Utils) 2: title : String 3: year : egész 4: amount: egész 5: tags : tag-eket reprezentáló Stringek whitespace-ekkel tagolt sorozata egy Stringben
+minden adattag legyen lekérdezhetõ a megfelelõ get metódussal, továbbra is kerüljük a szivárogtatást
+definiáljuk felül a tostring metódust: output: Book [J. R. R. Tolkien: The Hobbit (Year: 1937) Tags: [Fantasy, Action] Amount on stock: 5]
+item.Movie
+Készítsünk egy, az elõbbi absztrakt osztály egy másik példányosítható leszármazottját, a Book-hoz erõsen hasonlatos Movie osztályt
+az osztály adattagjai: - String típusú title - és szintén String típusú director
+
+Legyen négy függvénye:
+Az osztály privát konstruktora, amely feltölti az adattagokat, és meghívja az Item konstruktorát az ott definiált tagok inicializálásához
+A makeBook statikus factory metódus ellenõrzi a konstruktornak továbbítandó paramétereket és ha azok megfelelõek létrhozza és visszaadja a kreált objektumot, ellenkezõ esetben null.
+A makeBookparaméterei egy String[]-ben: 0: price : egész 1: director : String, amely egy valid név (lásd Utils) 2: title : String 3: year : egész 4: amount : egész 5: tags : tag-eket reprezentáló Stringek whitespace-ekkel tagolt sorozata egy Stringben
+minden adattag legyen lekérdezhetõ a megfelelõ get metódussal, továbbra is kerüljük a szivárogtatást
+
+definiáljuk felül a tostring metódust: output: Movie [Ridley Scott: The Martian (Year: 2015) Tags: [Action, Sci_fi] Amount on stock: 10]
+
+customer.Costumer
+-Írjuk meg a webshop ügyfeleit reprezentáló osztályt, mely két privát String típusú tagváltozót tartalmaz: a
+    -az ügyfél nevét 
+    -és címét
+- írjunk publikus gettereket a változókhoz `getName`, `getAddress`
+
+- írjunk egy rejtett konstruktort és egy hozzá tartozó factory metódust, mely ellenõrzi hogy az ügyfél neve megfelel-e a 'Utils'-ban megadott szabályoknak. Ha igen adja vissza az elkészített objektumot, ellenkezõ esetben `null`.
+    
+
+- definiáljuk felül a tostring metódust:
+    - output: `Customer: [John Doe, New York]`
+Part2 (8+2 pont)
+shop.WebShop
+Hozzuk létre a webshopot reprezentáló osztályt
+Adattagok:
+
+- `Item`-ek privát halmaza: `items`
+- privát `customers` map, amely a felhasználókat és az általuk megvásárolt `Item`-ek halmazait tárolja
+- írjunk egy publikus getCustomersCount() és getItemsCount() metódust, mely az adott container elemszámával tér vissza
+konstruktor: paramétere egy a webshop adatait tároló file nevét tartalmazó String
+
+- az input file-t soronként beolvassa és feltölti a webshop adattagjait, amennyiben azok megfelelõ formátumúak (használjuk a megírt factorykat!)
+- egy adott sor a követjkezõképpen néz ki:
+
+    - a sor tartalmát leíró kulcsszó mely a következõk egyike lehet: `Customer`,`Book`, `Movie` ,`Buy`
+    - ":" után a létrehozandó objektum leírása ";" -kel elválasztva:
+        Customer:<név>;<cím>
+        Book:<ár>;<szerzõ>;<cím>;<kiadás éve>;<darabszám>;<kategória-lista> 
+        Movie:<ár>;<rendezõ>;<cím>;<év>;<darabszám>;<kategória-lista>
+
+    - a `Buy:<ügyfél neve>;<item címe>` sor egy item eladását írja le, ekkor ki kell keresni név alapján az ügyfelet a `customers` map-bõl, és a hozzá tartozó itemset-hez hozzáadni a cím alapján azonosított terméket(feltételezhetjük hogy ezen értékek egyediek) Ezen felül a `Item`-eket tároló halmazunkban csökkenteni kell az adott termék mennyiségét.
+
+            - ehhez írjunk egy publikus `addPurchase`metódust, mely egy két elemû tömböt vár:
+
+                    0: vásárló neve
+                    1: az `Item` címe
+
+
+
+    - töltsük fel a beolvasott sorokból létrehozott objektumokkal az `items` és `customers` containereket (a mapben a vásárolt termékek listája egyelõre üres)
+írjunk egy printItems metódust, ami kiírja a items tartalmát a következõ formában:
+
+`Items: [Book [Jean-Paul Sartre: La nausée (Year: 1938) Tags: [Philosophy] Amount on stock: 4], Movie [Ridley Scott: The Martian (Year: 2015) Tags: [Action, Sci_fi] Amount on stock: 10],...]
+
+Part3 (8+2 pont)
+equals, hasCode, compareTo
+írjuk meg az equals és hascode metódusokat az Item leszármazottjaihoz:
+
+két könyv objektum azonos, ha a szerzõ, a cím, és az év megegyezik
+két film objektum azonos, ha a rendezõ, a cím, és az év megegyezik
+Comparable
+legyenek az Item típusó objektumok rendezhetõek az megjelenés éve alapján ( a rendezés növekvõ sorrendben történjen )
+írjunk a webshophoz egy getOrderedItems publikus metódust, mely visszaadja items tartalmát a fentebb leírt módon, csak év szerint növekedõ sorrendben.
+Part4 (10+2)
+írjuk meg webshop állapotának szöveges reprezentációját megadó toString metódust: WebShop: [;<ügyfelek reprezentációja az alábbi módon>] Ügyfelek: Customers: [<ügyfelek listája vesszõvel és egy whitespace-szel elválasztva>] Egy ügyfél: <Customer.toString>:[<általa megvásárolt elemekaprintItemsformátumában>]`
+clone, history
+- írjuk meg a `Movie`, `Book`, `Customer`, és `WebShop` osztályok `clone` metódusát, a nem változatott tagváltozókat ehhez deklaráljuk `final`-nak
+
+- a WebShopban hozzunk létre egy `private static` listát mely `WebShop`-okat tartalmaz, illetve ehhez egy `getHistory` metódust (elég a referenciát visszaadni)
+    
+- írjunk egy `public void saveState()` metódust, mely klónozza a webshopot és a klónt beszúrja a lista elejére.
+
+- írjunk meg egy printHistory metódust, mely egymás után '-'vel elválasztva kiírja az adott mentések toStringjét
+Pontozás
+A tesztelõ által adott pontszám csak becslésnek tekinthetõ, a gyakorlatvezetõ levonhat pontokat, vagy adhat részpontokat.
+
+Ponthatárok:
+
+0 - 13: elégtelen (1) 14 - 19 : elégséges (2) 20 - 26 : közepes (3) 27 - 31 : jó (4) 32 - : jeles (5)
+
+Jó munkát, jó játékot!

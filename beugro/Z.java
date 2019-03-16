@@ -1,0 +1,1 @@
+class Z extends X implements Y {}

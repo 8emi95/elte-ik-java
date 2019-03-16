@@ -1,0 +1,258 @@
+// Itt mindenhol az a) a helyes. (A vizsgán természetesen nem.)
+
+
+01. Miért kapunk fordítási hibát erre az osztályra?
+
+class Gold {
+    private int amount;
+    public String unit;
+    public static void main(String[] args) {
+        System.out.println(amount + unit);
+    }
+}
+
+a) Nem hozunk létre objektumot a Gold osztlyból.
+b) Nem használható a + művelet int és String típusú operandusokra.
+c) Inicializálatlan változók értékét használjuk a + műveletben.
+d) Az amount privát láthatóságú.
+
+
+
+02. Milyen metódust kell meghívni a kérdőjelek helyén, hogy 6 íródjon ki?
+
+public class Increment {
+    static void inc1(Integer i) { i = i + 1; }
+    static void inc2(Integer i) { i = new Integer(i + 1); }
+    public static void main(String[] args) {
+        Integer n = 5;
+        ???(n);
+        System.out.println(n);
+    }
+}
+
+a) Sem inc1, sem inc2 nem felel meg.
+b) Az inc1-et.
+c) Az inc2-t.
+d) Akár az inc1-et, akár az inc2-t.
+
+
+
+03. Hogyan kell létrehozni piros almát?
+
+// Fruit.java
+public class Fruit {
+    private String colour = "red";
+    public String colour() { return colour; }
+    public Fruit(String colour) { this.colour = colour; }
+    public Fruit() { this.colour = "green"; }
+}
+// Apple.java
+public class Apple extends Fruit {}
+
+a) Nem lehet piros almát létrehozni.
+b) new Apple()
+c) new Apple("red")
+d) Fordítási hiba az Apple osztályra.
+
+
+
+04. Melyik változó(k) van(nak) a végrehajtási veremben tárolva?
+
+public class Tree {
+    private int currentAge;
+    public int getAge() { return currentAge; }
+    public void setAge(int age) { currentAge = age; }
+}
+
+a) Az age.
+b) A currentAge.
+c) Az age és a currentAge.
+d) Sem az age, sem a currentAge.
+
+
+
+05. Mi a hatása ennek a kódnak, ha kezdetben sum értéke 0?
+
+for (int i = 1; i < 5; ++i) 
+    sum += i; sum *= 10;
+
+a) A sum 100 lesz.
+b) A sum 1234 lesz.
+c) A sum 12345 lesz.
+d) Fordítási hiba: hiányzó kapcsos zárójel.
+
+
+
+06. Melyik hoz létre objektumot a heapen?
+
+public void serious() {
+    int[] t = {1,2,3};
+    Integer i = 123;
+}
+
+a) Mindkét értékadás.
+b) Az első értékadás.
+c) A második értékadás.
+d) Egyik értékadás sem a kettő közül.
+
+
+
+07. Miért kapunk fordítási hibát?
+
+abstract class Shape {
+    public abstract boolean biggerThan(Shape that);
+}
+class Square extends Shape {
+    public final int size;
+    public Square(int size) { this.size = size; }
+    public boolean biggerThan(Square that) {
+        return size > that.size;
+    }
+}
+
+a) Implementálatlan abstract metódus.
+b) Hibás felüldefiniálás: hiányzik az @Override.
+c) Inicializálatlan final változó.
+d) Nem publikus osztályban nem lehet publikus metódus.
+
+
+
+08. Mit jelent, hogy egy kivétel "nem ellenőrzött" (unchecked)?
+
+a) Nem kötelező throws-ban deklarálni, ha felléphet.
+b) A futtató rendszer lekezeli.
+c) A fordító nem elelnőrzi, hogy szintatikusan helyes a definíciója.
+d) Nem ellenőrzi a futtató környezet, hogy felléphet-e.
+
+
+
+09. Mit ír ki az alábbi program?
+
+class Book {
+    String id;
+    Book(String isbn) { id = isbn; }
+}
+class Library {
+    public static void main(String[] args) {
+        Book b1 = new Book("1234-4567-28"),
+             b2 = new Book("1234-4567-28");
+        System.out.println(b1.equals(b2) + ":" + (b1 == b2));
+    }
+}
+
+a) false:false
+b) true:false
+c) true:true
+d) false:true
+
+
+
+10. Melyik igaz?
+
+int[] t = {1,2,3};
+int[][] m = {t,t};
+m[0]0[] = 0;
+
+a) m[1][0] == 0 & t[0] == 0
+b) m[1][0] == 1 & t[0] == 0
+c) m[1][0] == 0 & t[0] == 1
+d) m[1][0] == 1 & t[0] == 1
+
+
+
+11. Melyik helyes?
+
+interface Heavy {}
+interface Smart {}
+interface Book extends Heavy, Smart {}
+
+class Vehicle {}
+class Motored {}
+class Car extends Vehicle, Motored {}
+
+a) A Book igen, a Car nem.
+b) A Car igen, a Book nem.
+c) A Book is és a Car is.
+d) A book sem és a Car sem.
+
+
+
+12. Melyik enged nagyobb hozzáférést, a protected vagy a pacakge-private (félnyilvános) láthatóság?
+
+a) A protected.
+b) A félnyilvános.
+c) Mindkettő enged olyat, amit a másik nem.
+d) Osztályszintű tagoknál nincs különbség: példányszintá a félnyilvános.
+
+
+
+13. Mit ír ki az alábbi kódrészlet?
+
+int n = 0;
+try {
+    n += 1;
+    throw new RuntimeException();
+} catch(RuntimeException e) {
+    n += 2;
+    throw new Exception();
+} catch(Exception e) {
+    n += 4;
+} finally {
+    n += 8;
+}
+System.out.println(n);
+
+a) Nem jut el a vezérlés a kiíró utasításig.
+b) 11
+c) 15
+d) 7
+
+
+
+14. 
+
+a) 
+b) 
+c) 
+d) 
+
+
+
+15. Milyen viszonyban áll egy változó statikus és dinamikus típusa egymással?
+
+a) A dinamikus altípusa a statikusnak.
+b) A statikus altípusa a dinamikusnak.
+c) A statikus altípusa a dinamikusnak, de a kettő sosem egyezhet meg.
+d) A kettő között nem feltétlenül an altípus-kapcsolat.
+
+
+
+16. Mit fog kiíródni, ha lefuttatjuk a Plant osztályt?
+
+class Plant {
+    @Override public String toString() { return "plant"; }
+    public static void print(Plant plant) {
+        System.out.println(plant.toString());
+    }
+    public static void main(String[] args) {
+        Tree tree = (AppleTree) new Jonagold();
+        Plant.print(tree);
+    }
+}
+
+calss Tree extends Plant {
+    @Override public String toString() { return "tree"; }
+}
+
+calss AppleTree extends Plant {
+    @Override public String toString() { return "appletree"; }
+}
+
+calss Jonagold extends Plant {
+    @Override public String toString() { return "jonagold"; }
+}
+
+a) jonagold
+b) plant
+c) tree
+d) appletree

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>5. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">5. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.11.12.</p>
+<h2 id="feladatok">Feladatok</h2>
+<!-- jelenlegi könyvtár .txt fájljainak listázása-->
+<ol>
+<li><p>Írjunk programot, mely sorokat olvas be a szabványos bemenetről, amíg tud! Ezután fordított sorrendben írja ki a sorokat a szabványos kimenetre! A sorok eltárolására használjuk a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html"><code>java.util.LinkedList&lt;A&gt;</code></a> osztályt!</p>
+<p><em>Megjegyzés</em>:</p>
+<ul>
+<li><p>A parancssorban (Linuxon) <code>Ctrl-D</code> vagy (Windowson) <code>Ctrl-Z</code> kombinációval tudjuk jelezni a programnak, hogy nincs több sor, amelyet be kellene olvasnia.</p></li>
+<li><p>Annak eldöntésére, hogy van-e még beolvasásra váró sor, használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> osztály <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#hasNextLine--"><code>hasNextLine()</code></a> metódusát! A következő sort a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#nextLine--"><code>nextLine()</code></a> metódussal tudjuk beolvasni.</p></li>
+</ul></li>
+<li><p>Valósítsuk meg a Unix-szerű rendszerek <code>cat</code> programját! A <code>Cat</code> argumentumként vár egy fájlnevet, melynek tartalmát kiírja a szabványos bemenetre.</p>
+<p>Például:</p>
+<pre><code>$ echo &quot;Hello, World!&quot; &gt; hello.txt
+$ java Cat hello.txt
+Hello, World!</code></pre>
+<p>Jelezzük hibaüzenettel, ha a fájl nem található. Ehhez kezeljük le a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileNotFoundException.html"><code>java.io.FileNotFoundException</code></a> típusú kivételt!</p>
+<p>Gondoskodjunk minden esetben a fájl lezárásáról!</p></li>
+<li><p>Valósítsuk meg a Unix-szerű rendszerek <code>grep</code> programját! A <code>Grep</code> paraméterül vár egy szöveget és egy fájlnevet. Miközben olvassa a fájlt:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>kilistázza azokat a sorokat, melyek megegyeznek a paraméter szöveggel.</p></li>
+<li><p>kilistázza azokat a sorokat, melyben a szöveg megtalálható.</p></li>
+<li><p><em>Szorgalmi feladat.</em> A sor számát is kiírja, amelyben a szöveg megtalálható. Segítség: használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/LineNumberReader.html"><code>java.io.LineNumberReader</code></a>-t, hogy megtudjuk, hanyadik sorban járunk!</p></li>
+</ol>
+<p>Például:</p>
+<pre><code>$ echo &quot;Hello, World!\n Howdy?&quot; &gt; hello.txt
+$ java Grep World hello.txt
+Hello, World!</code></pre>
+<p>Jelezzük hibaüzenettel, ha a fájl nem található. Ehhez kezeljük le a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileNotFoundException.html"><code>java.io.FileNotFoundException</code></a> típusú kivételt!</p>
+<p>Ne kezeljük le az <a href="http://docs.oracle.com/javase/8/docs/api/java/io/IOException.html"><code>java.io.IOException</code></a> típusú kivételt, hanem specifikáljuk a <code>main()</code> fejlécében!</p>
+<!-- Írjunk ki a kivételobjektumban tárolt hibaüzenetet
+(`message`), és a stack-et (`printStackTrace()`)! -->
+<p>Gondoskodjunk minden esetben a fájl lezárásáról!</p></li>
+<li><p><em>Szorgalmi feladat.</em> Készítsünk programot, mely kiírja egy adott diák félév végi jegyeinek átlagát! A program bemenete a diák neve és egy fájlnév, melyben a diákok jegyei szerepelnek. Minden sorban ugyanannyi jegy szerepel, de előre nem tudhatjuk, hogy pontosan mennyi. Feltesszük, hogy minden sor jól van formázva.</p>
+<p>Például:</p>
+<pre><code>$ cat grades.txt
+Fazekas Sándor:4 3 5 4 5
+Mezei Péter:4 2 5 1 3
+Nagy Géza:5 4 5 3 4
+$ java Avg &quot;Mezei Péter&quot; grades.txt
+3.0
+$ java Avg &quot;Villám Géza&quot; grades.txt
+$ java Avg &quot;Fazekas Sándor&quot; asd
+File not found!</code></pre>
+<p>Jelezzük hibaüzenettel, ha a fájl nem található. Ehhez kezeljük le a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileNotFoundException.html"><code>java.io.FileNotFoundException</code></a> típusú kivételt!</p></li>
+<li><p><em>Szorgalmi feladat.</em> Adott egy fájl, melyben soronként egész számok szerepelnek. Készítsünk programot, mely megállapítja, hogy a számok összege melyik sornál ér el egy paraméterként megadott korlátot a paraméterként megadott fájlban!</p>
+<p>Kezeljük le a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileNotFoundException.html"><code>java.io.FileNotFoundException</code></a> kivételt! Adjunk értelmes hibaüzenetet, ha a fájl nem található!</p>
+<p>Segítség: használjunk egy <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> objektumot a számok beolvasására.</p>
+<p>Például:</p>
+<pre><code>$ cat almafa
+0
+3
+3
+4
+7
+$ java Bound 6 almafa
+Bound was reached at the 3. line
+$ java Bound 8 asdasd
+File not found!</code></pre></li>
+<li><p><em>Haladóknak.</em> Valósítsuk meg a biztonságos törlést végző <code>swipe</code> programot! A <code>Swipe</code> paraméterül vár egy fájlnevet, melynek tartalmát törölni kell, majd:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>a szabványos bemenetről olvasott sorokat egészen az üres sorig rögzíti benne.</p></li>
+<li><p>feltölti a második parancssori paraméterként megadott mennyiségű véletlenszerű</p>
+<ol style="list-style-type: lower-roman">
+<li><p>bájttal.</p></li>
+<li><p>karakterrel.</p></li>
+</ol></li>
+</ol>
+<p>Kezeljük le az <code>IOException</code> típusú kivételt! Írjunk ki a kivételobjektumban tárolt hibaüzenetet és a stack-et <code>printStackTrace()</code> metódussal!</p>
+<p>Gondoskodjunk minden esetben a fájl lezárásáról!</p></li>
+<li><p><em>Haladóknak.</em> Írjunk programot, mely rekurzívan bejárja a könyvtárakat, és kilistázza a bennük található fájlok számát!</p>
+<p>Például:</p>
+<pre><code>$ java CountFiles
+./ 2
+./a/ 3
+./a/b/ 4
+./c/ 2</code></pre></li>
+</ol>
+</body>
+</html>

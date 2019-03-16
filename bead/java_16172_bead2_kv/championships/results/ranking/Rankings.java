@@ -1,0 +1,20 @@
+package championships.results.ranking;
+
+import java.util.*;
+import java.io.*;
+
+import championships.results.*;
+
+public interface Rankings<T extends Comparable<T>> {
+	Set<String> getNations();
+	
+	T getPointsOf(String nation);
+	
+	Map<String,T> getPointsOfAll();
+	
+	List<String> getRanking();
+	
+	List<String> getTop3();
+	
+	void printRankingToFile(String filename) throws FileNotFoundException;
+}

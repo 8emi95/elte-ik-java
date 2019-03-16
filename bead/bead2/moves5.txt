@@ -1,0 +1,26 @@
+DOWN
+DOWN
+UP -2
+DOWN
+DOWN
+U 7
+RIGHT 8
+DOWN 4
+DOWN
+LEFT
+left
+
+
+UP
+LEFT
+UP
+LEFT
+UP
+RIGHT
+1 right
+UP
+UP
+UP
+ RIGHT 4 
+UP
+UP

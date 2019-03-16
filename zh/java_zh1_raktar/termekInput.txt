@@ -1,0 +1,7 @@
+1,alma,200
+nem-szam,rossz-termek,10
+2,ropi,100
+3,rossz-termek,10,felesleges-adat
+3,csoki,80
+2,mar-letezik-ez-az-azonosito,10
+4,cukor,150

@@ -1,0 +1,5 @@
++/-: (mindig elõzõ héten elhangzottból)
+Mi a Java fordító ki- és bemenete?
+be: Java forráskód
+ki: bájtkód
+

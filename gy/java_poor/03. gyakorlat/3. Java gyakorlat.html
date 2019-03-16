@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>3. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">3. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.09.28.</p>
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Készítsünk programot, mely kiírja a Fibonacci sorozat első <span class="math inline">\(n\)</span> elemét! Az <span class="math inline">\(n\)</span> értékét várja argumentumként a program!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>A sorozat első <span class="math inline">\(n\)</span> elemét tároljuk le egy tömbben, majd egy külön iterációban irassuk ki az elemeket!</p></li>
+<li><p>A sorozat első <span class="math inline">\(n\)</span> elemét tároljuk le egy tömbben, majd használjuk a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/AbstractCollection.html#toString--"><code>java.util.Arrays.toString()</code></a> metódust a kiíratásra!</p></li>
+</ol></li>
+<li><p>Készítsünk a <code>util</code> csomagon belül egy <code>IntVector</code> osztályt, mely egészek sorozatát ábrázolja!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Legyen egy tömb adattag, mely a sorozatot tárolja. Tegyük rejtetté!</p></li>
+<li><p>Adjunk az osztályhoz egy konstruktort, mely egy egészekből álló tömböt vár paraméterül! Ügyeljünk, hogy a belső állapotot ne szivárogtassuk ki!</p></li>
+<li><p>Vegyünk fel egy <code>add()</code> metódust, mely a sorozat minden eleméhez hozzáad egy paraméterül kapott egész számot!</p></li>
+<li><p>Írjunk egy <code>toString()</code> metódust is, mely felsorolja a számokat szóközzel elválasztva. Például: <code>[1 2 3]</code></p></li>
+</ol></li>
+<li><p>Készítsünk egy <code>Calculator</code> programot, mely egy számsorozatot és egy számot kap argumentumként. A program a számsorozat minden eleméhez hozzáadja a második argumentumot. Például:</p>
+<pre><code>$ java Calculator 1,2,3 5
+[6 7 8]</code></pre>
+<p>Használjuk az előbb megírt <code>util.IntVector</code> osztályt!</p></li>
+<li><p>Alakítsuk át az <code>util.IntVector</code> osztályt, hogy tömb helyett <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html"><code>java.util.LinkedList&lt;A&gt;</code></a> láncolt listában tárolja a számsorozatot!</p>
+<ul>
+<li>A lista végéhez hozzáadni az <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#add-E-"><code>add(elem)</code></a> metódussal lehet.</li>
+<li>A lista egy elemét a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#get-int-"><code>get(i)</code></a> metódussal érjük el.</li>
+<li>A lista egy elemét a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#set-int-E-"><code>set(i, elem)</code></a> metódussal írjuk felül.</li>
+<li>A lista hosszát a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#size--"><code>size()</code></a> metódussal kapjuk meg.</li>
+</ul></li>
+<li><p>Egyszerűsítsük le a <code>Calculator</code> programot a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> osztállyal!</p>
+<p>A <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> legfontosabb műveletei a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#nextInt--"><code>nextInt()</code></a> és a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#hasNextInt--"><code>hasNextInt()</code></a>.</p></li>
+<li><p>Készítsünk programot, mely eldönti egy argumentumként megadott szövegről, hogy palindrom vagy sem!</p>
+<p>Palindromnak nevezünk egy szót vagy kifejezést, ha visszafele olvasva ugyanazt kapjuk.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Feltesszük, hogy csak egy szót kapunk argumentumként.</p>
+<p>Például:</p>
+<pre><code>$ java Palindrome noon
+true
+
+$ java Palindrome radar
+true
+
+$ java Palindrome tree
+false</code></pre></li>
+<li><p><em>Szorgalmi.</em> Egészítsük ki úgy a programot, hogy az ne csak szavakat, hanem több szóból álló kifejezéseket is elfogadjon.</p>
+<p>Például:</p>
+<pre><code>$ java Palindrome &quot;race car&quot;
+true</code></pre></li>
+</ol></li>
+<li><p>Írjunk egy programot, mely kicseréli egy szöveg minden kisbetűjét nagybetűre, minden nagybetűt kisbetűre, minden számjegyéhez hozzáad egyet és minden más karaktert aláhúzásjelre cserél!</p>
+<p>Az egyes karakterek besorolásához használjuk a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html"><code>java.lang.Character</code></a> osztály statikus metódusait.</p></li>
+<li><p>Készítsünk egy olyan függvényt, mely egy paraméterül kapott <code>String</code> szavainak sorrendjét megfordítja, de a szavakat változatlanul hagyja!</p>
+<p>Például:</p>
+<pre><code>$ java ReverseWords &quot;Alma fa alatt&quot;
+alatt fa Alma</code></pre></li>
+<li><p>Írjunk egy <code>math.Vector</code> osztályt, melyben az alábbi metódusok szerepelnek:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>A statikus <code>dotProduct()</code> paraméterül vár két lebegőpontos értékekből álló tömböt és visszaadja a skaláris szozatukat. Ha a két tömb <span class="math inline">\(a\)</span> és <span class="math inline">\(b\)</span>, akkor a skaláris szozatuk <span class="math inline">\(\sum_{i} a_i  \times b_i\)</span></p></li>
+<li><p><em>Szorgalmi.</em> A statikus <code>crossProduct()</code> paraméterül vár két lebegőpontos értékekből álló, kételemű tömböt és az általuk bezárt szöget radiánban, és visszaad egy harmadik, háromelemű tömböt, melyben a paraméter tömbök vektoriális szozata szerepel.</p></li>
+</ol></li>
+<li><p><em>Haladóknak.</em> Írjunk egy programot, mely a szabványos bemenetről egész számokat olvas be, és megadja a hosszát és a kezdetét a leghosszabb egymást követő azonos számok sorozatának! Egy példa futás az alábbi:</p>
+<pre><code> java Longest
+ ~&gt; 1
+ ~&gt; 4
+ ~&gt; 4
+ ~&gt; 3
+ ~&gt;
+ start:  2
+ length: 2</code></pre>
+<p>Használjuk a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> osztály <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#nextInt--"><code>nextInt()</code></a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#hasNextInt--"><code>hasNextInt()</code></a> metódusait.</p></li>
+<li><p><em>Szorgalmi.</em> Készítsünk egy publikus <code>utils.NumericArrays</code> osztályt, melyben szerepelnek az alábbi statikus metódusok. Mindhárom metódus paraméterül vár egy <code>double</code> értékekből álló tömböt.</p>
+<ul>
+<li><p>Egy <code>sum()</code> metódus, mely visszaadja a számokat tartalmazó tömb elemeinek összegét <code>double</code> típusú értékként.</p></li>
+<li><p>Egy <code>average()</code> metódus, mely visszaadja a tömb elemeinek átlagát <code>double</code> típusú értékként. Ehhez használhatjuk a <code>sum()</code> metódust.</p></li>
+<li><p>Egy <code>normalize()</code> metódus, mely normálja a tömb elemeit. Az normált elemeket egy <code>double</code> értékeket tartalmazó tömbként adja vissza a metódus.</p>
+<p>A normálás azt jelenti, hogy a számok összege egy lesz. Ehhez meg kell határozni a tömb elemeinek összegét, és a tömb minden elemét meg knell szorozni az összeg reciprokával.</p></li>
+</ul>
+<p>Készítsünk egy <code>NumericArrayDemo</code> osztályt is egy <code>main()</code> metódussal, mely argumentumként várja az elvégzendő feladatot (<code>sum</code>, <code>avg</code> vagy <code>norm</code>) és a számsorozatot! Ez utóbbit vesszóvel elválasztva adjuk meg:</p>
+<pre><code>  java NumericArrayDemo sum 1,2,3
+  6
+
+  java NumericArrayDemo norm 1,2,1
+  [0.25, 0.5, 0.25]</code></pre></li>
+<li><p>Írjunk egy <code>math.Matrix</code> osztályt, melyben néhány mátrixműveletet valósítunk meg! Ezek az alábbiak:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>A <code>plus()</code> objektumszintű metódus paraméterül vár két kétdimenziós tömböt, melyeket összeadja. Az eredményt egy harmadik tömbben adja vissza.</p>
+<p>Az <span class="math inline">\(A\)</span> és a <span class="math inline">\(B\)</span> mátrix összegét megkapjuk a <span class="math inline">\(\sum_{i=0}^{n} \sum_{j = 0}^{m} A_{ij} + B_{ij}\)</span> kiszámításával.</p></li>
+<li><p><em>Haladóknak</em>. Hasonlóan a <code>plus()</code> metódushoz, készítsünk egy <code>multiply()</code> metódust, mely paraméterül vár két kétdimenziós tömböt, és a szorzás eredményét egy új tömbben adja vissza!</p>
+<p>Az <span class="math inline">\(A\)</span> és a <span class="math inline">\(B\)</span> mátrix <span class="math inline">\(C\)</span> szorzatát megkapjuk a <span class="math inline">\(C_{ij} = \sum_{k = 0}^n A_{ik} \times B_{jk}\)</span> kiszámításával minden <span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span>-re.</p></li>
+</ol></li>
+<li><p><em>Bónusz</em>: készítsük el az aknakereső játék alapjait!</p>
+<ol>
+<li><p>Hozzuk létre a <code>game.Minesweeper</code> publikus osztályt!</p></li>
+<li><p>Készítsünk egy <code>createTable()</code> metódust, mely paraméterül vár egy <code>p</code> valószínűséget és <code>m</code>, <code>n</code> egész számokat, és feltölt egy kétdimenziós, <code>m</code> sorból és <code>n</code> oszlopból álló logikai értékeket tartalmazó tömböt (a játéktáblát), ahol minden elem egy adott <span class="math inline">\(p\)</span> valószínűséggel lesz logikai igaz. Ott lesznek az aknák, ahol az elem értéke logikai igaz.</p>
+<p>Egy <span class="math inline">\(p\)</span> eloszlású <span class="math inline">\(x\)</span> indikátorváltozót a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#random--"><code>java.lang.Math.random()</code></a> metódus segítségével tudunk előállítani:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="dt">boolean</span> <span class="fu">x</span> (<span class="dt">double</span> p) {
+  <span class="kw">return</span> <span class="bu">Math</span>.<span class="fu">random</span>() &lt; p;
+}</code></pre></div>
+<p>A fenti <code>x</code> metódust <span class="math inline">\(p\)</span> valószínűséggel fog logikai igaz értéket, <span class="math inline">\(1-p\)</span> valószínűséggel hamis értéket visszaadni.</p></li>
+<li><p>Ez alapján készítsünk egy másik, <code>solve()</code> nevű függvényt, mely paraméterül vár egy aknakereső játéktáblát (kétdimenziós logikai tömböt), és visszaad egy egészekből álló kétdimenziós tömböt! A paraméter tömb és az eredmény tömb méretei azonosak.</p>
+<p>Az eredmény tömbben egy elem azt jelöli, hogy a szomszédjában hány akna található. Ez lesz az aknakereső játék megoldása.</p></li>
+<li><p>Készítsünk egy-egy függvényt a logikai és a számokból álló tömb szöveggé alakítására! A függvények az átalakítandó tömböt paraméterül várják és szöveget adnak vissza.</p>
+<p>Mindkét függvényben az akna helyére kerüljön csillag. A logikai tömbnél az aknamentes helyekre kerüljön pont.</p>
+<p>A végeredmény hatékony előállításához használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuffer.html"><code>java.lang.StringBuffer</code></a> osztályt.</p></li>
+<li><p>Írjunk egy <code>program.Main</code> osztályt! Ebben helyet kap a <code>main()</code> metódus, mely egy sorban kéri be a szabványos bemenetről az aknakereső tábla méretét és a <span class="math inline">\(p\)</span> valószínűséget! A szabványos kimenetre írjuk ki mindkét táblát!</p>
+<p>A beolvasás megkönnyítésére használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html"><code>java.util.Scanner</code></a> osztályt, és annak <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#nextInt--"><code>nextInt()</code></a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html#nextDouble--"><code>nextDouble()</code></a> metódusait.</p></li>
+</ol></li>
+</ol>
+</body>
+</html>

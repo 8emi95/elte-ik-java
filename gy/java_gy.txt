@@ -1,0 +1,138 @@
+2017.09.14
+1. Java GY
+
+http://dlukacs.web.elte.hu/
+http://dlukacs.web.elte.hu/feladatok1.html
+
+*******************************************************
+
+2017.09.21
+2. Java GY
+
++/-: main class-szel
+
+-g
+információkat rak bájtkódba amit később tudunk használni
+
+jdb
+debugger
+
+töréspont
+stop at Distance:17
+
+main[1] p1.x
+main[1] print p1.x
+
+*******************************************************
+
+2017.09.28
+3. Java GY
+
++/-: nah
+
+*******************************************************
+
+2017.10.05
+4. Java GY
+
++/-:
+1. láthatóság
+2. public, private
+3. milyen nyelvi elemeket módosíthatuink láthatósági módosítókkal
+4. lokális változó előtt állhat-e láthatósági módosító
+
+linux: javac -d ./bin -cp bin:lib/* src/IntTreeTest.java
+winfos: javac -d ./bin -cp bin;lib/* src/IntTreeTest.java
+java -cp bin;lib/* org.junit.runner.JUnitCore IntTreeTest
+
+*******************************************************
+
+2017.10.12
+5. Java GY
+
++/-:
+1. stack-en, heap-en mit tárol a virtuális gép
+2. mi az előnye annak h 2 különböző memóriaterület van
+3. hol tárolódnak: referencia, objektum, 42
+
+*******************************************************
+
+2017.10.19
+6. Java GY
+
++/-:  new p, eltol, new q, eltol, print táv(p,q) - stack heap mi történik?
+
+*******************************************************
+
+2017.10.26
+7. Java GY
+
++/-:
+1. ismertesd egy kivétel terjedését (rövid példa)
+2. stack trace mi, mire való?
+3. checked unchecked exception különbség
+
+*******************************************************
+
+2017.11.09
+8. Java GY
+
++/-:
+1. hogyan hozhatunk létre tömböt javaban?
+2. hogyan történik a tömbök indexelése javaban?
+példával
+3. hogyan határozhatjuk meg adott indexű tömbelem memóriacímét?
+
+*******************************************************
+
+2017.11.16
+9. Java GY
+
++/-:
+1. mi a szemétgyűjtő (garbage collector) algoritmus célja? hogyan működik?
+2. meddig van tárolva egy objektum a memóriában?
+
+*******************************************************
+
+2017.11.23
+10. Java GY
+
++/-: // opre zh
+
+
+*******************************************************
+
+2017.11.30
+11. Java GY
+
++/-:
+1. mit jelent az interfész (általában), mi a szerepe?
+2. mit jelent az interface (javában), mi a szerepe?
+3. mi a kapcsolat a 2 között?
+
+
+*******************************************************
+
+2017.
+12. Java GY
+
++/-:
+1. statikus típus
+2. dinamikus típus
+3. helyes-e az alábbi kód?
+Object o = new Object();
+o = “Java”;
+
+pót: igaz-e
+1. minden adattagja final -> immutábilis
+2. immutábilis -> minden adattagja final
+indoklás vagy példakód
+
+
+*******************************************************
+
+2017.
+13. Java GY
+
++/-: // orpe zh
+

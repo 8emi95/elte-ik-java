@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
+</head><body>
+
+<h1 id="java-csoport-zh-wzxhzdk0-2013-november-7">Java Csoport Zh – 2013. november 7.</h1>
+<h2 id="segedanyagok">Segédanyagok</h2>
+<ul>
+<li><a href="http://koszegijudit.web.elte.hu/ebr/public/java/">Java SE 6 Dokumentáció</a></li>
+</ul>
+<h2 id="tesztprogram-es-osztaly-vazak">Tesztprogram és osztály vázak</h2>
+<ul>
+<li><a href="http://koszegijudit.web.elte.hu/java/zh1/zh1csop2.zip">zh1csop2.zip</a></li>
+</ul>
+<h2 id="a-feladat-atfogo-leirasa">A feladat átfogó leírása</h2>
+<p>A feladat egy olyan alkalmazás készítése, amellyel szimulálni tudjuk 
+termékek elszállítását gyárakból. A gyárakban a téglatest alakú 
+dobozokba csomagolt termékek egyetlen futószalagra kerülnek, ahonnan a 
+szállítók fuvarozzák el őket. A gyártás során a legyártott dobozok a 
+futószalag végére kerülnek, a szállítók pedig a futószalag elejétől 
+pakolnak. Minden doboznak egyforma a magassága (ennek nem lesz 
+jelentősége a feladatban) és a szélessége; valamint a legtöbb doboz 
+kocka alakú, azaz a mélysége is megegyezik az előző két mérettel. Van 
+azonban pár különleges termék, ami a szabványostól különböző csomagolást
+ igényel, így a dobozok 3. mérete (a mélység) ezeknél a speciális 
+dobozoknál eltérhet. A szállítók kamionjai változó hosszúságúak 
+lehetnek, abban viszont megegyeznek, hogy a rakodótér szélessége 
+megegyezik egy doboz szélességével, így egyetlen sor dobozt tudunk 
+bepakolni egy kamionba. Dobozok egymás tetejére nem kerülhetnek. A 
+dobozok elszállításának pontos módjáról majd az adott feladatnál lesz 
+részletesebb tájékoztatás.</p>
+<p>Az osztályok kerüljenek egy <code>szallitas</code> nevű csomagba.</p>
+<h2 id="2-esert">2-esért</h2>
+<h3 id="wzxhzdk3gyarwzxhzdk4-osztaly"><code>Gyar</code> osztály</h3>
+<ul>
+<li>A gyárban az elkészült, futószalagra helyezett (<code>Doboz</code> típusú) dobozokat egy listában tároljuk, egy gyár létrejöttekor a futószalagja üres (hosszát pedig végtelennek képzelhetjük).</li>
+<li><code>legyart</code>: olyan <code>void</code> visszatérési értékű 
+metódus, amelynek egyetlen paramétere egy újonnan legyártott doboz, amit
+ a futószalagra az utoljára legyártott doboz után teszünk.</li>
+<li><code>dobozokSzama</code>: paraméter nélküli, <code>int</code> visszatérési értékű függvény, amely megadja, hogy hány doboz van a futószalagon.</li>
+</ul>
+<h3 id="wzxhzdk5dobozwzxhzdk6-osztaly"><code>Doboz</code> osztály</h3>
+<ul>
+<li><code>szelesseg</code>: osztályszintű <code>int</code> típusú adattag, amely meghatározza a dobozok cm-ben mért élhosszát. Kezdőértéke legyen <code>50</code>. A változó értékét ne lehessen megváltoztatni, viszont kívülről szabadon lekérdezhető legyen.</li>
+<li><code>getMelyseg</code>: példányszintű, paraméter nélküli metódus, amely <code>int</code> típusú visszatérési értékében visszaadja egy doboz mélységét, ami ebben az esetben megegyezik a szélességgel.</li>
+<li><code>termekAzonosito</code>: példányszintű, <code>byte</code> 
+típusú adattag, amely a dobozba csomagolt termék azonosítóját tárolja. A
+ változót ne lehessen kívülről elérni, viszont legyen hozzá publikus 
+lekérdező (<code>getTermekAzonosito</code>) és beállító (<code>setTermekAzonosito</code>) metódus.</li>
+<li>Létrehozáskor a konstruktorban a dobozba csomagolt termék azonosítóját lehessen megadni paraméterként.</li>
+<li><code>toString</code> paraméter nélküli, <code>String</code> 
+visszatérési értékű függvény. Egy doboz String reprezentációjában 
+szögletes zárójelek között szerepeljen a dobozba csomagolt termék 
+azonosítója és a doboz mélysége (amit a <code>getMelyseg</code> metódus ad vissza) kettősponttal elválasztva. A mélység után szerepeljen a "cm" is. Szóközök, újsor, stb. le negyen benne! Pl. <code>"[1:50cm]"</code></li>
+</ul>
+<h3 id="wzxhzdk7specialisdobozwzxhzdk8-osztaly-wzxhzdk11-a-wzxhzdk9dobozwzxhzdk10-osztalybol-szarmazik"><code>SpecialisDoboz</code> osztály – a <code>Doboz</code> osztályból származik</h3>
+<ul>
+<li><code>szorzo</code> egy új példányszintű, <code>float</code> típusú 
+adattag, amely azt adja meg, hogy a speciális csomagolást igénylő termék
+ dobozának a mélysége hányszorosa a szabványos dobozénak.</li>
+<li>Legyen egy két paraméteres konstruktora az osztálynak, amelynek első
+ paramétere a termékazonosító, második paramétere pedig a szorzó.</li>
+<li><code>getMelyseg</code>: definiáld felül a szülőosztályban található metódust úgy, hogy a <code>Doboz</code> osztály <code>szelesseg</code> változójában tárolt értékét szorozd meg az aktuális dobozhoz tartozó szorzóval. Mivel itt <code>int</code> típusú értéket kell visszaadni, a kapott eredményt kerekítsd egészre (<em>Tipp</em>: <code>java.lang.Math</code> osztály).</li>
+</ul>
+<p><em>Megjegyzés</em>: innentől kezdve a doboz mérete alatt mindig azt az értéket értjük, amelyet a <code>getMelyseg</code> metódus ad vissza, hiszen ez az egyetlen méret, ami különbözhet a dobozok esetében.</p>
+<h2 id="3-asert">3-asért</h2>
+<h3 id="wzxhzdk14gyarwzxhzdk15-osztaly"><code>Gyar</code> osztály</h3>
+<ul>
+<li><code>getMeretAlattiDoboz</code>: példányszintű, <code>Doboz</code> visszatérési értékű metódus, amelynek egyetlen <code>int</code>
+ típusú paramétere azt határozza meg, hogy milyen méret alatti dobozt 
+keresünk a futószalagon. A lista elejétől kezdve keressük meg az első 
+dobozt, amelynek mélysége ezen a méreten belül van. Amennyiben nincs 
+ilyen doboz a futószalagon (vagy egyáltalán nincs rajta doboz), <code>null</code>-t adjunk vissza. A dobozt nem kell "levenni" a futószalagról.</li>
+<li><code>toString</code>: a futószalagon lévő dobozok String reprezentációját adja vissza, ahol a dobozok aláhúzás jellel (<code>_</code>) legyenek elválasztva. Az utolsó után ne szerepeljen ilyen jel. Pl. "[1:50cm]_[2:150cm]_[5:60cm]"</li>
+</ul>
+<h3 id="wzxhzdk16specialisdobozwzxhzdk17-osztaly"><code>SpecialisDoboz</code> osztály</h3>
+<ul>
+<li>Legyen egy paraméteres konstruktora is, amelyben csak a termékazonosítót adjuk meg, szorzónak pedig 1-et állít be.</li>
+</ul>
+<h2 id="4-esert">4-esért</h2>
+<h3 id="wzxhzdk18szallitowzxhzdk19-osztaly"><code>Szallito</code> osztály</h3>
+<ul>
+<li>A szállítónak két adattagja van: az egyik egy lista, amelyben a 
+felpakolt dobozok szerepelnek (létrehozáskor üres), a másik pedig a 
+szállítóautó rakodóterének hossza cm-ben</li>
+<li>Két konstruktora legyen: az egyikben lehessen megadni a rakodótér 
+hosszát (cm-ben); a másik pedig paraméter nélküli, ami a rakodótér 
+hosszát úgy állítsa be, hogy pontosan 10 szabványos doboz férjen el 
+benne.</li>
+<li><code>getDobozok</code>: példányszintű, paraméter nélküli metódus, amely visszaadja a szállítón lévő dobozok listáját (lehet <code>List</code> típusú, vagy annak leszármazottja)</li>
+<li><code>felrak</code>: példányszintű, <code>boolean</code> visszatérési értékű metódus. Egy <code>Doboz</code>
+ típusú paramétere van. A paraméterben megadott dobozt akkor tesszük fel
+ az autóra, ha az még ráfér (azaz a felpakolt dobozok összmélysége + a 
+paraméterként kapott doboz mélysége nem haladja meg a rakodótér 
+hosszát). Ekkor <code>true</code> értékkel térünk vissza, és felvesszük a dobozt a szállító listájára, egyébként pedig <code>false</code> értéket adunk vissza. </li>
+</ul>
+<h2 id="5-osert">5-ösért</h2>
+<h3 id="wzxhzdk20gyarwzxhzdk21-osztaly"><code>Gyar</code> osztály</h3>
+<ul>
+<li><code>elszallit</code>: példányszintű, <code>int</code> visszatérési
+ értékű, egyparaméteres metódus. Paramétere egy szállító. A futószalag 
+elejéről kezdve pakoljuk fel a szállítóra addig a dobozokat, amíg egy 
+olyan dobozhoz érünk el, ami nem fér fel a kamionra. Ekkor ezt a dobozt 
+átugorhatjuk, és megkereshetjük a szalagon azt az első dobozt, ami még 
+felférhet. Ha még mindig maradt hely, megint megpróbálunk egy ilyet 
+keresni, stb. Két esetben kell megállni a pakolással: ha a futószalagon 
+lévő összes dobozt felpakoltuk, vagy ha már nincs olyan doboz, ami 
+felférne a kamionra. A visszatérési értékben megadjuk, hogy hány dobozt 
+pakoltunk fel. </li>
+</ul>
+<h3 id="wzxhzdk22szallitowzxhzdk23-osztaly"><code>Szallito</code> osztály</h3>
+<ul>
+<li><code>lepakol</code>: példányszintű, <code>int</code> visszatérési értékű függvény. Egy <code>byte</code>
+ típusú paramétert vár, amely azt adja meg, hogy milyen 
+termékazonosítójú dobozokat szeretnénk lepakolni. A feladat kikeresni az
+ összes dobozt, amin ez a termékazonosító szerepel, és lepakolni, azaz 
+eltávolítani a szállító listájáról ezeket a dobozokat. Szeretnénk 
+segíteni kiszámítani, hogy mennyi hely fog kelleni a tároláshoz, így 
+meghatározzuk a lepakolt dobozok összalapterületét (cm^2-ben): a dobozok
+ összmélységét meg kell szorozni az állandó szélességgel.</li>
+</ul>
+<h3 id="tipp">Tipp</h3>
+<p>A for-each ciklussal történő listabejárás során a listát nem lehet 
+változtatni, ezért a fenti feladat megoldásánál célszerű lehet az 
+eltávolítandó elemeket egy külön ideiglenes listába kigyűjteni, majd ezt
+ a listát bejárni, és a kívánt elemeket eltávolítani az eredeti 
+listából.</p>
+
+
+
+</body></html>

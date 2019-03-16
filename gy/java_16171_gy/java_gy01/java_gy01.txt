@@ -1,0 +1,14 @@
+zh: elméleti (teszt?) + gyakorlati (kisebb különálló prog feladatok)
+
+hiányzás: 3 +/- 0, 4. -1
+
+bead: beadra + gyakorlatról lemaradt feladatok gyakorlásra
+
+java fordító + futtató
+JRE java runtime environment
+JDK java development kit
+
+szövegszerkesztõ + parancssor
+
+javac fájlnév
+java osztálynév

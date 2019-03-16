@@ -1,0 +1,8 @@
+2017.03.07.
+4. Java GY
+
++/-: az alábbi típusú változók közül melyik NEM helyes alapértelmezett érték?
+a) int -> 0
+b) String -> "null" (EZ)
+c) char -> '\u000'
+d) float -> 0.0f

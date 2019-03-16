@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>2. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">2. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.09.21.</p>
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Készítsünk egy <code>Person</code> osztályt, mely egy személyt fog ábrázolni! A személyekről nyilvántartjuk a vezeték- és keresztnevüket (két <code>String</code>), illetve a születésük évét (<code>int</code>). Legyen egy konstruktora is, mely átveszi az adattagok kezdeti értékeit paraméterül!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Adjunk a <code>Person</code> osztályhoz egy <code>isAdult</code> metódust! Ez egy évszámot vár és logikai igazat ad vissza, ha az adott személy felnőtt korú az adott évben, hamisat, ha kiskorú.</p></li>
+<li><p>Tegyük lehetővé, hogy egy <code>Person</code> objektumot szöveggé alakíthassunk! Ehhez készítsünk egy <code>toString</code> metódust, mely egymás után fűzi a vezeték- és keresztnevet egy szóközzel elválasztva.</p></li>
+<li><p>Vegyünk fel egy osztályszintű logikai adattagot, melynek hatására egycsapásra minden személy nevét nagybetűkkel írja ki a <code>toString</code>!</p></li>
+</ol></li>
+<li><p>Írjunk egy autókat ábrázoló <code>Car</code> osztályt! Az autókról eltároljuk a rendszámukat (<code>String</code>), hogy hány ajtósak (<code>int</code>) és a tulajdonosukat (<code>Person</code>). Készítsünk hozzá konstruktort is, mely inicializálja a mezőket!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Adjunk a <code>Car</code> osztályhoz egy <code>isFamilyCar</code> metódust, amely eldönti, hogy egy autó családi vagy sem! Családinak mondjuk a járművet, ha 5 ajtaja van.</p></li>
+<li><p>Készítsünk egy <code>isValid</code> nevű metódust, mely logikai igazat ad vissza, ha az adott <code>Car</code> objektum érvényes! Ez akkor teljesül, ha</p>
+<ul>
+<li>a rendszám nem egy üres szöveg (ennek eldöntésére használjuk <code>String.isEmpty()</code> metódust),<br />
+</li>
+<li>az ajtók száma 3 vagy 5,</li>
+<li>a tulajdonos nem egy üres referencia, vagyis nem <code>null</code>,</li>
+<li>a tulajdonos felnőttkorú a mostani évben.</li>
+</ul></li>
+<li><p>Valósítjuk meg a <code>Car</code> objektukot szöveggé alakítását egy <code>toString</code> metódussal! Például egy <code>&quot;ABC-123&quot;</code> rendszámú, ötajtós, Roger Federer tulajdonában álló autó esetén állítsuk elő a következő szöveget:</p>
+<pre><code>&quot;ABC-123 5 doors, owner: Roger Federer&quot;</code></pre></li>
+</ol></li>
+<li><p>Helyezzük el a <code>Person</code> és a <code>Car</code> osztályokat egy <code>city</code> nevű csomagba! Ehhez mozgassuk át a forrásfájlokat egy újonnan létrehozott <code>city</code> könyvtárba és írjuk a fájlok elejére a csomag deklarációt.</p></li>
+<li><p>Írjunk egy <code>main</code> metódust! Helyezzük el ezt egy <code>Main</code> osztályban, melyet tegyük a <code>program</code> csomagba! A <code>main</code> metódus törzsében hozzunk létre egy személy és egy autó objektumot, majd írassuk ki az utóbbit a szabványos kimenetre!</p></li>
+<li><p>Írjuk át a <code>Person</code> konstruktorát egy <code>makePerson</code> nevű statikus metódussá, mely létrehoz egy <code>Person</code> típusú objektumot! Ehhez létre kell hozni egy inicializálatlan <code>Person</code> típusú objektumot és be kell állítani az adattagjait. A <code>makePerson</code> paramétere legyen a személy vezeték- és keresztneve és születési éve!</p>
+<p>Ellenőrizzük le, hogy helyesek-e a paraméterek: a név nem lehet üres, a születési év 1900 és 2016 között legyen! Ha nem teljesülnek a feltételek, adjunk vissza egy sehova sem mutató referenciát, azaz <code>null</code>-t!</p></li>
+<li><p>Készítsünk egy <code>Calculator</code> nevű programot, mely egy számsorozatot és egy számot vár argumentumként. Például <code>java Calculator 2,3,4 1</code>. A program a számsorozat minden eleméhez hozzáadja a második argumentumot, és kiírja az új sorozatot:</p>
+<pre><code>$ java Calculator 1,2,3 1
+2,3,4</code></pre>
+<p>Ellenőrizzük le a futás elején, hogy megkaptuk-e mind a két argumentumot!</p>
+<p>Használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#split-java.lang.String-"><code>String.split()</code></a> metódust a számsorozat feldarabolására.</p></li>
+</ol>
+</body>
+</html>

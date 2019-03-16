@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>8. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">8. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.11.17.</p>
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Hozzuk létre az absztrakt <code>Graph</code> ősosztályt. Rendelkezzen az alábbi absztrakt metódusokkal, melyek megvalósítását a származtatott osztályok végzik el.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Egy <code>boolean</code> visszatérésű <code>hasEdge()</code> függvény, ami két <code>int</code> típusú paramétert kap. Akkor tér vissza igazzal, ha létezik él az első paraméterrel jelzett csúcsból a második paraméterrel jelzett csúcsba.</p></li>
+<li><p>Egy számok halmazát visszaadó <code>edgesFrom()</code> függvény, amely megadja, hogy a paraméterként kapott csúcsból mely csúcsok érhetőek el.</p></li>
+<li><p>Egy <code>addEdge()</code> függény, amely a gráfhoz hozzáad egy új élt az első paraméterként kapott csúcsból a második csúcsba.</p></li>
+</ol></li>
+<li><p>Hozzuk létre a <code>Graph</code> leszármazottját, a sűrű gráfok ábrázolásában hatékony <code>DenseGraph</code> osztályt.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Az élek jelenlétét tároljuk egy logikai értékeket tartalmazó mátrixban. Ha az <code>i</code>, <code>j</code> koordinátákon <code>true</code> érték van tárolva, akkor az <code>i</code>-ből van <code>j</code>-be él.</p></li>
+<li><p>Az osztálynak legyen egy konstruktora, ami megkapja a csúcsok számát. Ezek után a csúcsokat <span class="math inline">\([0 \dots n-1]\)</span> számok reprezentálják. A csúcsok a későbbiekben már nem bővíthetők, de éleket majd hozzáadhatunk a gráfhoz.</p></li>
+<li><p>Implementáljuk le a <code>hasEdge()</code>, <code>edgesFrom()</code> és <code>addEdge()</code> függvényeket ennek megfelelően.</p></li>
+</ol></li>
+<li><p>A <code>Graph</code> osztályban hozzunk létre egy <code>depthFirstTraversal()</code> függvényt, ami a paraméterként kapott csúcsból indulva mélységi bejárást végez, és a meglátogatott csúcsokat egy listában adja vissza.</p>
+<p>Ehhez használjunk stack-ként egy láncolt listát és legyen még egy láncolt lista, amiben számon tartjuk, hogy mely csúcsokat jártuk be (ez lesz a végeredmény).</p>
+<ol>
+<li><p>Kezdetben a stack-ben egy elem van, az a csúcs, amiből a bejárás kiindul.</p></li>
+<li><p>Minden egyes iterációban kivesszük a verem első elemét. Ha ez az elem még nem szerepel a bejárt csúcsok listájában (most találjuk meg először), akkor beletesszük. Megnézzük a kivett elemből egy éllel elérhető összes elemet, és amit még nem jártunk be, azt betesszük a verembe.</p></li>
+<li><p>A bejárás addig megy, amíg a stack nem üres.</p></li>
+</ol></li>
+<li><p>Hozzuk létre a <code>Graph</code> másik leszármazottját, a <code>SparseGraph</code>-ot, amely a ritka gráfok tárolására optimális. Az éleket tároljuk egy gyorsan indexelhető <a href="http://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html"><code>java.util.ArrayList</code></a>-ben, ennek minden eleme egy <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Set.html"><code>java.util.Set</code></a>, amiben benne vannak azok a csúcsok amelyek az adott sorszámú csúcsból elérhetők.</p>
+<p>Implementáljuk le a <code>hasEdge()</code>, <code>edgesFrom()</code> és <code>addEdge()</code> függvényeket ennek megfelelően. Konstruktor legyen az előző ábrázoláshoz hasonló.</p></li>
+<li><p>Megoldásunk teszteléséhez írjunk egy <code>Main</code> osztályt. Az osztály négy parancssori paramétert kap (a paraméterek helyességét nem kell ellenőrizni):</p>
+<ul>
+<li><p>a gráf típusa (sparse vagy dense)</p></li>
+<li><p>a csúcsok száma</p></li>
+<li><p>az élek listája: élek szóköz nélkül vesszővel elválasztva, ahol egy élt <code>csúcs1-csúcs2</code> alakban adunk meg</p></li>
+<li><p>a mélységi bejárást melyik csúcsból indítjuk</p></li>
+</ul>
+<p>A program hozza létre a megfelelő gráfot, adja hozzá az éleket, majd végezzen mélységi bejárást a megadott csúcsból és írja ki ennek eredményét. Példák:</p>
+<pre><code>$ java Main sparse 4 0-1,1-3,0-2,2-3 0
+[0, 2, 3, 1]
+$ java Main dense 4 0-1,1-3,0-2,2-3 0
+[0, 2, 3, 1]</code></pre></li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,6 @@
+Magyarorszag: 10
+magyar: 5
+Egyesult Allamok: 5
+angol: 4
+Franciaorszag: 3
+hibas: 3

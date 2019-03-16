@@ -1,0 +1,13 @@
+2017.03.14.
+5. Java GY
+
++/-: aliasing -> egy memóriacímen két kül mutató is
+
+
+GY4/2
+GY5/1 volt előzőn (?)
+GY5/2
+				kimenet			bemenet
+				---------------------------
+byte-alapú		OutputStreamer	InputStreamer
+karakter-alapú	Writer			Reader

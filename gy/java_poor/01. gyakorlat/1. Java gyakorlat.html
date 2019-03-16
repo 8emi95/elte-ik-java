@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>1. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">1. Java gyakorlat</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#kiíratás-beolvasás">Kiíratás, beolvasás</a><ul>
+<li><a href="#feladatok">Feladatok</a></li>
+</ul></li>
+<li><a href="#konverzió-szöveggé-szövegből">Konverzió szöveggé, szövegből</a><ul>
+<li><a href="#feladatok-1">Feladatok</a></li>
+</ul></li>
+</ul>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.09.11.</p>
+<h2 id="kiíratás-beolvasás">Kiíratás, beolvasás</h2>
+<p>A kiíratás és beolvasás a szabványos kimenetről és bemenetre a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/System.html"><code>java.lang.System</code></a> osztályon keresztül történik:</p>
+<ul>
+<li>A szabványos kimenet a <code>System.out</code> objektum.</li>
+<li>A szabványos bemenet a <code>System.in</code> objektum.</li>
+<li>A szabványos hibakimenet a <code>System.err</code> objektum.</li>
+</ul>
+<h3 id="feladatok">Feladatok</h3>
+<ol>
+<li><p>Írjunk egy ,,Hello World!’’ programot!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Készítsük el a program változatát, mely kedvesen üdvözöl egy, a szabványos bemeneten megadott személyt! Például:</p>
+<pre><code>$ java GreetingsA
+Szia! Hogy hívnak?
+~&gt; Péter
+Üdv Péter, miújság?</code></pre>
+<p>A ,,<code>~&gt;</code>’’ programnak adott bemenetet jelöli.</p></li>
+<li><p>Készítsük el a program változatát, mely kedvesen üdvözöl egy, argumentumként megadott személyt! Például:</p>
+<pre><code>$ java GreetingsB Béla
+Üdv Béla, miújság?</code></pre></li>
+</ol></li>
+</ol>
+<h2 id="konverzió-szöveggé-szövegből">Konverzió szöveggé, szövegből</h2>
+<p>Szöveget a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a> típussal ábrázoljuk. Számok konverziója szöveggé, szövegből:</p>
+<ul>
+<li><p>Szám szöveggé alakítása: <code>String s = &quot;&quot; + 2</code>, <code>String s = String.valueOf(2)</code>, <code>String trees = 2 + &quot; fa&quot;</code></p></li>
+<li><p>Szöveg számmá alakítása: <code>int n = Integer.parseInt(&quot;5&quot;)</code>, <code>double d = Double.parseDouble(&quot;3.14&quot;)</code> stb.</p></li>
+</ul>
+<h3 id="feladatok-1">Feladatok</h3>
+<ol>
+<li><p>Írjunk egy programot, mely bekér két egész számot és előállítja a következő kimenetet:</p>
+<pre><code>$ java IntOpts 
+Kérek két egész számot!
+~&gt; 17
+~&gt; 3
+17 * 3 = 51
+17 / 3 = 5
+17 % 3 = 2
+17 = 3 * 5 + 2</code></pre>
+<p>Ha a második szám nulla, akkor csak a szorzatot írjuk ki!</p></li>
+<li><p>Írjunk egy programot, mely argumentumként várja <span class="math inline">\(a\)</span> és <span class="math inline">\(b\)</span> egész számokat, majd kiszámolja <span class="math inline">\(a^b\)</span>-t! Használjunk ciklust!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Feltesszük, hogy <span class="math inline">\(b\)</span> nemnegatív szám.</p></li>
+<li><p><span class="math inline">\(b\)</span> lehet negatív is. Ekkor már törtszámokkal dolgozunk, használjuk a <code>double</code> típust!</p></li>
+</ol>
+<p>Például:</p>
+<pre><code>$ java Power 2 4
+16
+$ java Power 2 -3
+0.125</code></pre></li>
+<li><p><em>Szorgalmi.</em> Készítsünk egy programot, mely megadott hatványkitevőig kiírja 2 hatványait! A kitevőt argumentumként kapja. Ellenőrizzük a program futása elején, hogy megkaptuk-e az argumentumot! Használjunk ciklust, és ne használjuk a <code>Math.pow()</code> metódust!</p>
+<pre><code>$ java Powers2 4
+1
+2
+4
+8
+16</code></pre></li>
+<li><p><em>Haladóknak.</em> Készíts egy programot, mely megadja egy másodfokú egyenlet megoldásait (feltesszük, hogy mindkét megoldás valós)! Például a <span class="math inline">\(x^2 + 3 \cdot x + 2 = 0\)</span> megoldásai:</p>
+<pre><code>$ java Quadratic 1.0 3.0 2.0
+x1 = -2
+x2 = -1</code></pre>
+Segítség:
+<ul>
+<li><p>használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Math.html"><code>java.lang.Math</code></a> osztály függvényeit!</p></li>
+<li><p>A másodfokú egyenlet megoldásai: <span class="math inline">\(x_1 = \frac{-b + \sqrt{b^2 - 4  \cdot a \cdot c}}{2 \cdot a}\)</span>, <span class="math inline">\(x_2 = \frac{-b - \sqrt{b^2 - 4  \cdot a \cdot c}}{2 \cdot a}\)</span></p></li>
+</ul></li>
+<li><p><em>Haladóknak.</em> Készítsünk egy programot, mely eldönti, hogy egy argumentumként megadott év szökőév-e!</p>
+<p>Szökőévek a 4-gyel osztható évek, kivéve a 100-zal oszthatóakat, de a 400-zal oszthatók ugyancsak szökőévek. Például 2004 és 2008 szökőév, mert osztható 4-gyel, de 100-zal nem. De 1700 nem szökőév, mivel osztható 100-zal. 1600 is szökőév, mivel osztható ugyan 100-zal, de osztható 400-zal is.</p>
+<pre><code>$ java IsLeapYear 2004
+true
+$ java IsLeapYear 1700
+false
+$ java IsLeapYear 1600
+true</code></pre></li>
+<li><p><em>Haladóknak.</em> Készítsünk egy programot, mely bekér egy egész számot, és eldönti róla, hogy tökéletes-e vagy sem! Egy szám tökéletes, ha megegyezik a rendes osztói (a szám összes osztói kivéve önmaga) összegével. Például 6 tökéletes, mivel 1 + 2 + 3 = 6. Az első néhány tökéletes szám: 6, 28, 496, 8128.</p></li>
+<li><p><em>Haladóknak.</em> Készítsünk egy számológépet! A program kérjen be két számot és egy műveletet, majd végezze el a műveletet a számokon! A művelet lehet a négy alapművelet egyike (<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>) illetve hatványozás (<code>^</code>).</p>
+<pre><code>$ java Calc 2 * 5
+10
+$ java Calc 4 + 3
+7
+$ java Calc 2 ^ 3
+8</code></pre>
+<p>Segítség: annak eldöntésére, hogy milyen művelet lett megadva, használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-"><code>String.equals()</code></a> metódust. Például:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">String</span> op = <span class="st">&quot;+&quot;</span>;
+<span class="kw">if</span> (op.<span class="fu">equals</span>(<span class="st">&quot;+&quot;</span>))
+   ...
+<span class="kw">else</span> <span class="kw">if</span>(op.<span class="fu">equals</span>(<span class="st">&quot;-&quot;</span>))
+   ...</code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li><em>Szorgalmi.</em> Mi történik, ha a feladatban a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-"><code>String.equals()</code></a> metódus helyett a <code>==</code> operátort használjuk? Változott a program működése? Miért?</li>
+</ol></li>
+</ol>
+</body>
+</html>

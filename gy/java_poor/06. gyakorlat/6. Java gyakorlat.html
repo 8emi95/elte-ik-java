@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>6. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">6. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.10.26.</p>
+<h2 id="a-final-módosító">A <code>final</code> módosító</h2>
+<p>Amenyiben nem szeretnénk, hogy egy változó értéke inicializálása után megváltozzon, elláthatjuk <code>final</code> módosítóval. Egy ilyen változó értékének felülírása fordítási hibát eredményez:</p>
+<pre><code>FinalErr.java:4: error: cannot assign a value to final variable n
+        n = 2;
+        ^</code></pre>
+<p>vagy</p>
+<pre><code>FinalErr.java:6: error: variable n might already have been assigned
+        n = 1;
+        ^</code></pre>
+<p>Egy módosíthatatlan változó esetén ügyelni kell, hogy csak egyszer, az inicializálás során adjunk értéket. Az <code>n</code> változó deklarációja és inicializációja (röviden definíciója) az alábbi:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="dt">final</span> <span class="dt">int</span> n = <span class="dv">0</span>;</code></pre></div>
+<p>Amennyiben egy osztály adattagja módosíthatatlan, akkor szintén oda kell figyelni az inicializációra. A változót inicializálhatjuk is rögtön a deklaráció helyén, vagy a konstruktorokban adunk neki értéket egyszer.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> A {
+    <span class="dt">final</span> <span class="dt">int</span> n = <span class="dv">0</span>; <span class="co">// ok</span>
+}
+
+<span class="kw">class</span> B {
+    <span class="dt">final</span> <span class="dt">boolean</span> b;
+    <span class="kw">public</span> <span class="fu">B</span>() {
+        b = <span class="kw">true</span>;    <span class="co">// ok, első értékadás</span>
+        b = <span class="kw">false</span>;   <span class="co">// hibás</span>
+    }</code></pre></div>
+<p>A <code>final</code> módosítónak az osztályok közötti öröklődéssel kapcsolatban is van jelentése. Erről az öröklődésnél lesz szó.</p>
+<h2 id="interfészek">Interfészek</h2>
+<p>Az interfészek lehetővé teszik a szoftver tervezését anélkül, hogy a megvalósításra kelljen gondolnunk.</p>
+<p>Egy interfész definíciója változók és metódusok deklarációjának és, a Java 8-as verziójával kezdve, metódusok definíciójának sorozata.</p>
+<p>Az interfészen belüli változók alapértelmezés szerint <code>public final static</code> módosítókkal vannak ellátva, ezért ezeket kitenni felesleges. A metódus deklarációk és definíciók alapértelmezetten <code>public</code> láthatósággal rendelkeznek, így ezt sem kell kitenni.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> Car {
+    <span class="dt">boolean</span> b = <span class="kw">true</span>;   <span class="co">// ok</span>
+    <span class="dt">int</span> a = b;          <span class="co">// hibás</span>
+    <span class="dt">int</span> b = <span class="dv">2</span>;          <span class="co">// ok</span>
+    <span class="dt">int</span> c = c * <span class="dv">3</span>;      <span class="co">// hibás</span>
+
+    <span class="dt">void</span> <span class="fu">accelerate</span>();  <span class="co">// ok</span>
+}</code></pre></div>
+<p>Egy interfész egy új referencia típust vezet be. Létrehozhatunk egy változót, melynek típusa valamely interfész (például a fenti <code>Car</code>). Ekkor a változónak értékül adhatjuk bármely olyan objektum referenciáját, melynek osztálya megvalósítja az interfészt. Például, ha a fenti <code>Car</code> interfészt megvalósítja a Google önvezető járműve, akkor az alábbi kód helyes:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Car c = <span class="kw">new</span> <span class="fu">GoogleCar</span>();</code></pre></div>
+<p>Az interfészek kapcsolatban állhatnak egymással: ezt a kapcsolatot kiterjesztésnek nevezzük, melyet az <code>extends</code> kulcsszóval jelzünk. Eszerint az interfészek szülő-gyermek viszonyban állnak egymással. Egy interfész tehát a törzsében deklarált változókból és metódusokból, illetve az általa kiterjesztett interfészek váltózóiból és metódusaiból áll.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> SelfDrivingCar <span class="kw">extends</span> Car, GPS {
+    <span class="dt">void</span> <span class="fu">driveToLocation</span>(<span class="bu">Position</span> coordinates);
+}</code></pre></div>
+<p>Egy osztály abban az esetben implementál egy interfészt, ha annak minden metódusához rendel törzset. Ehhez jelezni kell a szándékot az osztály definíciójának fejlécében az <code>implements</code> kulcsszót használva, és minden, az interfészben deklarált metódusnak nyilvánosnak kell lennie. Ellenkező esetben a fordító hibát jelez.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> GoogleCar <span class="kw">implements</span> SelfDrivingCar {
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">accelerate</span>() { <span class="co">/* ... */</span> }
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">driveToLocation</span>(<span class="bu">Position</span> coordinates) { <span class="co">/* ... */</span> }
+
+    <span class="co">/* A GPS interfész műveletei */</span>
+}</code></pre></div>
+<p>Egy közismert interfész a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"><code>java.lang.Comparable</code></a>. Ezt megvalósítják azok az osztályok, melyek objektumai összehasonlíhatók: <code>java.lang.Integer</code>, <code>java.lang.String</code>, <code>java.util.Date</code> stb.</p>
+<p>A <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"><code>java.lang.Comparable</code></a> interfész egyetlen művelete a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T-"><code>compareTo()</code></a>, mely paraméterül vár egy másik objektumot. A <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T-"><code>compareTo()</code></a> negatív egészt ad vissza, ha a <code>this</code> objektum kisebb, mint a paraméter, nullát, ha egyenlők, és pozitív egészt, ha a <code>this</code> nagyobb, mint a paraméter valamilyen reláció szerint.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> <span class="bu">Comparable</span>&lt;T&gt; {
+    <span class="dt">int</span> <span class="fu">compareTo</span>(T other);
+}</code></pre></div>
+<p>Például:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">Integer</span> n = <span class="dv">2</span>;
+<span class="bu">Integer</span> m = <span class="dv">4</span>;
+n.<span class="fu">compareTo</span>(m);  <span class="co">// -1</span></code></pre></div>
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Készítsük el a publikus <code>geometry.Movable</code> interfészt! Ez deklarálja a <code>move()</code> metódust, mely paraméterül vár két <code>int</code> típusú távolságot (függőleges és vízszintes), és nincs visszatérési értéke.</p></li>
+<li><p>Készítsük el a publikus <code>geometry.Figure</code> interfészt! Ez kiterjeszti a fenti <code>Movable</code> és a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"><code>java.lang.Comparable&lt;Figure&gt;</code></a> interfészt az alábbi metódusokkal:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Egy <code>double</code> visszatérési típusú <code>area()</code>, mely kiszámolja a síkidom területét.</p></li>
+<li><p>Egy <code>String</code> visszatérési típusú <code>show()</code>, mely visszaadja a síkidom szöveges reprezentációját.</p></li>
+<li><p>Valamint a <code>Comparable</code> interfész <code>compareTo()</code> metódusának adjunk egy alapértelmezett definíciót! Ez a síkidomokat területük alapján hasonlítja össze. Az a nagyobb síkidom, amelyiknek a területe nagyobb.</p></li>
+</ol></li>
+<li><p>Készítsük el a publikus <code>geometry.Circle</code> osztályt, mely egy kört fog ábrázolni! Az osztály megvalósítja a <code>Figure</code> interfész műveleteit.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Deklaráljunk három privát <code>int</code> adattagot, melyek a kör közepének koordinátáit és a kör sugarát tárolják!</p></li>
+<li><p>Készítsünk egy konstruktort, mely paraméterül várja a kör középpontjának <span class="math inline"><em>x</em></span>, <span class="math inline"><em>y</em></span> koordinátáit és a kör sugarát, és ezekkel inicializálja az adattagokat!</p></li>
+<li><p>Készítsünk egy alapértelmezett konstruktort is, mely a kör középpontját az origóba és a kör sugarát 1-re állítja!</p></li>
+<li><p>Valósítsuk meg a <code>Figure</code> interfész műveleteit! Ezek a következők: <code>move()</code>, <code>area()</code>, <code>compareTo()</code> és <code>show()</code>.</p>
+<p>A <code>show()</code> eredményére egy lehetséges példa: <code>&quot;Circle at (2,4) radius: 5&quot;</code></p></li>
+</ol></li>
+<li><p>Készítsük el a publikus <code>geometry.Square</code> osztályt, melynek egy objektuma egy négyzetet fog ábrázolni! Ez az osztály is megvalósítja a <code>Figure</code> interfész műveleteit.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Deklaráljunk három privát, <code>int</code> típusú adattagot, melyek a négyzet bal felső sarkának koordinátáit és a négyzet oldalának hosszát ábrázolják!</p></li>
+<li><p>Definiáljunk egy konstruktort, mely paraméterül várja az adattagok kezdeti értékét, és ezekkel inicializálja az objektumot!</p></li>
+<li><p>Definiáljunk egy alapértelmezett konstruktort, mely a bal felső sarkot az origóba, az oldal hosszát 1-re állítja.</p></li>
+<li><p>Valósítsuk meg a <code>Figure</code> interfész műveleteit! Ezek a következők: <code>move()</code>, <code>area()</code> és <code>show()</code>.</p>
+<p>A <code>show()</code> eredményére egy lehetséges példa: <code>&quot;Square at (1,-2) side: 3&quot;</code></p></li>
+</ol></li>
+<li><p>Készítsük el a <code>geometry</code> csomagon kívül a <code>FigureDemo</code> osztályt! Definiáljuk az alábbi két metódust:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Egy statikus, <code>Figure</code> visszatérési típusú <code>biggest</code> metódust, mely paraméterül várja <code>Figure</code> referenciák listáját (elfogadunk <code>ArrayList</code>-et és <code>LinkedList</code>-et is, ezért várjunk paraméterül egy <code>List</code> referenciát)!</p>
+<p>A metódus egy maximumkiválasztást valósít meg a síkidomokon, és visszaadja a listából a legnagyobb területű síkidom referenciáját. Két síkidom összehasonlításához használjuk a <code>compareTo()</code> metódust! Használjunk iterátort a paraméter lista bejárására! Iterátort a lista <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html#iterator--"><code>iterator()</code></a> metódusával tudunk kérni.</p></li>
+<li><p>Írjunk <code>main()</code> metódust a <code>biggest()</code> kipróbálására! Inicializáljunk egy <code>List</code> referenciát egy <code>LinkedList</code> objektummal és töltsük föl néhány síkidommal. Írassuk is ki a legnagyobb síkidom szöveges reprezentációját!</p></li>
+</ol></li>
+</ol>
+</body>
+</html>

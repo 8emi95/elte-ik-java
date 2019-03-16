@@ -1,0 +1,261 @@
+01.
+
+public abstract class Prism {
+    public final double h;
+    public Prism(double ...) {
+        this.h = h;
+    }
+    public double volume() {
+        return h.base();
+    }
+    public abstract double base();
+    public ... Prism create() {
+        return new Prism(3.14);
+    }
+}
+
+a) példány (áthúzva) ... nem(?) példánoysítható
+b) met absz...
+c) nem lehet konstruktor
+d) nem lehet ...
+
+
+02. Melyik állítás igaz?
+
+class Animal {}
+class Mammal extends Animal implements M... {}
+class Bat extends Animal implements Dangerous, Flying {}
+interface Mobile {}
+interface Dangerous {}
+interface Flying extends Mobile {}
+
+1. Flying altípusa Mammal-nek
+2. Bat altípusa Animal-nek
+
+a) első
+b) második
+c) mindkettő
+d) egyik se
+
+
+03. Mely sorra kapunk fordítási hibát?
+
+Object n1 = null;
+String n2 = null;
+n1 = n2;            // bee
+n2 = n1;            // boo
+n1 = (Object) n2;   // fee
+n2 = (Object) n1;   // foo
+
+a) bee
+b) bee fee
+c) boo foo
+d) boo
+
+
+04. auto-boxing
+
+05. fordítási hiba oka?
+
+public static void complain(String problem) {
+    throw new ....Exception(problem);
+}
+
+a) try-catch
+b) ?
+c) fejléc v. try-catch
+d) fejléc
+
+
+06. mit csinál?
+
+class Road {
+    public int limit() {
+        return 50;
+    }
+}
+class Highway extends Road {
+    @Override public int limit() {
+        return 130;
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Highway h = new Highway();
+        Road r = h;
+        System.out.println(r.limit());
+        System.out.println(h.limit());
+    }
+}
+
+a) 130 130
+b) 50 130
+c) futási hiba, mert r nem ret h
+d) fordítási hiba, mert r nem ret h
+
+
+07.
+
+class Road {
+    public int limit() {
+        return 50;
+    }
+    public boolean check(int speed) {
+        return speed <= limit();
+    }
+}
+class Highway extends Road {
+    @Override public int limit() {
+        return 130;
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Road m7 = new Highway();
+        System.out.println(m7.limit());
+        System.out.println(m7.check(100));
+    }
+}
+
+a) 50 false
+b) 130 true
+c) 130 false
+d) 50 true
+
+
+08. Object, Road, Highway közül ??? helyére hányat lehet írni, hogy true legyen a végeredmény?
+
+class Road {
+    public int limit() {
+        return 50;
+    }
+    public boolean check(int speed) {
+        return speed <= limit();
+    }
+}
+class Highway extends Road {
+    @Override public int limit() {
+        return 130;
+    }
+}
+class Main {
+    public boolean check(??? road, int speed) {
+        return speed <= road.limit();
+    }
+    public static void main(String[] args) {
+        Road m7 = new Highway();
+        System.out.println(check(m7, 100));
+    }
+}
+
+a) 0
+b) 1
+c) 2
+d) 3
+
+
+09. Mi lesz A dinamikus típusa a végén?
+
+class A {}
+class B extends A {}
+class C extends B {}
+class D extends C {}
+class Main {
+    public static void main(String[] args) {
+        C c = new D();
+        A a = (B) C;
+    }
+}
+
+a) A
+b) B
+c) C
+d) D
+
+
+10. ellenőrzött kivétel
+
+
+11. lefordul?
+
+public class GI {
+    public final re, im;
+    public GI(int re, int im) {
+        this.re = re;
+        this.im = im;
+    }
+    public boolean equals(GI that) {
+        return that != null && re == that.re && im == that.im;
+    }
+    public static void main(String[] args) {
+        Object i = new GI(0, 1);
+        System.out.println(new GI(0,1).equals(i));
+    }
+}
+
+a) igen
+b) ?
+c) hibás felüldefiniálás
+d) nincs @Override
+
+
+12. mit ír ki?
+
+interface Finite {}
+class Road implements Finite {}
+class Highway implements Road {}
+class Main {
+    public static void main(String[] args) {
+        Finite f = new Highway();
+        Highway h = new Highway();
+        System.out.println(f instanceof Road);
+        System.out.println(h instanceof Road);
+    }
+}
+
+a) false false
+b) true false
+c) false true
+d) true true
+
+
+13.
+
+class Rectangle {
+    public final int a, b;
+    public Rectangle(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+}
+class Square extends Rectangle {
+    public Square(int a) {
+        ???
+    }
+}
+
+1. super(a,a);
+2. this.a = a; this.b = a;
+
+a) első
+b) második
+c) mindkettő
+d) egyik sem
+
+
+14. melyik igaz?
+
+interface-nek lehet több szülő interface-e
+osztálynak lehet több interface-t megvalósítania
+
+
+15. 
+
+public static void ...(String fileName) throws new IOException {
+    try (FileOutputStream fout = new FileOutputStream(fileName)) {
+        fout.writeln(42);
+    }
+}
+
+
+16. túlherhelés

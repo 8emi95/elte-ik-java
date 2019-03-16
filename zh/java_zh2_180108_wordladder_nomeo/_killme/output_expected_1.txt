@@ -1,0 +1,2 @@
+The length of the path is 10.
+[flirt, flint, fling, cling, clink, click, clock, crock, croak, creak, break]

@@ -1,0 +1,90 @@
+Általános tudnivalók
+Ebben az ismertetésben az osztályok, valamint a minimálisan szükséges metódusok leírásai fognak szerepelni. A feladatmegoldás során fontos betartani az elnevezésekre és típusokra vonatkozó megszorításokat, illetve a szövegek formázási szabályait. Segédfüggvények is létrehozhatók, a feladatban nem megkötött adattagok és elnevezéseik is a feladat megoldójára vannak bízva. Törekedni kell arra, hogy az osztályok belső reprezentációja a lehető legjobban legyen védve, tehát csak akkor és csak olyan hozzáférés megengedett, amelyre a feladat felszólít, vagy amit az osztályt használó kódrészlet megkíván!
+
+A beadott megoldásnak működnie kell a mellékelt tesztprogrammal, de ez nem elégséges feltétele az elfogadásnak. A megírt forráskód kellően általános és újrafelhasználható legyen!
+
+Az egyes feladatrészeknél két pontszám látható (pl. 5 + 1), ebből az első az alappont, amely a helyességért, a feladatleírásban szereplő követelmények teljesítéséért adható. A második egy pluszpont, amely az oktató megítélése alapján akkor jár, ha a hallgató az adott feladatrészt a félévben tanult alapvető programozási irányelvek betartásával készítette el, így levonandó például optimalizálatlan, kódismétlésekkel teli vagy konvenciókat erősen sértő kód esetén.
+
+Használható segédanyagok: Java dokumentáció, legfeljebb egy üres lap és toll. Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelőknek kell jelezni, NEM a diáktársaknak!
+
+Figyelem! Az a metódus, amely fordítási hibát tartalmaz, automatikusan nulla pontot ér!
+
+Tesztelés
+Az egyes részfeladatokhoz külön tesztesetek tartoznak, amelyeket a feladatok végén jelöltünk meg. Ezek önállóan is fordítható és futtatható .java állományok a mellékelt .jar segítségével. Például Windows alatt az első feladathoz tartozó tesztesetek így fordíthatók és futtathatók:
+
+> javac -cp .;tests-Auction.jar tests/Part1.java
+> java -cp .;tests-Auction.jar tests/Part1
+Ugyanezeket a teszteseteket használja a komplett feladathoz tartozó tesztelést végző Test osztály is. Ezt Windows alatt így lehet futtatni:
+
+> java -cp .;tests-Auction.jar Test
+Linux alatt mindent ugyanúgy lehet fordítani és futtatni, csak a -cp paraméterében a pontosvesszőt kell kettőspontra cserélni.
+
+A feladat összefoglaló leírása
+A feladatban egy árverést fogunk szimulálni.
+
+A programhoz tartozik egységtesztelő, amely az egyes osztályok funkcionalitását teszteli.
+
+A feladat részletes ismertetése
+1. rész (10 + 1 pont)
+auction.Lot osztály:
+
+Az osztály egy árverési tételt (műalkotást) reprezentál.
+
+Az osztálynak három rejtett adattagja van: egy szöveg típusú alkotó, egy szöveg típusú cím és egy egész típusú leütési ár (angolul hammer price).
+
+Az osztálynak legyen egy rejtett konstruktora, amely paraméterként megkapja az alkotó nevét, a műalkotás címét, valamint a kikiáltási árat, és beállítja a megfelelő adattagokat (a leütési ár legyen a kikiáltási ár). (1 pont)
+
+Definiáljunk egy osztályszintű make nevű metódust is. A make metódus szintén az alkotó nevét, a műalkotás címét és a kikiáltási árát kapja meg paraméterként. A metódus először ellenőrzi, hogy a paraméterek megfelelőek. Amennyiben igen, akkor létrehozza és visszaadja a paramétereknek megfelelő Lot típusú objektumot. Ha a paraméterek nem megfelelőek, akkor a metódus null-t adjon vissza.
+
+Az alkotó neve akkor megfelelő, ha nem egy null referencia.
+
+A műalkotás címe akkor megfelelő, ha szintén nem egy null referencia, és legalább 2 karakter hosszú, csak nagybetűkből és szóközökből áll.
+
+A kikiáltási ár akkor megfelelő, ha pozitív szám. (3 pont)
+
+Segítség: a metódusban használható a Character osztály isLetter() és isUpperCase() metódusa.
+
+Definiáljuk az osztályban az alábbi, paraméter nélküli lekérdező metódusokat: getArtist(), getTitle() és getHammerPrice(), amelyek rendre visszaadják a műalkotás címét és a leütési árat. (1 pont)
+
+Az osztálynak legyen egy bid nevű metódusa, mely visszatérési érték nélküli, és egy pozitív egész paramétert vár, és amelynek segítségével licitálni lehet az aktuális műalkotásra. A licit a következőképpen történik: ha a paraméter nagyobb, mint műalkotás leütési ára, akkor a leütési árat a paraméterrel tesszük egyenlővé. Különben nem történik semmi. (3 pont)
+
+Definiáljunk egy paraméter nélküli toString nevű metódust is, amely visszaadja az objektum szöveges reprezentációját. A formátum legyen a következő: alkotó: műalkotás címe (leütési ár GBP). Pl. Henri Matisse: JACQUY (350000 GBP), Salvador Dali: PORTRAIT DE MADAME DUCAS (500000 GBP). (1 pont)
+
+Definiáljunk egy moreExpensiveThan() metódust, mely egy műtárgyat vár paraméterül, és logikai igazat ad vissza, ha az aktuális műtárgy, melyen a metódust meghívták, drágább, mint a paraméterül kapott, továbbá a paraméter nem null. (1 pont)
+
+Vegyünk fel egy Lot típusú STATUE osztályszintű adattagot, melynek alkotója Felix W. de Weldon, címe US MARINE MEMORIAL, kikiáltási ára 50000.
+
+Tesztelő: tests.Part1
+
+2. rész (5 + 2 pont)
+auction.Auction osztály:
+
+Az osztály egy árverést reprezentál.
+
+Az osztály egy rejtett műtárgy-sorozat adattagban tartsa nyilván, hogy milyen műtárgyakra (Lot típusú objektumok) lehet licitálni. A típus tetszőleges, lehet rögzített méretű sorozat típus is.
+
+Az osztálynak legyen egy publikus konstruktora, amely műtárgyak tömbjét kapja paraméterként. A konstruktor inicializálja a sorozat adattagot a tömböt használva, ügyelve arra, hogy a belső állapot ne szivárogjon ki. Feltesszük, hogy egyik elem sem null. (2 pont)
+
+Definiáljunk egy numberOfLots nevű metódust, amely visszaadja az árverésen szereplő műtárgyak számát. (1 pont)
+
+Definiáljunk egy paraméter nélküli toString nevű metódust is, amely visszaadja az árverés szöveges reprezentációját. Az egyes alkotásokat sortörés vagy szóköz karakter is elválaszthatja. A szöveg összeállításakor a műtárgyak olyan formában szerepeljenek, ahogyan a Lot toString nevű metódusa előállítja őket. Az utolsó műtárgy után opcionálisan lehet sortörés vagy szóköz. (2 pont)
+
+Tesztelő: tests.Part2
+
+3. rész (8 + 2 pont)
+A auction.Auction osztályban definiáljuk az alábbi publikus metódusokat:
+
+browseLots(): a metódus lehetővé teszi a műtárgyak közötti böngészést. Egy alkotó nevét kapja paraméterként és egy listában visszaadja azon műtárgyakat, melyek az adott alkotó művei. Ha az árverezőház nem rendelkezik egyetlen olyan műalkotással sem, mely megfelel a követelménynek, akkor a metódus egy üres listát ad vissza. A végeredmény típusa List legyen, megadva az elemek típusát is. (3 pont)
+
+priceOfCollection(): a metódus megadja, hogy mennyibe kerülne, ha egy adott alkotó összes művét szeretné megvenni egy rajongó. A metódus egy alkotó nevét várja paraméterül és egy long típusú számot ad vissza eredményül (egy gyűjtemény rengeteg pénzbe kerülhet). (2 pont)
+
+mostExpensive(): a metódus paraméter nélküli, és az árverezőház legdrágább műalkotását adja vissza (egy Lot típusú objektumot). Ha az árverezőháznak egyetlen műalkotása sincsen, akkor null-t adjunk vissza. Ha több egyformán legdrágább alkotás van, akkor az elsővel térjünk vissza.(3 pont)
+
+Tesztelő: tests.Part3
+
+Pontozás (elmélet + gyakorlat)
+0 -- 17: elégtelen (1)
+18 -- 22: elégséges (2)
+23 -- 27: közepes (3)
+28 -- 32: jó (4)
+33 -- 37: jeles (5)

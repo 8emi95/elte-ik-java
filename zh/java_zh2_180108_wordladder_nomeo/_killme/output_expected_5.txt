@@ -1,0 +1,2 @@
+class java.lang.RuntimeException
+The input file does not consist of one line.

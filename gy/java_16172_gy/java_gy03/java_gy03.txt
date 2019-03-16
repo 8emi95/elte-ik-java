@@ -1,0 +1,5 @@
+2017.02.28.
+3. Java GY
+
++/-: melyek primitív típusok? int, Double, String, char, complex
+meo: int, char

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>10. Java gyakorlat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">10. Java gyakorlat</h1>
+</div>
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2017.05.02.</p>
+<!-- equals, hashCode, clone, abstract osztályok, enum -->
+<!-- equals, hashCode, abstrakt osztályok, enum (egyszerű?), comparator -->
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Valósítsuk meg a dátumokat reprezentáló <code>Date</code> osztályt! Definiáljuk felül az <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html"><code>Object</code></a>-ből örökölt <code>equals()</code> metódust! Használjunk felsorolásos típust a hónapok megadásához!</p></li>
+<li><p>Hozzunk létre egy absztrakt <code>polyhedra.Prism</code> osztályt, amely segítségével hasábokat tudunk ábrázolni!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Tároljuk el benne a hasáb magasságát (<code>height</code>), valamint legyen egy olyan <em>absztrakt</em> metódus, amely az alapterületét számolja ki (<code>area()</code>). Ennek felhasználásával aztán készítsünk egy másik, <em>nem felüldefiniálható</em> metódust, amely a hasáb térfogatát számítja ki a magasság és az alapterület segítségével (<code>volume()</code>).</p></li>
+<li><p>Tegyük absztrakttá a <code>toString()</code> metódust, hogy a leszármazottban kötelező legyen megvalósítani!</p></li>
+<li><p>Definiáljuk felül az <code>equals()</code> metódust! Az egyenlőséget a térfogat alapján vizsgáljuk.</p></li>
+</ol></li>
+<li><p>Hozzuk létre az előbbi <code>Prism</code> osztály leszármazottjaként a (konkrét) <code>Cylinder</code> osztályt, mellyel hengereket, továbbá egy <code>Cube</code> osztályt, mellyel kockákat tudunk reprezentálni!</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Valósítsuk meg az absztrakt <code>area()</code> és <code>toString()</code> metódusokat!</p></li>
+<li><p>Tiltsuk meg a <code>Cube</code> osztályból való származtatást!</p></li>
+</ol></li>
+<li><p>Készítsünk egy osztályt, mely két hasábot térfogat szerint hasonlít össze, azaz megvalósítja a <code>Comparator</code> interfészt! Az osztály segítségével a hasábokat növekvő sorrendbe rendezhetjük térfogat szerint a <code>Collections.sort()</code> metódussal!</p></li>
+<li><p>Készítsünk egy másik osztályt az előzőhöz hasonlóan, amely két hasábot alapterület szerint hasonlít össze!</p></li>
+</ol>
+</body>
+</html>

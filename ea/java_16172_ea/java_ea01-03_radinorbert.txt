@@ -1,0 +1,336 @@
+1. EA
+	Java nyelv
+		Imperatív: változók értékadása
+		Objektumorientált: adatabsztrakció
+	Forráskód felépítése
+		csomag
+		osztály: típusdefiníció
+			osztály
+				absztrakt
+				konkrét
+			interfész
+			felsorolási típus
+			annotációs típus
+		tagok
+			mező (adattag)
+			metódus (művelet)
+				utasítások
+					értékadás
+					elágazás
+						if
+						switchcase
+					ciklusok
+						for
+						while
+						do while
+					blokk utasítás
+					kivételkezelés
+					nem strukturált utasítások
+						break
+						continue
+			tagosztály
+		konstruktorok
+			utasítások
+		inicializáló blokkok
+	forrásfájl (.java)	-> fordítási egység	-> több fordítási egyséből áll a forráskód
+	|fordítás (javac)		|
+	->	bájtkód (.class)	->	egyből több .class
+		|futtatás (java)			egymástól függetlenül fordíthatók
+		->	JVM értelmezi
+	class Data{
+		private int year;	//változódeklació
+		private int month;
+		private int day;
+		void nextDay(){
+			if(day<28){
+				day++;
+			}else{}
+		}
+		public int getMonth(){return month;}
+		public void setMonth(int newmonth){
+			if(day<29||)month = nextmonth;
+			else throw new IllegalArgumentException();
+		}
+		public static void main(String[] args){
+			Date date;		   //referencia
+			date = new Date(); //a referencia által hivatkozott Date osztályból jött létre
+			date.year = 2017;
+			date.nextDay();
+		}
+	}
+		<osztálydefiníció> := class <azonosító> <törzs>
+			osztálynév: camelcase, nagybetűvel kezdődik
+		(törzs) := "{"(tag|konstruktor|...)*"}"
+		<tag> := <mező>|<metódus>|<osztálydefiníció>
+		<metódus> := <típus><azonosító>"("(formális paraméter)*")"<metódustörzs>
+		metódusnév: camelcase, kisbetűvel kezdődik
+	Típusok
+		Primitív típusok
+				boolean -> true, false
+			egész típusok
+				byte	-> 8 bit
+				short	-> 16 bit
+				int		-> 32 bit
+				long	-> 64 bit
+			lebegőpontos típusok
+				float	-> 32 bit
+				double	-> 64 bit
+			unicode
+				char	-> 16 bit
+		Referencia típusok
+			típusreferenciával megadott típusok (pl. Date)
+			tömbtípus (int[])
+	new: dinamikus tárhelyen allokál (heap)
+	Date.java (forrásfájl neve)
+	|fordítás (javac)
+	-> Date.class (platformfüggetlen tárgykód)
+	|futtatás (java)
+	-> JVM értelmezi
+	adatabsztakció = egységbe zárás + információ elrejtés
+	|				(enkapszuláció)	 (típus interfészét és belső 
+	|								  megvalósítást elválasztjuk)
+	|	láthatósági szabályok
+	|		public		- nyilvános
+	|		protected	- package + öröklődés
+	|					- félnyilvános (package-private)
+	|		private		- rejtett
+	->  a programban használt adatok konzisztenciájának megőrzése
+		típus invariáns: logikai állítás, amely karakterizálja 
+						  az objektum legális belős állapotát
+			- kunstruáláskor bizonságban áll
+			- módosításkor nem szabad elrontani
+2. EA
+	public osztály \	
+		   metódus	\_ bárhonnan hivatkozható
+		   mező		/
+		   (...)   /
+	félnyilvános 		osztály    \
+	(package-private)	metódus		\_ csak a definíciót
+						mező		/  tartalmazó csomagban
+						(...)  	   /   
+	package misc;		//a misc csomagban van, onnan használjuk
+	public class Date{
+		private int year;
+		(...)
+		public int getYear(){(...)}
+	}
+						//névtelen csomagba kerül, csak ott használható
+	public class Date{	
+		private int year;		
+		(...)
+		public int getYear(){(...)}
+	}
+	osztály rövid neve: 
+		csomagnévvel minősített név
+		misc.Date
+	osztály rövid neve: 
+		a deklarációban szereplő név, csomagnév nélkül
+		Date
+	csomag rendszere:
+		hierarchikus, alcsomagok használhatók
+	"mélyen hierarchikus" csomagnevek
+		globálisan egyedi névtér
+		hu.elte.kto.analyzer.server
+			^fejlesztő/cég/termék azonosítója
+		nem lesznek névkonfliktusok
+	a csomag nem csak névtér, hanem fizikai szervezés alapja
+							[kód a fájrendszerben]
+		csomag				könyvtár
+		alcsomag			alkönyvtár
+		(...)				(...)
+		fordítási egység	forrásfájl
+	fordítási egység
+		opcionális package utasítás
+		0, 1, vagy több import utasítás
+			import java.util.list;
+		egy/több típusdefiníció 
+		|	(pl. osztálydefiníció)
+		-> legfeljebb egy publikus (a többi félnyilvános segédtípus)
+			ennek neve = a forrásfájl neve
+	dolgozunk egy projekten, egy munkakönyvtárban
+		C:\Users\kto\analyzer
+					|
+					|-|server
+					| -|data
+					|  -|types
+					|   -Employee.java
+					|-client
+					|-web
+					|-gui
+		csomaghierarchiát tükrözi a könyvtárhierarchia
+		a megfelelő alkönyvtárba tesszük a forrásfájlokat
+		C:\(...)\analyzer> dir
+			server
+			client
+		C:\(...)\analyzer> javac server\data\types\Employee.java
+			teljes elérési út
+			van kiterjesztés
+		C:\(...)\analyzer> java server.data.types.Employee
+			az osztály teljes neve
+			nincs kiterjesztés
+		Nem cd-zünk beljebb!
+	belső állapot	típusinvariáns
+	műveletek		megőrzik konzisztens állapotból konzisztens állapotba
+	konstrukció		előállítja a konzisztens állapotot
+		|
+	pl konstruktorban
+		metódusszerű
+	public class Date{
+		private int year;
+		(...)
+		public int getYear(){(...)}
+		(...)
+		public void setYear(int year){
+			if(month==2 && day==29 && !isLeapYear(year)){
+				throw new IllegalArgumentException();
+			}
+			this.year = year;
+		}
+	}
+	Minden osztálynak van konstruktora
+		ha mi nem írunk, generálodik egy ilyen
+			pulic Date(){}
+		Explicit
+			mi írtuk
+			paraméter nélküli, vagy paraméteres
+		Implicit/default
+			paraméter nélküli
+		Láthatóság:
+			pl. mint metódusoknál
+	Szintaktika
+		nincs return type
+	class Date{
+		public void Date(int year){	//nem konstruktor
+			(...)					//legális, csak furcsa
+		}							//nevű metódus
+	}
+	Ha nincs explicit konstruktor,
+	lefut a deafult és "közben"
+	beállítodnak az incializáló
+	kifejezésben megadott értékek.
+		0/null/false
+		megadott értékadás
+			általában nem használjuk
+	metódus:
+		- specifikus rész
+			(láthatóság, return type, név, paraméter)
+		- törzs {}
+		- változódeklaráció
+		- értékadó
+		- ciklus
+			while
+			dowhile
+			for
+			enhanced for
+		- elágazás
+			if
+			switchcase
+		- return utasítás
+		- throw
+		- break, continue
+			ritkán, jó okkal használatos
+	if(x>0){--x;}
+		Ugyanaz, mint a másik, de ez a preferált
+	if(x>0) --x;
+		Több lehetőséget ad kódolási hibára
+		
+3.EA
+	public class Point{				public class Line{
+		public double x, y;				public double a, b;
+	}									public void Line(aVal, bVal){
+											a = aVal;
+											b = bVal;
+										}
+									}
+		Melyiknek van konstruktora?
+			(a) Point
+			(b) Line
+			[c] mindkettő
+			(d) egyik sem
+	Változódeklaráció
+			mező: objektum része
+			lokális: metódusban
+		Hatókör: scope
+			A blokk, amely közvetlenül tartalmazza a deklarációt
+		void dummy(int n){												|
+			int x = 3;									|				|
+			for(int i=0;i<n;++i){		|				| 				|
+				System.out.println(i);	| i hatóköre	| x hatóköre	| n  hatóköre
+			}							|				|				|
+		}												|				|
+		Lokális változó hatókörében ugyanazzal a névvel nem lehet változót deklarálni
+			"elfedni" ("hide", "shadow")
+			fordításidejű hiba
+			public class Point {
+				private int x, y;
+				public Point(int x, int y){	//elfedik az objektummezőket
+					this.x = x;	//a belső változóval elfedett változóhoz kiterjesztett láthatóság
+				}
+			}
+	Javabeans konvenció
+		object property: getter és setter mentén
+			public void getValami(){return valami;}
+			public void setValami(){this.valami=valamis;}
+		Egy [lehetséges] megvalósítás
+	this kulcsszó
+		Az "aktuális" objektumot azonosítja
+	class Bar{
+		int p;			// példányszintű mező: minden példányban van egy
+		static int s;	// osztályszintű mező: az összes Bar-hoz ugyanaz tartozik
+	}
+	void foo(){
+		int x;
+	(...){
+			int x;	//ford.hiba
+		(...)
+		}
+	(...)
+	}
+	public class Point{
+		private int x, y;
+		public Point(int x, int y){(...)};
+		public void setX(int x){this.x = x;}
+		public int getx(){return x;}
+		(...)
+		public void move(int dx, int dy){
+			x += dx; 
+			y= dy;
+		}
+	}
+	immutable (módosíthatatlan)
+		public class Point{
+			private int x, y;
+			public Point(int x, int y){(...)};
+			public void setX(int x){this.x = x;}
+			public int getx(){return x;}
+			(...)
+			public Point move(int dx, int dy){
+				return new Point(x+dx, y+dy);
+			}
+		}
+		- pazarló megoldás: memóriafoglalás minden műveletnél
+		- ne "annyire" pazarló, ilyen a JVM
+		- hatékonyabb megoldás párhuzamos programokban
+		- csökkenti a programozási hibalehetőséget
+	Letrehozás, inicializáció
+		- amikor new-val létrehozunk egy objektumok,
+		  létrejönnek a példánymezők benne
+		- inicializálás azonnal
+			1. Minden mező 0-szerű értékkel
+			2. Inicializáló kifejezésekkel
+			3. Konstruktoron keresztül
+		Osztályszintű mezők
+			- létrejön, mikor az osztály "betöldődik" a JVM-be
+			- inicializálódik
+				1. 0-szerű érték
+				2. inicializáló kifejezés
+			- amíg a program fut
+		Lokális változó
+			- létrejön, mikor belpünk a deklaráció hatókörébe
+			- inicializáció
+				0 szerű értéke NINCS
+				void foo(){
+					int n;
+					++n;	//ford.hiba
+				}
+			- megszűnik, mikor kilépünk a hatókörből

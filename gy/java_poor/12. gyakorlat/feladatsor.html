@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../general.css" type="text/css" />
+</head>
+<body>
+<!-- belső osztályok, névtelen osztályok -->
+
+<p><a href="http://docs.oracle.com/javase/8/docs/api/">Java SE 8 API dokumentációja</a></p>
+<p>Utolsó módosítás: 2016.12.15.</p>
+<h2 id="feladatok">Feladatok</h2>
+<ol>
+<li><p>Hozzunk létre egy <code>Book</code> osztályt. Minden könyvnek van szerzője, címe, ára.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Vegyük fel az adattagokat úgy, hogy legyenek nyilvánosak és csak olvashatóak.</p></li>
+<li><p>Adjunk konstruktort is az osztályhoz, mely inicializálja az adattagokat.</p></li>
+<li><p>Írjuk felül a <code>toString()</code> metódust, hogy valami hasonlót adjon: <code>Book[&lt;szerző&gt;: &lt;cím&gt; (&lt;ár&gt;)]</code>.</p></li>
+</ol></li>
+<li><p>Hozzuk létre a <code>BookByPrice</code> osztályt, mellyel a könyveket rendezhetjük ár szerint. Az osztály implementálja a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html"><code>Comparator&lt;Book&gt;</code></a> interfészt és annak <code>compare()</code> metódusát.</p></li>
+<li><p>Hozzuk létre a <code>BookByTitle</code> osztályt, mellyel a könyveket rendezhetjük <em>cím</em> szerint. Az osztály implementálja a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html"><code>Comparator&lt;Book&gt;</code></a> interfészt és annak <code>compare()</code> metódusát.</p></li>
+<li><p>Hozzuk létre a <code>BookDemo</code> osztályt és abban egy <code>main()</code> metódust. A <code>main()</code> hozzon létre egy könyvekből álló listát, és rendezze ár szerint növekvő sorrendbe a könyveket a <code>Collections.sort()</code> vagy a <code>List.sort()</code> metódussal, és írja is ki a listát a képernyőre. Majd rendezze ár szerint csökkenő sorrendbe a könyveket a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#reverseOrder-java.util.Comparator-"><code>Collections.reverseOrder()</code></a> metódussal.</p>
+<p>Rendezzük a könyveket cím szerint is.</p>
+<p>Módosítsuk a <code>main()</code>-t úgy, hogy névtelen függvényt használunk a fenti osztályok helyett.</p></li>
+<li><p>Módosítsuk a <code>main()</code>-t, hogy kilistázza az 5000 Ft-nál drágább könyvek címét. Használjuk a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code>java.stream.Stream</code></a> osztály <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#filter-java.util.function.Predicate-"><code>filter()</code></a> és <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-"><code>map()</code></a> metódusait. <code>Stream</code>-et listává a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-"><code>collect(Collectors.toList())</code></a> metódussal alakíthatunk.</p></li>
+<li><p>Keressük meg az adott című könyvet a listában. Használjuk a <code>filter()</code>-t együtt a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#findFirst--"><code>findFirst()</code></a> metódussal.</p>
+<p>A <code>findFirst</code> eredménye egy <code>Optional&lt;Book&gt;</code> objektum, mely egy doboz, amely lehet üres.</p></li>
+<li><p>Készítsünk programot Caesar-kód feltörésének megkönnyítésére! A cél hogy előállítsuk egy szöveg karakter-statisztikáját (azaz megszámoljuk, hogy a karakterek hányszor fordulnak elő a szövegben). Ez és a szöveg nyelvének jellemző statisztikája alapján már tudunk következtetni az eltolás mértékére, ezáltal visszafejthető az üzenet.</p>
+<p>Például:</p>
+<pre><code>$ java CaesarBreaker &quot;almafa alatt&quot;
+{a=5, b=0, c=0, d=0, e=0, f=1, g=0, h=0, i=0, j=0, k=0, l=2, m=1, n=0, o=0,
+p=0, q=0, r=0, s=0, t=2, u=0, v=0, w=0, x=0, y=0, z=0}</code></pre>
+<p>Fejtsük vissza az alábbi (angol nyelvű) üzenetet:</p>
+<blockquote>
+<p><em>krz riwhq l vdlg wr brx wkdw zkhq brx kdyh holplqdwhg wkh lpsrvvleoh zkdwhyhu uhpdlqv krzhyhu lpsuredeoh pxvw eh wkh wuxwk</em></p>
+</blockquote>
+<!-- how often i said to you that when you have eliminated the
+impossible whatever remains however improbable must be the truth
+-->
+
+<p>Angol nyelvű regények és újságok vizsgálata alapján a következő betűgyakoriság rajzolódott ki:</p>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><p>Betű</p></td>
+<td align="left"><p>a</p></td>
+<td align="left"><p>b</p></td>
+<td align="left"><p>c</p></td>
+<td align="left"><p>d</p></td>
+<td align="left"><p>e</p></td>
+<td align="left"><p>f</p></td>
+<td align="left"><p>g</p></td>
+<td align="left"><p>h</p></td>
+<td align="left"><p>i</p></td>
+<td align="left"><p>j</p></td>
+<td align="left"><p>k</p></td>
+<td align="left"><p>l</p></td>
+<td align="left"><p>m</p></td>
+<td align="left"><p>n</p></td>
+<td align="left"><p>o</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Százalék</p></td>
+<td align="left"><p>8,2</p></td>
+<td align="left"><p>1,5</p></td>
+<td align="left"><p>2,8</p></td>
+<td align="left"><p>4,3</p></td>
+<td align="left"><p>12,7</p></td>
+<td align="left"><p>2,2</p></td>
+<td align="left"><p>2,0</p></td>
+<td align="left"><p>6,1</p></td>
+<td align="left"><p>7,0</p></td>
+<td align="left"><p>0,2</p></td>
+<td align="left"><p>0,8</p></td>
+<td align="left"><p>4,0</p></td>
+<td align="left"><p>2,4</p></td>
+<td align="left"><p>6,7</p></td>
+<td align="left"><p>7,5</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Betű</p></td>
+<td align="left"><p>p</p></td>
+<td align="left"><p>q</p></td>
+<td align="left"><p>r</p></td>
+<td align="left"><p>s</p></td>
+<td align="left"><p>t</p></td>
+<td align="left"><p>u</p></td>
+<td align="left"><p>v</p></td>
+<td align="left"><p>w</p></td>
+<td align="left"><p>x</p></td>
+<td align="left"><p>y</p></td>
+<td align="left"><p>z</p></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Százalék</p></td>
+<td align="left"><p>1,9</p></td>
+<td align="left"><p>0,1</p></td>
+<td align="left"><p>6,0</p></td>
+<td align="left"><p>6,3</p></td>
+<td align="left"><p>9,1</p></td>
+<td align="left"><p>2,8</p></td>
+<td align="left"><p>1,0</p></td>
+<td align="left"><p>2,4</p></td>
+<td align="left"><p>0,2</p></td>
+<td align="left"><p>2,0</p></td>
+<td align="left"><p>0,1</p></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</body>
+</html>

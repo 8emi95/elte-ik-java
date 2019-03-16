@@ -1,0 +1,14 @@
+BEAD: hibák
+Entry
+String show(int format) - 3 konstans kellett (0, 1, 2)
+if (format == 0) .... nem jó
+
+string összehasonlítás - equals-szal!!!
+
+***********************
+
++/-: Meddig tart egy objektum élettartama?
+
+
+Scanner:
+Scanner s = new Scanner(new File(filenev));
